@@ -5,6 +5,7 @@ A high-performance SolidJS application scaffold using Vite for build tooling and
 ## Tech Stack
 
 - **SolidJS** - Fine-grained reactive UI framework
+- **@solidjs/router** - Client-side routing
 - **Vite** - Fast build tool with HMR
 - **Bun** - Fast JavaScript runtime and package manager
 - **TypeScript** - Type safety
@@ -53,6 +54,43 @@ Preview the production build locally:
 
 ```bash
 bun run serve
+```
+
+## Project Structure
+
+```
+src/
+├── index.html              # HTML entry point
+├── index.tsx              # JavaScript entry point
+└── app/
+    ├── App.tsx            # Router setup
+    ├── Comp.tsx           # Example component
+    └── pages/             # Route pages
+        ├── Home.tsx       # Home page (/)
+        ├── About.tsx      # About page (/about)
+        └── NotFound.tsx   # 404 page
+```
+
+## Routing
+
+The app uses `@solidjs/router` for client-side routing. Routes are defined in `src/app/App.tsx`:
+
+```tsx
+<Router>
+  <Route path="/" component={Home} />
+  <Route path="/about" component={About} />
+  <Route path="*" component={NotFound} />
+</Router>
+```
+
+Add new routes by creating page components in `src/app/pages/` and adding them to the Router.
+
+Navigate between pages using the `<A>` component:
+
+```tsx
+import { A } from '@solidjs/router';
+
+<A href="/about">Go to About</A>
 ```
 
 ## Testing
@@ -118,6 +156,7 @@ Deploy the `dist` folder to any static host provider (Vercel, Netlify, Cloudflar
 ## Learn More
 
 - [SolidJS Documentation](https://solidjs.com)
+- [SolidJS Router Documentation](https://docs.solidjs.com/solid-router)
 - [Vite Documentation](https://vitejs.dev)
 - [Bun Documentation](https://bun.sh)
 - [Vitest Documentation](https://vitest.dev)
