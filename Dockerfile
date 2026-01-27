@@ -1,0 +1,37 @@
+FROM oven/bun:1-alpine AS builder
+
+WORKDIR /app
+
+# Copy dependency files
+COPY package.json bun.lock* ./
+
+# Install dependencies
+RUN bun install --frozen-lockfile
+
+# Copy source code
+COPY . .
+
+# Build the application
+RUN bun run build
+
+# Production stage
+FROM oven/bun:1-alpine AS runner
+
+WORKDIR /app
+
+# Create non-root user
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S bunuser -u 1001
+
+# Copy built files from builder
+COPY --from=builder --chown=bunuser:nodejs /app/dist /app/dist
+
+# Copy the native Bun server
+COPY --chown=bunuser:nodejs serve.ts /app/serve.ts
+
+USER bunuser
+
+EXPOSE 3000
+
+# Serve with native Bun server
+CMD ["bun", "run", "serve.ts"]

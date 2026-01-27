@@ -50,10 +50,16 @@ The build is minified and optimized for best performance.
 
 ### Preview Production Build
 
-Preview the production build locally:
+Preview the production build locally with Vite's preview server:
 
 ```bash
 bun run serve
+```
+
+Or use the native Bun server (same as Docker):
+
+```bash
+bun run serve:prod
 ```
 
 ## Project Structure
@@ -148,6 +154,55 @@ bun run test:e2e:headed
 ```
 
 E2E tests are located in `tests/e2e/` and automatically start the dev server. Test results and reports are saved in `tests/.output/` (git-ignored).
+
+## Docker
+
+The Docker image uses **native Bun** to serve static files (no nginx or extra dependencies needed). The production server is defined in `serve.ts`.
+
+### Building Locally
+
+Build for your current architecture:
+
+```bash
+docker build -t homepage-v2 .
+```
+
+Run the container:
+
+```bash
+docker run -p 3000:3000 homepage-v2
+```
+
+### Multi-Architecture Builds
+
+The project supports native multi-arch builds (amd64 and arm64) without QEMU for optimal performance.
+
+**✅ ARM64 builds work out of the box for public repositories!**
+
+As of January 2025, GitHub provides free ARM64 runners (`ubuntu-24.04-arm`) for public repos. The workflow is already configured correctly.
+
+**For private repositories:**
+- Requires GitHub Team/Enterprise plan, OR
+- Use a self-hosted ARM64 runner, OR
+- Remove the arm64 matrix entry to build amd64 only
+
+### CI/CD Pipeline
+
+The GitHub Actions workflow:
+1. Runs tests on every push/PR
+2. Builds Docker images natively for each architecture (amd64, arm64)
+3. Pushes images to GitHub Container Registry (ghcr.io)
+4. Creates multi-arch manifest with tags:
+   - `latest` (main branch only)
+   - `main` (main branch)
+   - `sha-<commit>` (short commit hash)
+   - `v1.2.3` (semver tags)
+
+Pull the image:
+
+```bash
+docker pull ghcr.io/<your-username>/homepage-v2:latest
+```
 
 ## Deployment
 
