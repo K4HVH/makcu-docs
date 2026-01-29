@@ -36,6 +36,109 @@
   --color-tertiary: var(--color-gray-600);     /* Tertiary elements */
   --color-accent: var(--color-blue-500);       /* Highlight/accent color */
   --color-muted: var(--color-gray-400);        /* Muted text/elements */
+
+  /* Spacing Scale (4px base unit) */
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-8: 32px;
+  --spacing-10: 40px;
+  --spacing-12: 48px;
+  --spacing-16: 64px;
+
+  /* Border Radius */
+  --radius-none: 0;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-full: 9999px;
+
+  /* Border Widths */
+  --border-width-thin: 1px;
+  --border-width-medium: 2px;
+  --border-width-thick: 3px;
+
+  /* Transitions */
+  --transition-fast: 0.1s ease;
+  --transition-normal: 0.2s ease;
+  --transition-slow: 0.3s ease;
+
+  /* Typography - Font Sizes */
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-base: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 24px;
+  --font-size-3xl: 30px;
+  --font-size-4xl: 36px;
+  --font-size-5xl: 48px;
+  --font-size-6xl: 60px;
+
+  /* Typography - Line Heights */
+  --line-height-tight: 1.25;
+  --line-height-snug: 1.375;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.625;
+  --line-height-loose: 2;
+
+  /* Typography - Font Weights */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Typography - Letter Spacing */
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.025em;
+
+  /* =============================================================================
+     Global Application Defaults
+     These are the default values used throughout the application.
+     Change these to adjust the overall look and feel.
+     ============================================================================= */
+
+  /* Default Spacing */
+  --g-spacing: var(--spacing-4);        /* Standard spacing (16px) */
+  --g-spacing-sm: var(--spacing-2);     /* Small spacing (8px) */
+  --g-spacing-lg: var(--spacing-6);     /* Large spacing (24px) */
+  --g-spacing-xs: var(--spacing-1);     /* Extra small spacing (4px) */
+
+  /* Default Border Radius */
+  --g-radius: var(--radius-md);         /* Standard border radius (4px) */
+
+  /* Default Border Width */
+  --g-border-width: var(--border-width-thin);       /* Standard border (1px) */
+  --g-border-width-accent: var(--border-width-thick); /* Accent border (3px) */
+
+  /* Default Transitions */
+  --g-transition: var(--transition-normal);  /* Standard transition (0.2s) */
+
+  /* Default Border Colors */
+  --g-border-color: var(--color-gray-700);          /* Standard border color */
+  --g-border-color-subtle: var(--color-gray-800);   /* Subtle border color */
+  --g-border-color-emphasis: var(--color-primary);  /* Emphasized border color */
+
+  /* Default Backgrounds */
+  --g-background: var(--color-gray-900);         /* Standard background */
+  --g-background-elevated: var(--color-gray-800); /* Elevated background */
+  --g-background-subtle: var(--color-black);      /* Subtle background */
+
+  /* Default Text Colors */
+  --g-text-primary: var(--color-white);      /* Primary text color */
+  --g-text-secondary: var(--color-gray-100); /* Secondary text color */
+  --g-text-muted: var(--color-muted);        /* Muted/subtle text color */
+  --g-text-link: var(--color-primary);       /* Link text color */
+
+  /* Default Typography */
+  --g-font-size: var(--font-size-base);          /* Standard font size (16px) */
+  --g-line-height: var(--line-height-normal);    /* Standard line height (1.5) */
+  --g-font-weight: var(--font-weight-normal);    /* Standard font weight (400) */
 }
 
 /* Reset & Base Styles */
@@ -50,9 +153,12 @@ body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: var(--color-black);
-  color: #ffffff;
+  background: var(--g-background-subtle);
+  color: var(--g-text-primary);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-size: var(--g-font-size);
+  line-height: var(--g-line-height);
+  font-weight: var(--g-font-weight);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -69,4 +175,222 @@ body {
   z-index: 1;
   width: 100%;
   height: 100%;
+}
+
+/* =============================================================================
+   Typography
+   ============================================================================= */
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--g-text-primary);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  margin: 0 0 var(--g-spacing) 0;
+}
+
+h1 {
+  font-size: var(--font-size-5xl);
+  font-weight: var(--font-weight-bold);
+}
+
+h2 {
+  font-size: var(--font-size-4xl);
+}
+
+h3 {
+  font-size: var(--font-size-3xl);
+}
+
+h4 {
+  font-size: var(--font-size-2xl);
+}
+
+h5 {
+  font-size: var(--font-size-xl);
+}
+
+h6 {
+  font-size: var(--font-size-lg);
+}
+
+/* Body Text */
+p {
+  margin: 0 0 var(--g-spacing) 0;
+  color: var(--g-text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+/* Links */
+a {
+  color: var(--g-text-link);
+  text-decoration: none;
+  transition: color var(--g-transition);
+}
+
+a:hover {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+a:active {
+  color: var(--color-blue-700);
+}
+
+/* Emphasis */
+strong, b {
+  font-weight: var(--font-weight-bold);
+  color: var(--g-text-primary);
+}
+
+em, i {
+  font-style: italic;
+  color: var(--g-text-secondary);
+}
+
+/* Small Text */
+small {
+  font-size: var(--font-size-sm);
+  color: var(--g-text-muted);
+}
+
+/* Lists */
+ul, ol {
+  margin: 0 0 var(--g-spacing) 0;
+  padding-left: var(--g-spacing-lg);
+  color: var(--g-text-secondary);
+}
+
+li {
+  margin-bottom: var(--g-spacing-sm);
+  line-height: var(--line-height-relaxed);
+}
+
+ul ul, ol ol, ul ol, ol ul {
+  margin-bottom: 0;
+  margin-top: var(--g-spacing-sm);
+}
+
+/* Code */
+code {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: var(--font-size-sm);
+  background: var(--g-background);
+  color: var(--color-accent);
+  padding: var(--g-spacing-xs) var(--g-spacing-sm);
+  border-radius: var(--g-radius);
+  border: var(--g-border-width) solid var(--g-border-color);
+}
+
+pre {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: var(--font-size-sm);
+  background: var(--g-background);
+  color: var(--g-text-secondary);
+  padding: var(--g-spacing);
+  border-radius: var(--g-radius);
+  border: var(--g-border-width) solid var(--g-border-color);
+  overflow-x: auto;
+  margin: 0 0 var(--g-spacing) 0;
+  line-height: var(--g-line-height);
+}
+
+pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* Blockquote */
+blockquote {
+  margin: 0 0 var(--g-spacing) 0;
+  padding-left: var(--g-spacing);
+  border-left: var(--g-border-width-accent) solid var(--g-border-color-emphasis);
+  color: var(--g-text-secondary);
+  font-style: italic;
+}
+
+/* Horizontal Rule */
+hr {
+  border: none;
+  border-top: var(--g-border-width) solid var(--g-border-color);
+  margin: var(--g-spacing-lg) 0;
+}
+
+/* Text Utility Classes */
+.text-xs { font-size: var(--font-size-xs); }
+.text-sm { font-size: var(--font-size-sm); }
+.text-base { font-size: var(--font-size-base); }
+.text-lg { font-size: var(--font-size-lg); }
+.text-xl { font-size: var(--font-size-xl); }
+.text-2xl { font-size: var(--font-size-2xl); }
+.text-3xl { font-size: var(--font-size-3xl); }
+.text-4xl { font-size: var(--font-size-4xl); }
+.text-5xl { font-size: var(--font-size-5xl); }
+.text-6xl { font-size: var(--font-size-6xl); }
+
+.text-white { color: var(--color-white); }
+.text-gray-100 { color: var(--color-gray-100); }
+.text-gray-200 { color: var(--color-gray-200); }
+.text-gray-300 { color: var(--color-gray-300); }
+.text-muted { color: var(--color-muted); }
+.text-primary { color: var(--color-primary); }
+.text-secondary { color: var(--color-secondary); }
+.text-accent { color: var(--color-accent); }
+
+.font-normal { font-weight: var(--font-weight-normal); }
+.font-medium { font-weight: var(--font-weight-medium); }
+.font-semibold { font-weight: var(--font-weight-semibold); }
+.font-bold { font-weight: var(--font-weight-bold); }
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+/* =============================================================================
+   Layout Utility Classes
+   ============================================================================= */
+
+/* Container */
+.container {
+  max-width: 800px;
+  padding: var(--g-spacing-lg);
+}
+
+.container--wide {
+  max-width: 1200px;
+}
+
+.container--narrow {
+  max-width: 600px;
+}
+
+/* Grid Layouts */
+.grid {
+  display: grid;
+  gap: var(--g-spacing-lg);
+}
+
+.grid--sm {
+  gap: var(--g-spacing-sm);
+}
+
+.grid--md {
+  gap: var(--g-spacing);
+}
+
+/* Flex Layouts */
+.flex {
+  display: flex;
+  gap: var(--g-spacing);
+}
+
+.flex--sm {
+  gap: var(--g-spacing-sm);
+}
+
+.flex--wrap {
+  flex-wrap: wrap;
 }

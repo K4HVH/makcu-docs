@@ -1,0 +1,92 @@
+/* =============================================================================
+   Card Component
+   ============================================================================= */
+
+.card {
+  background: var(--g-background);
+  border: var(--g-border-width) solid var(--g-border-color);
+  border-radius: var(--g-radius);
+  padding: var(--g-spacing);
+  transition: all var(--g-transition);
+}
+
+.card > *:first-child {
+  margin-top: 0;
+}
+
+.card > *:last-child {
+  margin-bottom: 0;
+}
+
+/* Card Variants */
+.card--default {
+  background: var(--g-background);
+  border-color: var(--g-border-color);
+}
+
+.card--emphasized {
+  background: var(--g-background-elevated);
+  border-color: var(--g-border-color-emphasis);
+}
+
+.card--subtle {
+  background: var(--g-background-subtle);
+  border-color: var(--g-border-color-subtle);
+}
+
+/* Interactive Cards */
+.card--interactive {
+  cursor: pointer;
+}
+
+.card--interactive:hover {
+  border-color: var(--g-border-color-emphasis);
+  background: var(--g-background-elevated);
+  transform: translateY(-2px);
+}
+
+.card--interactive:active {
+  transform: translateY(0);
+}
+
+/* Accent Border */
+.card--accent-left {
+  border-left-width: var(--g-border-width-accent);
+}
+
+.card--accent-left.card--primary {
+  border-left-color: var(--color-primary);
+}
+
+.card--accent-left.card--secondary {
+  border-left-color: var(--color-secondary);
+}
+
+.card--accent-left.card--accent {
+  border-left-color: var(--color-accent);
+}
+
+/* Padding Variants */
+.card--compact {
+  padding: var(--g-spacing-sm);
+}
+
+.card--spacious {
+  padding: var(--g-spacing-lg);
+}
+
+/* Card Header */
+.card__header {
+  margin-bottom: var(--g-spacing-sm);
+  padding-bottom: var(--g-spacing-sm);
+  border-bottom: var(--g-border-width) solid var(--g-border-color);
+}
+
+.card__header h3 {
+  margin-bottom: 0;
+}
+
+.card__header small {
+  display: block;
+  margin-top: var(--g-spacing-xs);
+}

@@ -10,7 +10,7 @@ export const GridBackground: Component<GridBackgroundProps> = (props) => {
   let canvasRef: HTMLCanvasElement | undefined;
 
   const gridSize = () => props.gridSize ?? 10;
-  const gridColor = () => props.gridColor ?? getCSSVariable('--color-gray-900');
+  const gridColor = () => props.gridColor ?? getCSSVariable('--g-background');
 
   const resizeCanvas = () => {
     if (!canvasRef) return;
