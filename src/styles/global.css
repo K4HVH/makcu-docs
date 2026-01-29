@@ -1,0 +1,72 @@
+/* =============================================================================
+   MIDNIGHT THEME - Global Styles
+   Black and Blue color scheme with interactive grid background
+   ============================================================================= */
+
+/* CSS Variables - Theme Tokens */
+:root {
+  /* Base Colors */
+  --color-black: #000000;
+  --color-white: #ffffff;
+
+  /* Gray Scale */
+  --color-gray-900: #0a0a0a;
+  --color-gray-800: #1a1a1a;
+  --color-gray-700: #2a2a2a;
+  --color-gray-600: #3a3a3a;
+  --color-gray-500: #4a4a4a;
+  --color-gray-400: #6a6a6a;
+  --color-gray-300: #8a8a8a;
+  --color-gray-200: #aaaaaa;
+  --color-gray-100: #cccccc;
+
+  /* Blue Scale - Midnight Theme */
+  --color-blue-950: #001433;  /* Very dark blue */
+  --color-blue-900: #002047;  /* Dark blue */
+  --color-blue-800: #003366;  /* Muted blue */
+  --color-blue-700: #004d99;  /* Medium blue */
+  --color-blue-600: #0066cc;  /* Standard blue */
+  --color-blue-500: #0080ff;  /* Bright blue */
+  --color-blue-400: #3399ff;  /* Light blue */
+  --color-blue-300: #66b3ff;  /* Lighter blue */
+
+  /* Semantic Colors */
+  --color-primary: var(--color-blue-600);      /* Main interaction color */
+  --color-secondary: var(--color-blue-800);    /* Secondary elements */
+  --color-tertiary: var(--color-gray-600);     /* Tertiary elements */
+  --color-accent: var(--color-blue-500);       /* Highlight/accent color */
+  --color-muted: var(--color-gray-400);        /* Muted text/elements */
+}
+
+/* Reset & Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--color-black);
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* Content Container */
+.content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
