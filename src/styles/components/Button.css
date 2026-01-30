@@ -29,16 +29,16 @@
 
 /* Variants */
 .button--primary {
-  background: var(--color-primary);
+  background: var(--g-button-primary);
   color: var(--color-white);
 }
 
 .button--primary:hover:not(:disabled) {
-  background: var(--color-accent);
+  background: var(--g-button-primary-hover);
 }
 
 .button--primary:active:not(:disabled) {
-  background: var(--color-blue-700);
+  background: var(--g-button-primary-active);
 }
 
 .button--secondary {
@@ -71,16 +71,16 @@
 }
 
 .button--danger {
-  background: var(--color-danger);
+  background: var(--g-button-danger);
   color: var(--color-white);
 }
 
 .button--danger:hover:not(:disabled) {
-  background: var(--color-red-500);
+  background: var(--g-button-danger-hover);
 }
 
 .button--danger:active:not(:disabled) {
-  background: var(--color-red-700);
+  background: var(--g-button-danger-active);
 }
 
 /* Sizes */

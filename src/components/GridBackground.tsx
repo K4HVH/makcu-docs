@@ -10,7 +10,7 @@ export const GridBackground: Component<GridBackgroundProps> = (props) => {
   let canvasRef: HTMLCanvasElement | undefined;
 
   const gridSize = () => props.gridSize ?? 10;
-  const gridColor = () => props.gridColor ?? getCSSVariable('--g-background');
+  const gridColor = () => props.gridColor ?? getCSSVariable('--color-gray-800');
 
   const resizeCanvas = () => {
     if (!canvasRef) return;
@@ -31,9 +31,15 @@ export const GridBackground: Component<GridBackgroundProps> = (props) => {
     const size = gridSize();
 
     ctx.imageSmoothingEnabled = false;
-    ctx.strokeStyle = gridColor();
+
+    // Create gradient from NNE to SSW
+    const gradient = ctx.createLinearGradient(width * 0.65, height * 0.1, width * 0.35, height * 0.9);
+    gradient.addColorStop(0, gridColor());
+    gradient.addColorStop(1, getCSSVariable('--color-blue-950'));
+
+    ctx.strokeStyle = gradient;
     ctx.lineWidth = 1;
-    ctx.globalAlpha = 0.5;
+    ctx.globalAlpha = 0.3;
 
     // Draw vertical lines
     for (let x = 0; x <= width; x += size) {
