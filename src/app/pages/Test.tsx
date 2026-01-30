@@ -7,6 +7,7 @@ import { Button } from '../../components/Button';
 import { ButtonGroup } from '../../components/ButtonGroup';
 import { Spinner } from '../../components/Spinner';
 import { getCSSVariable } from '../../utils/cssVariables';
+import { BsBookmark, BsBookmarkFill, BsHeart, BsHeartFill, BsStar, BsStarFill, BsPlus, BsTrash, BsPencil, BsDownload, BsUpload, BsGear } from 'solid-icons/bs';
 
 const Test: Component = () => {
   const [checked1, setChecked1] = createSignal(false);
@@ -170,6 +171,39 @@ const Test: Component = () => {
             </div>
           </Card>
 
+          <Card>
+            <CardHeader title="Icon Checkboxes" subtitle="Using solid-icons library" />
+            <div class="grid--sm">
+              <Checkbox label="Bookmark" iconUnchecked={BsBookmark} iconChecked={BsBookmarkFill} />
+              <Checkbox label="Bookmark (checked)" iconUnchecked={BsBookmark} iconChecked={BsBookmarkFill} checked />
+              <Checkbox label="Heart" iconUnchecked={BsHeart} iconChecked={BsHeartFill} />
+              <Checkbox label="Heart (checked)" iconUnchecked={BsHeart} iconChecked={BsHeartFill} checked />
+              <Checkbox label="Star" iconUnchecked={BsStar} iconChecked={BsStarFill} />
+              <Checkbox label="Star (checked)" iconUnchecked={BsStar} iconChecked={BsStarFill} checked />
+            </div>
+          </Card>
+
+          <Card>
+            <CardHeader title="Icon Checkboxes - Compact" />
+            <div class="grid--sm">
+              <Checkbox label="Compact bookmark" iconUnchecked={BsBookmark} iconChecked={BsBookmarkFill} size="compact" />
+              <Checkbox label="Compact heart" iconUnchecked={BsHeart} iconChecked={BsHeartFill} size="compact" checked />
+              <Checkbox label="Compact star" iconUnchecked={BsStar} iconChecked={BsStarFill} size="compact" />
+            </div>
+          </Card>
+
+          <Card>
+            <CardHeader title="Icon Checkboxes - No Labels" />
+            <div class="flex--sm">
+              <Checkbox iconUnchecked={BsBookmark} iconChecked={BsBookmarkFill} />
+              <Checkbox iconUnchecked={BsBookmark} iconChecked={BsBookmarkFill} checked />
+              <Checkbox iconUnchecked={BsHeart} iconChecked={BsHeartFill} />
+              <Checkbox iconUnchecked={BsHeart} iconChecked={BsHeartFill} checked />
+              <Checkbox iconUnchecked={BsStar} iconChecked={BsStarFill} />
+              <Checkbox iconUnchecked={BsStar} iconChecked={BsStarFill} checked />
+            </div>
+          </Card>
+
           <h2>Button Component Examples</h2>
 
           <Card>
@@ -238,6 +272,49 @@ const Test: Component = () => {
               <Button variant="danger" onClick={() => confirm('Are you sure?')}>
                 Confirm action
               </Button>
+            </div>
+          </Card>
+
+          <Card>
+            <CardHeader title="Icon-Only Buttons" />
+            <div class="flex--sm flex--wrap">
+              <Button variant="primary" icon={BsPlus} />
+              <Button variant="secondary" icon={BsPencil} />
+              <Button variant="subtle" icon={BsGear} />
+              <Button variant="danger" icon={BsTrash} />
+            </div>
+          </Card>
+
+          <Card>
+            <CardHeader title="Buttons with Icons" />
+            <div class="grid--sm">
+              <div class="flex--sm flex--wrap">
+                <Button variant="primary" icon={BsPlus}>Add Item</Button>
+                <Button variant="secondary" icon={BsDownload}>Download</Button>
+                <Button variant="subtle" icon={BsUpload}>Upload</Button>
+              </div>
+              <div class="flex--sm flex--wrap">
+                <Button variant="primary" icon={BsPlus} iconPosition="right">Add Item</Button>
+                <Button variant="secondary" icon={BsDownload} iconPosition="right">Download</Button>
+              </div>
+            </div>
+          </Card>
+
+          <Card>
+            <CardHeader title="Icon Button Sizes" />
+            <div class="flex--sm flex--wrap">
+              <Button size="compact" icon={BsPlus} />
+              <Button size="normal" icon={BsPlus} />
+              <Button size="spacious" icon={BsPlus} />
+            </div>
+          </Card>
+
+          <Card>
+            <CardHeader title="Icon Buttons - Loading State" />
+            <div class="flex--sm flex--wrap">
+              <Button variant="primary" icon={BsPlus} loading>Add</Button>
+              <Button variant="secondary" icon={BsDownload} loading>Download</Button>
+              <Button variant="primary" icon={BsPlus} loading />
             </div>
           </Card>
 

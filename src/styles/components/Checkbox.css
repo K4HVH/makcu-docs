@@ -139,3 +139,70 @@
 .checkbox--compact .checkbox__label {
   font-size: var(--font-size-sm);
 }
+
+/* Icon checkboxes */
+.checkbox__icon-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  color: var(--g-text-secondary);
+  transition: color var(--g-transition);
+}
+
+.checkbox--compact .checkbox__icon-wrapper {
+  width: 16px;
+  height: 16px;
+}
+
+.checkbox__icon {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  transition: opacity var(--g-transition);
+}
+
+.checkbox--compact .checkbox__icon {
+  font-size: 16px;
+}
+
+/* Show unchecked icon by default */
+.checkbox__icon--unchecked {
+  opacity: 1;
+}
+
+/* Hide checked icon by default */
+.checkbox__icon--checked {
+  opacity: 0;
+}
+
+/* When checked, hide unchecked icon and show checked icon */
+.checkbox__input:checked ~ .checkbox__icon-wrapper .checkbox__icon--unchecked,
+.checkbox__input:indeterminate ~ .checkbox__icon-wrapper .checkbox__icon--unchecked {
+  opacity: 0;
+}
+
+.checkbox__input:checked ~ .checkbox__icon-wrapper .checkbox__icon--checked,
+.checkbox__input:indeterminate ~ .checkbox__icon-wrapper .checkbox__icon--checked {
+  opacity: 1;
+}
+
+/* Change icon color when checked */
+.checkbox__input:checked ~ .checkbox__icon-wrapper,
+.checkbox__input:indeterminate ~ .checkbox__icon-wrapper {
+  color: var(--color-primary);
+}
+
+/* Hover effect for icon checkboxes */
+.checkbox--icon:not(.checkbox--disabled):hover .checkbox__icon-wrapper {
+  color: var(--g-border-color-emphasis);
+}
+
+.checkbox--icon:not(.checkbox--disabled):hover .checkbox__input:checked ~ .checkbox__icon-wrapper,
+.checkbox--icon:not(.checkbox--disabled):hover .checkbox__input:indeterminate ~ .checkbox__icon-wrapper {
+  color: var(--color-accent);
+}

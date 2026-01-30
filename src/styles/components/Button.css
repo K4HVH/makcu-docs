@@ -125,3 +125,25 @@
 .button--loading {
   cursor: wait;
 }
+
+/* Icon buttons */
+.button__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1em;
+}
+
+/* Icon-only buttons (square padding, increased to match text button height) */
+.button--icon-only {
+  padding: var(--spacing-3) var(--spacing-3);
+  min-width: auto;
+}
+
+.button--icon-only.button--compact {
+  padding: var(--g-spacing-xs) var(--g-spacing-xs);
+}
+
+.button--icon-only.button--spacious {
+  padding: var(--g-spacing) var(--g-spacing);
+}

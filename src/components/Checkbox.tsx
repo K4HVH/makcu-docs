@@ -1,10 +1,12 @@
-import { Component, JSX, createEffect, splitProps } from 'solid-js';
+import { Component, JSX, createEffect, splitProps, Show } from 'solid-js';
 import '../styles/components/Checkbox.css';
 
 interface CheckboxProps extends Omit<JSX.InputHTMLAttributes<HTMLInputElement>, 'size' | 'type'> {
   label?: string;
   size?: 'normal' | 'compact';
   indeterminate?: boolean;
+  iconUnchecked?: Component;
+  iconChecked?: Component;
 }
 
 export const Checkbox: Component<CheckboxProps> = (props) => {
@@ -13,12 +15,15 @@ export const Checkbox: Component<CheckboxProps> = (props) => {
     'size',
     'disabled',
     'indeterminate',
+    'iconUnchecked',
+    'iconChecked',
     'class',
   ]);
 
   let inputRef: HTMLInputElement | undefined;
 
   const size = () => local.size ?? 'normal';
+  const hasIcon = () => local.iconUnchecked || local.iconChecked;
 
   createEffect(() => {
     if (inputRef) {
@@ -37,6 +42,10 @@ export const Checkbox: Component<CheckboxProps> = (props) => {
       classes.push('checkbox--compact');
     }
 
+    if (hasIcon()) {
+      classes.push('checkbox--icon');
+    }
+
     if (local.class) {
       classes.push(local.class);
     }
@@ -53,7 +62,23 @@ export const Checkbox: Component<CheckboxProps> = (props) => {
         disabled={local.disabled}
         {...rest}
       />
-      <span class="checkbox__box" />
+      <Show
+        when={hasIcon()}
+        fallback={<span class="checkbox__box" />}
+      >
+        <span class="checkbox__icon-wrapper">
+          <Show when={local.iconUnchecked}>
+            <span class="checkbox__icon checkbox__icon--unchecked">
+              {local.iconUnchecked && <local.iconUnchecked />}
+            </span>
+          </Show>
+          <Show when={local.iconChecked}>
+            <span class="checkbox__icon checkbox__icon--checked">
+              {local.iconChecked && <local.iconChecked />}
+            </span>
+          </Show>
+        </span>
+      </Show>
       {local.label && <span class="checkbox__label">{local.label}</span>}
     </label>
   );
