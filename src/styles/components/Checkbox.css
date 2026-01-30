@@ -33,6 +33,20 @@
   background: var(--g-background);
   transition: all var(--g-transition);
   flex-shrink: 0;
+  overflow: hidden;
+}
+
+.checkbox__box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0);
+  transition: background var(--g-transition);
+  pointer-events: none;
+  border-radius: inherit;
 }
 
 .checkbox__box::after {
@@ -46,6 +60,7 @@
   border: solid var(--color-white);
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
+  z-index: 1;
 }
 
 /* Compact size */
@@ -102,6 +117,16 @@
 /* Hover state (not disabled) */
 .checkbox:not(.checkbox--disabled):hover .checkbox__box {
   border-color: var(--g-border-color-emphasis);
+}
+
+.checkbox:not(.checkbox--disabled):hover .checkbox__box::before {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Hover for checked/indeterminate states */
+.checkbox:not(.checkbox--disabled):hover .checkbox__input:checked + .checkbox__box::before,
+.checkbox:not(.checkbox--disabled):hover .checkbox__input:indeterminate + .checkbox__box::before {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 /* Label text */
