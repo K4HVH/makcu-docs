@@ -1,9 +1,15 @@
 import type { Component } from 'solid-js';
+import { createSignal } from 'solid-js';
 import { GridBackground } from '../../components/GridBackground';
 import { Card, CardHeader } from '../../components/Card';
+import { Checkbox } from '../../components/Checkbox';
 import { getCSSVariable } from '../../utils/cssVariables';
 
 const Test: Component = () => {
+  const [checked1, setChecked1] = createSignal(false);
+  const [checked2, setChecked2] = createSignal(true);
+  const [checked3, setChecked3] = createSignal(false);
+
   return (
     <>
       <GridBackground gridSize={10} />
@@ -87,6 +93,72 @@ const Test: Component = () => {
           <Card variant="emphasized" interactive accent="primary" padding="spacious">
             <CardHeader title="Combined Options" subtitle="Multiple props combined" />
             <p>This card combines emphasized variant, interactive hover, primary accent, and spacious padding.</p>
+          </Card>
+
+          <h2>Checkbox Component Examples</h2>
+
+          <Card>
+            <CardHeader title="Basic Checkboxes" />
+            <div class="grid--sm">
+              <Checkbox label="Unchecked checkbox" />
+              <Checkbox label="Checked checkbox" checked />
+              <Checkbox label="Disabled checkbox" disabled />
+              <Checkbox label="Disabled checked" checked disabled />
+            </div>
+          </Card>
+
+          <Card>
+            <CardHeader title="Interactive Checkboxes" />
+            <div class="grid--sm">
+              <Checkbox
+                label="Toggle me"
+                checked={checked1()}
+                onChange={(e) => setChecked1(e.currentTarget.checked)}
+              />
+              <Checkbox
+                label="Toggle me too"
+                checked={checked2()}
+                onChange={(e) => setChecked2(e.currentTarget.checked)}
+              />
+              <p>
+                <small>
+                  Checkbox 1: {checked1() ? 'checked' : 'unchecked'} |
+                  Checkbox 2: {checked2() ? 'checked' : 'unchecked'}
+                </small>
+              </p>
+            </div>
+          </Card>
+
+          <Card>
+            <CardHeader title="Indeterminate State" />
+            <div class="grid--sm">
+              <Checkbox label="Indeterminate checkbox" indeterminate />
+              <Checkbox
+                label="Toggle all states"
+                checked={checked3()}
+                indeterminate={checked3() === undefined}
+                onChange={(e) => setChecked3(e.currentTarget.checked)}
+              />
+            </div>
+          </Card>
+
+          <Card>
+            <CardHeader title="Compact Size" />
+            <div class="grid--sm">
+              <Checkbox label="Compact unchecked" size="compact" />
+              <Checkbox label="Compact checked" size="compact" checked />
+              <Checkbox label="Compact indeterminate" size="compact" indeterminate />
+            </div>
+          </Card>
+
+          <Card>
+            <CardHeader title="Without Labels" />
+            <div class="flex--sm">
+              <Checkbox />
+              <Checkbox checked />
+              <Checkbox indeterminate />
+              <Checkbox size="compact" />
+            </div>
           </Card>
         </div>
       </div>

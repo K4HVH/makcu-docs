@@ -1,0 +1,116 @@
+/* =============================================================================
+   Checkbox Component
+   ============================================================================= */
+
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--g-spacing-sm);
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox--disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Hidden native input */
+.checkbox__input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Custom checkbox box */
+.checkbox__box {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  border: var(--g-border-width) solid var(--g-border-color);
+  border-radius: var(--g-radius);
+  background: var(--g-background);
+  transition: all var(--g-transition);
+  flex-shrink: 0;
+}
+
+.checkbox__box::after {
+  content: '';
+  position: absolute;
+  display: none;
+  left: 5px;
+  top: 2px;
+  width: 4px;
+  height: 8px;
+  border: solid var(--color-white);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Compact size */
+.checkbox--compact .checkbox__box {
+  width: 14px;
+  height: 14px;
+}
+
+.checkbox--compact .checkbox__box::after {
+  left: 4px;
+  top: 1px;
+  width: 3px;
+  height: 6px;
+}
+
+/* Checked state */
+.checkbox__input:checked + .checkbox__box {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.checkbox__input:checked + .checkbox__box::after {
+  display: block;
+}
+
+/* Indeterminate state */
+.checkbox__input:indeterminate + .checkbox__box {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.checkbox__input:indeterminate + .checkbox__box::after {
+  display: block;
+  left: 3px;
+  top: 7px;
+  width: 10px;
+  height: 0;
+  border-width: 0 0 2px 0;
+  transform: none;
+}
+
+.checkbox--compact .checkbox__input:indeterminate + .checkbox__box::after {
+  left: 2px;
+  top: 5px;
+  width: 8px;
+}
+
+/* Focus state */
+.checkbox__input:focus-visible + .checkbox__box {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Hover state (not disabled) */
+.checkbox:not(.checkbox--disabled):hover .checkbox__box {
+  border-color: var(--g-border-color-emphasis);
+}
+
+/* Label text */
+.checkbox__label {
+  color: var(--g-text-secondary);
+  font-size: var(--g-font-size);
+  line-height: var(--g-line-height);
+}
+
+.checkbox--compact .checkbox__label {
+  font-size: var(--font-size-sm);
+}
