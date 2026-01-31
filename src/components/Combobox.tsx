@@ -1,5 +1,7 @@
 import { Component, createSignal, createEffect, Show, For, splitProps, JSX, onCleanup } from 'solid-js';
 import { Portal } from 'solid-js/web';
+import { BsX } from 'solid-icons/bs';
+import { Checkbox } from './Checkbox';
 import '../styles/components/Combobox.css';
 
 interface ComboboxOption {
@@ -7,16 +9,19 @@ interface ComboboxOption {
   label: string;
   disabled?: boolean;
   icon?: Component;
+  iconUnchecked?: Component;
+  iconChecked?: Component;
 }
 
 interface ComboboxProps {
   name?: string;
-  value?: string;
-  onChange?: (value: string) => void;
+  value?: string | string[];
+  onChange?: (value: string | string[]) => void;
   options: ComboboxOption[];
   placeholder?: string;
   size?: 'normal' | 'compact';
   disabled?: boolean;
+  multiple?: boolean;
   class?: string;
 }
 
@@ -29,6 +34,7 @@ export const Combobox: Component<ComboboxProps> = (props) => {
     'placeholder',
     'size',
     'disabled',
+    'multiple',
     'class',
   ]);
 
@@ -70,8 +76,20 @@ export const Combobox: Component<ComboboxProps> = (props) => {
     document.removeEventListener('mousedown', handleClickOutside);
   });
 
-  const selectedOption = () => {
-    return local.options.find(opt => opt.value === local.value);
+  const selectedValues = () => {
+    if (local.multiple) {
+      return Array.isArray(local.value) ? local.value : [];
+    }
+    return local.value ? [local.value] : [];
+  };
+
+  const selectedOptions = () => {
+    const values = selectedValues();
+    return local.options.filter(opt => values.includes(opt.value));
+  };
+
+  const isSelected = (value: string) => {
+    return selectedValues().includes(value);
   };
 
   const handleToggle = () => {
@@ -81,10 +99,26 @@ export const Combobox: Component<ComboboxProps> = (props) => {
   };
 
   const handleSelect = (value: string) => {
-    if (local.onChange) {
+    if (!local.onChange) return;
+
+    if (local.multiple) {
+      const currentValues = selectedValues();
+      const newValues = currentValues.includes(value)
+        ? currentValues.filter(v => v !== value)
+        : [...currentValues, value];
+      local.onChange(newValues);
+      // Don't close dropdown in multiple mode
+    } else {
       local.onChange(value);
+      setIsOpen(false);
     }
-    setIsOpen(false);
+  };
+
+  const handleRemove = (value: string) => {
+    if (!local.onChange || !local.multiple) return;
+    const currentValues = selectedValues();
+    const newValues = currentValues.filter(v => v !== value);
+    local.onChange(newValues);
   };
 
   const handleClickOutside = (e: MouseEvent) => {
@@ -144,21 +178,51 @@ export const Combobox: Component<ComboboxProps> = (props) => {
     >
       <div class="combobox__trigger" onClick={handleToggle}>
         <span class="combobox__value">
-          <Show when={selectedOption()} fallback={<span class="combobox__placeholder">{local.placeholder || 'Select...'}</span>}>
-            {(() => {
-              const option = selectedOption();
-              const Icon = option?.icon;
-              return (
-                <>
-                  {Icon && (
-                    <span class="combobox__icon">
-                      <Icon />
-                    </span>
-                  )}
-                  <span>{option?.label}</span>
-                </>
-              );
-            })()}
+          <Show when={selectedOptions().length > 0} fallback={<span class="combobox__placeholder">{local.placeholder || 'Select...'}</span>}>
+            {local.multiple ? (
+              <div class="combobox__chips">
+                <For each={selectedOptions()}>
+                  {(option) => {
+                    const Icon = option.iconChecked || option.icon;
+                    return (
+                      <span class="combobox__chip">
+                        {Icon && (
+                          <span class="combobox__icon">
+                            <Icon />
+                          </span>
+                        )}
+                        <span>{option.label}</span>
+                        <button
+                          type="button"
+                          class="combobox__chip-remove"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleRemove(option.value);
+                          }}
+                        >
+                          <BsX />
+                        </button>
+                      </span>
+                    );
+                  }}
+                </For>
+              </div>
+            ) : (
+              (() => {
+                const option = selectedOptions()[0];
+                const Icon = option?.icon;
+                return (
+                  <>
+                    {Icon && (
+                      <span class="combobox__icon">
+                        <Icon />
+                      </span>
+                    )}
+                    <span>{option?.label}</span>
+                  </>
+                );
+              })()
+            )}
           </Show>
         </span>
         <span class="combobox__arrow" />
@@ -179,7 +243,7 @@ export const Combobox: Component<ComboboxProps> = (props) => {
             <For each={local.options}>
               {(option) => (
                 <div
-                  class={`combobox__option ${option.disabled ? 'combobox__option--disabled' : ''} ${local.value === option.value ? 'combobox__option--selected' : ''}`}
+                  class={`combobox__option ${option.disabled ? 'combobox__option--disabled' : ''} ${isSelected(option.value) ? 'combobox__option--selected' : ''}`}
                   onMouseDown={(e) => {
                     if (option.disabled) {
                       e.stopPropagation();
@@ -194,10 +258,19 @@ export const Combobox: Component<ComboboxProps> = (props) => {
                     handleSelect(option.value);
                   }}
                 >
-                  {option.icon && (
-                    <span class="combobox__icon">
-                      <option.icon />
-                    </span>
+                  {local.multiple ? (
+                    <Checkbox
+                      checked={isSelected(option.value)}
+                      disabled={option.disabled}
+                      iconUnchecked={option.iconUnchecked}
+                      iconChecked={option.iconChecked}
+                    />
+                  ) : (
+                    option.icon && (
+                      <span class="combobox__icon">
+                        <option.icon />
+                      </span>
+                    )
                   )}
                   <span>{option.label}</span>
                 </div>

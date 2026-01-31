@@ -9,7 +9,7 @@ import { Button } from '../../components/Button';
 import { ButtonGroup } from '../../components/ButtonGroup';
 import { Spinner } from '../../components/Spinner';
 import { getCSSVariable } from '../../utils/cssVariables';
-import { BsBookmark, BsBookmarkFill, BsHeart, BsHeartFill, BsStar, BsStarFill, BsPlus, BsTrash, BsPencil, BsDownload, BsUpload, BsGear, BsCircle, BsSquare, BsTriangle } from 'solid-icons/bs';
+import { BsBookmark, BsBookmarkFill, BsHeart, BsHeartFill, BsStar, BsStarFill, BsPlus, BsTrash, BsPencil, BsDownload, BsUpload, BsGear, BsCircle, BsCircleFill, BsSquare, BsTriangle } from 'solid-icons/bs';
 
 const Test: Component = () => {
   const [checked1, setChecked1] = createSignal(false);
@@ -27,6 +27,9 @@ const Test: Component = () => {
   const [comboValue5, setComboValue5] = createSignal<string>();
   const [comboValue6, setComboValue6] = createSignal<string>();
   const [comboValue7, setComboValue7] = createSignal<string>();
+  const [comboMulti1, setComboMulti1] = createSignal<string[]>(['option2']);
+  const [comboMulti2, setComboMulti2] = createSignal<string[]>([]);
+  const [comboMulti3, setComboMulti3] = createSignal<string[]>(['star', 'heart']);
 
   const handleLoadingClick = () => {
     setLoading(true);
@@ -433,6 +436,59 @@ const Test: Component = () => {
               ]}
             />
             <p><small>Selected: {comboValue7() || 'None'}</small></p>
+          </Card>
+
+          <h2>Multi-Select Combobox Examples</h2>
+
+          <Card>
+            <CardHeader title="Basic Multi-Select" />
+            <Combobox
+              multiple
+              value={comboMulti1()}
+              onChange={setComboMulti1}
+              options={[
+                { value: 'option1', label: 'Option 1' },
+                { value: 'option2', label: 'Option 2' },
+                { value: 'option3', label: 'Option 3' },
+                { value: 'option4', label: 'Option 4' },
+              ]}
+            />
+            <p><small>Selected: {comboMulti1().join(', ') || 'None'}</small></p>
+          </Card>
+
+          <Card>
+            <CardHeader title="Multi-Select with Placeholder" />
+            <Combobox
+              multiple
+              placeholder="Select multiple colors..."
+              value={comboMulti2()}
+              onChange={setComboMulti2}
+              options={[
+                { value: 'red', label: 'Red' },
+                { value: 'green', label: 'Green' },
+                { value: 'blue', label: 'Blue' },
+                { value: 'yellow', label: 'Yellow' },
+                { value: 'purple', label: 'Purple' },
+              ]}
+            />
+            <p><small>Selected: {comboMulti2().join(', ') || 'None'}</small></p>
+          </Card>
+
+          <Card>
+            <CardHeader title="Multi-Select with Icons" />
+            <Combobox
+              multiple
+              placeholder="Select favorites..."
+              value={comboMulti3()}
+              onChange={setComboMulti3}
+              options={[
+                { value: 'star', label: 'Star', iconUnchecked: BsStar, iconChecked: BsStarFill },
+                { value: 'heart', label: 'Heart', iconUnchecked: BsHeart, iconChecked: BsHeartFill },
+                { value: 'bookmark', label: 'Bookmark', iconUnchecked: BsBookmark, iconChecked: BsBookmarkFill },
+                { value: 'circle', label: 'Circle', iconUnchecked: BsCircle, iconChecked: BsCircleFill },
+              ]}
+            />
+            <p><small>Selected: {comboMulti3().join(', ') || 'None'}</small></p>
           </Card>
 
           <h2>Button Component Examples</h2>
