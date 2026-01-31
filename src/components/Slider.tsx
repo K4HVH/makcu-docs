@@ -47,6 +47,7 @@ export const Slider: Component<SliderProps> = (props) => {
 
   const [isDragging, setIsDragging] = createSignal(false);
   const [activeThumb, setActiveThumb] = createSignal<'start' | 'end' | null>(null);
+  const [hoveredThumb, setHoveredThumb] = createSignal<'start' | 'end' | null>(null);
   const [tooltipPosition, setTooltipPosition] = createSignal({ top: 0, left: 0 });
 
   let trackRef: HTMLDivElement | undefined;
@@ -72,7 +73,8 @@ export const Slider: Component<SliderProps> = (props) => {
   };
 
   const updateTooltipPosition = () => {
-    const thumbRef = activeThumb() === 'start' ? startThumbRef : endThumbRef;
+    const currentThumb = activeThumb() || hoveredThumb();
+    const thumbRef = currentThumb === 'start' ? startThumbRef : endThumbRef;
     if (thumbRef) {
       const rect = thumbRef.getBoundingClientRect();
       const isHorizontal = orientation() === 'horizontal';
@@ -81,6 +83,12 @@ export const Slider: Component<SliderProps> = (props) => {
         left: isHorizontal ? rect.left + rect.width / 2 : rect.right + 8,
       });
     }
+  };
+
+  const getTooltipValue = () => {
+    const currentThumb = activeThumb() || hoveredThumb();
+    const [start, end] = getValue();
+    return currentThumb === 'start' ? start : end;
   };
 
   const valueFromPosition = (clientPos: number) => {
@@ -122,9 +130,11 @@ export const Slider: Component<SliderProps> = (props) => {
     setIsDragging(true);
     setActiveThumb(thumb);
     (e.target as HTMLElement).setPointerCapture(e.pointerId);
-    if (local.showTooltip !== false) {
+    // Only update position if not already hovering this thumb
+    if (local.showTooltip !== false && hoveredThumb() !== thumb) {
       updateTooltipPosition();
     }
+    setHoveredThumb(null); // Clear hover state when dragging starts
   };
 
   const handlePointerMove = (e: PointerEvent) => {
@@ -213,11 +223,6 @@ export const Slider: Component<SliderProps> = (props) => {
     return classes.join(' ');
   };
 
-  const getTooltipValue = () => {
-    const [start, end] = getValue();
-    return activeThumb() === 'start' ? start : end;
-  };
-
   return (
     <>
       <div class={classNames()} {...rest}>
@@ -263,6 +268,13 @@ export const Slider: Component<SliderProps> = (props) => {
               onPointerDown={(e) => handlePointerDown(e, 'start')}
               onPointerMove={handlePointerMove}
               onPointerUp={handlePointerUp}
+              onMouseEnter={() => {
+                if (local.showTooltip !== false) {
+                  setHoveredThumb('start');
+                  updateTooltipPosition();
+                }
+              }}
+              onMouseLeave={() => setHoveredThumb(null)}
               tabIndex={local.disabled ? -1 : 0}
             />
           )}
@@ -276,13 +288,20 @@ export const Slider: Component<SliderProps> = (props) => {
             onPointerDown={(e) => handlePointerDown(e, 'end')}
             onPointerMove={handlePointerMove}
             onPointerUp={handlePointerUp}
+            onMouseEnter={() => {
+              if (local.showTooltip !== false) {
+                setHoveredThumb('end');
+                updateTooltipPosition();
+              }
+            }}
+            onMouseLeave={() => setHoveredThumb(null)}
             tabIndex={local.disabled ? -1 : 0}
           />
         </div>
       </div>
 
       {/* Tooltip */}
-      <Show when={isDragging() && local.showTooltip !== false}>
+      <Show when={(isDragging() || hoveredThumb()) && local.showTooltip !== false}>
         <Portal>
           <div
             class="slider__tooltip"

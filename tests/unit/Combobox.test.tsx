@@ -85,8 +85,9 @@ describe('Combobox', () => {
   });
 
   it('closes dropdown after selection', async () => {
+    const handleChange = vi.fn();
     const { container } = render(() => (
-      <Combobox options={mockOptions} />
+      <Combobox options={mockOptions} onChange={handleChange} />
     ));
     const trigger = container.querySelector('.combobox__trigger') as HTMLElement;
 
@@ -104,6 +105,8 @@ describe('Combobox', () => {
       const dropdown = document.querySelector('.combobox__dropdown');
       expect(dropdown).not.toBeInTheDocument();
     }, { timeout: 100 });
+
+    expect(handleChange).toHaveBeenCalledWith('option2');
   });
 
   it('is disabled when disabled prop is true', () => {
