@@ -23,6 +23,33 @@
   box-shadow: 0 0 0 2px var(--g-background);
 }
 
+/* Size variants - apply to child avatars */
+.avatar-group--compact .avatar-group__item .avatar {
+  width: 32px;
+  height: 32px;
+}
+
+.avatar-group--compact .avatar-group__item .avatar .avatar__initials {
+  font-size: 12px;
+}
+
+.avatar-group--compact .avatar-group__item .avatar .avatar__icon {
+  font-size: 16px;
+}
+
+.avatar-group--spacious .avatar-group__item .avatar {
+  width: 48px;
+  height: 48px;
+}
+
+.avatar-group--spacious .avatar-group__item .avatar .avatar__initials {
+  font-size: 16px;
+}
+
+.avatar-group--spacious .avatar-group__item .avatar .avatar__icon {
+  font-size: 24px;
+}
+
 /* Spacing variants */
 .avatar-group--spacing-tight .avatar-group__item:not(:first-child) {
   margin-left: -12px;
@@ -36,29 +63,29 @@
   margin-left: -4px;
 }
 
-/* Size-specific spacing adjustments */
+/* Size-specific spacing adjustments (compact has MORE overlap, spacious has LESS) */
 .avatar-group--compact .avatar-group__item:not(:first-child) {
-  margin-left: -6px;
+  margin-left: -10px;
 }
 
 .avatar-group--compact.avatar-group--spacing-tight .avatar-group__item:not(:first-child) {
-  margin-left: -10px;
-}
-
-.avatar-group--compact.avatar-group--spacing-loose .avatar-group__item:not(:first-child) {
-  margin-left: -3px;
-}
-
-.avatar-group--spacious .avatar-group__item:not(:first-child) {
-  margin-left: -10px;
-}
-
-.avatar-group--spacious.avatar-group--spacing-tight .avatar-group__item:not(:first-child) {
   margin-left: -14px;
 }
 
-.avatar-group--spacious.avatar-group--spacing-loose .avatar-group__item:not(:first-child) {
+.avatar-group--compact.avatar-group--spacing-loose .avatar-group__item:not(:first-child) {
   margin-left: -6px;
+}
+
+.avatar-group--spacious .avatar-group__item:not(:first-child) {
+  margin-left: -6px;
+}
+
+.avatar-group--spacious.avatar-group--spacing-tight .avatar-group__item:not(:first-child) {
+  margin-left: -10px;
+}
+
+.avatar-group--spacious.avatar-group--spacing-loose .avatar-group__item:not(:first-child) {
+  margin-left: -2px;
 }
 
 /* Z-index stacking - later avatars behind earlier ones */
