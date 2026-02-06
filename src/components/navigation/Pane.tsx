@@ -202,14 +202,20 @@ export const Pane: Component<PaneProps> = (props) => {
         {...rest}
       >
         <div class="pane__body">
-          <div class="pane__content">
-            <Show
-              when={currentState() === 'partial' && local.partialChildren}
-              fallback={local.children}
+          <div
+            class="pane__content pane__content--full"
+            classList={{ 'pane__content--active': currentState() === 'open' }}
+          >
+            {local.children}
+          </div>
+          <Show when={local.partialChildren}>
+            <div
+              class="pane__content pane__content--partial"
+              classList={{ 'pane__content--active': currentState() === 'partial' }}
             >
               {local.partialChildren}
-            </Show>
-          </div>
+            </div>
+          </Show>
         </div>
         <Show when={showHandle()}>
           <button

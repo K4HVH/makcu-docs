@@ -74,6 +74,7 @@
   position: relative;
   overflow: hidden;
   flex-shrink: 0;
+  background: var(--g-background-subtle);
 }
 
 /* Horizontal body */
@@ -124,25 +125,76 @@
 }
 
 /* =============================================================================
-   Pane Content (fills the body, handles overflow)
+   Pane Content (cross-fade between layers)
+   Content layers are absolutely positioned at their target size so they
+   never reflow during the body's size transition. Opacity handles the
+   visual swap; the body's overflow:hidden clips to the current size.
    ============================================================================= */
 
 .pane__content {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
   overflow: auto;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
 }
 
-/* Hide scrollbar in closed state */
-.pane--closed .pane__content {
+.pane__content--active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Hide scrollbar when not active */
+.pane__content:not(.pane__content--active) {
   overflow: hidden;
 }
 
+/* Horizontal panes — content sized to target width, full height */
+.pane--left > .pane__body > .pane__content--full,
+.pane--right > .pane__body > .pane__content--full {
+  width: var(--pane-open-size);
+  height: 100%;
+}
+
+.pane--left > .pane__body > .pane__content--partial,
+.pane--right > .pane__body > .pane__content--partial {
+  width: var(--pane-partial-size);
+  height: 100%;
+}
+
+/* Vertical panes — content sized to target height, full width */
+.pane--top > .pane__body > .pane__content--full,
+.pane--bottom > .pane__body > .pane__content--full {
+  width: 100%;
+  height: var(--pane-open-size);
+}
+
+.pane--top > .pane__body > .pane__content--partial,
+.pane--bottom > .pane__body > .pane__content--partial {
+  width: 100%;
+  height: var(--pane-partial-size);
+}
+
+/* Right-positioned panes — anchor content to the right edge */
+.pane--right > .pane__body > .pane__content {
+  left: auto;
+  right: 0;
+}
+
+/* Bottom-positioned panes — anchor content to the bottom edge */
+.pane--bottom > .pane__body > .pane__content {
+  top: auto;
+  bottom: 0;
+}
+
 /* =============================================================================
-   Handle
+   Handle (matches Button subtle variant pattern)
    ============================================================================= */
 
 .pane__handle {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -153,21 +205,36 @@
   color: var(--g-text-muted);
   font-size: var(--font-size-xs);
   padding: 0;
-  transition: color var(--g-transition), background var(--g-transition);
+  transition: all var(--g-transition);
+}
+
+.pane__handle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0);
+  transition: background var(--g-transition);
+  pointer-events: none;
 }
 
 .pane__handle:hover {
-  color: var(--g-text-secondary);
+  color: var(--g-text-primary);
+}
+
+.pane__handle:hover::before {
   background: rgba(255, 255, 255, 0.05);
 }
 
-.pane__handle:active {
-  background: rgba(255, 255, 255, 0.08);
+.pane__handle:active::before {
+  background: rgba(0, 0, 0, 0.05);
 }
 
 .pane__handle:focus-visible {
   outline: 2px solid var(--color-primary);
-  outline-offset: -2px;
+  outline-offset: 2px;
 }
 
 /* Horizontal handle (left/right panes) */

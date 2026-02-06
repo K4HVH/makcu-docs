@@ -3,37 +3,27 @@ import { test, expect } from '@playwright/test';
 test.describe('Pane component', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
-
-    // Scroll to the Pane section
-    const paneSection = page.getByRole('heading', { name: 'Pane Component', exact: true });
-    await paneSection.scrollIntoViewIfNeeded();
   });
 
-  test('permanent pane renders with handle visible', async ({ page }) => {
-    const section = page.locator('.card', { has: page.locator('h3', { hasText: 'Permanent Pane with Partial State' }) });
-    await section.scrollIntoViewIfNeeded();
+  test('viewport permanent pane renders with handle visible', async ({ page }) => {
+    // The viewport-level permanent left pane wraps the page content
+    const pane = page.locator('.pane--permanent.pane--left').first();
+    await expect(pane).toBeVisible();
 
-    // Handle should be visible
-    const handle = section.locator('.pane__handle').first();
+    const handle = pane.locator('.pane__handle');
     await expect(handle).toBeVisible();
+  });
 
-    // Pane should start closed
-    const pane = section.locator('.pane').first();
-    await expect(pane).toHaveClass(/pane--closed/);
+  test('viewport permanent pane starts in partial state', async ({ page }) => {
+    const pane = page.locator('.pane--permanent.pane--left').first();
+    await expect(pane).toHaveClass(/pane--partial/);
   });
 
   test('handle click cycles through states with partial', async ({ page }) => {
-    const section = page.locator('.card', { has: page.locator('h3', { hasText: 'Permanent Pane with Partial State' }) });
-    await section.scrollIntoViewIfNeeded();
+    const pane = page.locator('.pane--permanent.pane--left').first();
+    const handle = pane.locator('.pane__handle');
 
-    const handle = section.locator('.pane__handle').first();
-    const pane = section.locator('.pane').first();
-
-    // Starts closed
-    await expect(pane).toHaveClass(/pane--closed/);
-
-    // Click → partial
-    await handle.click();
+    // Starts partial
     await expect(pane).toHaveClass(/pane--partial/);
 
     // Click → open
@@ -43,59 +33,59 @@ test.describe('Pane component', () => {
     // Click → closed
     await handle.click();
     await expect(pane).toHaveClass(/pane--closed/);
+
+    // Click → partial (cycle restarts)
+    await handle.click();
+    await expect(pane).toHaveClass(/pane--partial/);
   });
 
-  test('right pane opens and closes', async ({ page }) => {
-    const section = page.locator('.card', { has: page.locator('h3', { hasText: 'Right Position' }) });
-    await section.scrollIntoViewIfNeeded();
+  test('handle icon rotates when open', async ({ page }) => {
+    const pane = page.locator('.pane--permanent.pane--left').first();
+    const handle = pane.locator('.pane__handle');
+    const icon = handle.locator('.pane__handle-icon');
 
-    const handle = section.locator('.pane__handle').first();
-    const pane = section.locator('.pane').first();
+    // Partial — not rotated
+    await expect(icon).not.toHaveClass(/pane__handle-icon--rotated/);
 
-    // Starts closed
-    await expect(pane).toHaveClass(/pane--closed/);
-    await expect(pane).toHaveClass(/pane--right/);
-
-    // Open
+    // Click → open — rotated
     await handle.click();
-    await expect(pane).toHaveClass(/pane--open/);
+    await expect(icon).toHaveClass(/pane__handle-icon--rotated/);
 
-    // Close
+    // Click → closed — not rotated
     await handle.click();
-    await expect(pane).toHaveClass(/pane--closed/);
+    await expect(icon).not.toHaveClass(/pane__handle-icon--rotated/);
   });
 
   test('temporary overlay pane opens with backdrop', async ({ page }) => {
-    const section = page.locator('.card', { has: page.locator('h3', { hasText: 'Temporary Overlay Pane' }) });
-    await section.scrollIntoViewIfNeeded();
+    // Scroll to the Pane section and click Open Right Pane
+    const paneSection = page.getByRole('heading', { name: 'Pane Component Examples', exact: true });
+    await paneSection.scrollIntoViewIfNeeded();
 
-    // Click the open button
-    const openButton = section.locator('button', { hasText: 'Open Settings Pane' });
+    const openButton = page.locator('button', { hasText: 'Open Right Pane' });
     await openButton.click();
 
-    // Pane should be open
-    const pane = section.locator('.pane');
+    // Fixed overlay pane should be open
+    const pane = page.locator('.pane--fixed.pane--right');
     await expect(pane).toHaveClass(/pane--open/);
     await expect(pane).toHaveClass(/pane--overlay/);
 
     // Backdrop should be visible
-    const backdrop = section.locator('.pane__backdrop--visible');
+    const backdrop = page.locator('.pane__backdrop--visible.pane__backdrop--fixed');
     await expect(backdrop).toBeVisible();
   });
 
   test('temporary overlay pane closes on backdrop click', async ({ page }) => {
-    const section = page.locator('.card', { has: page.locator('h3', { hasText: 'Temporary Overlay Pane' }) });
-    await section.scrollIntoViewIfNeeded();
+    const paneSection = page.getByRole('heading', { name: 'Pane Component Examples', exact: true });
+    await paneSection.scrollIntoViewIfNeeded();
 
-    // Open the pane
-    const openButton = section.locator('button', { hasText: 'Open Settings Pane' });
+    const openButton = page.locator('button', { hasText: 'Open Right Pane' });
     await openButton.click();
 
-    const pane = section.locator('.pane');
+    const pane = page.locator('.pane--fixed.pane--right');
     await expect(pane).toHaveClass(/pane--open/);
 
-    // Click the backdrop
-    const backdrop = section.locator('.pane__backdrop');
+    // Click the visible fixed backdrop
+    const backdrop = page.locator('.pane__backdrop--fixed.pane__backdrop--visible');
     await backdrop.click({ position: { x: 5, y: 5 }, force: true });
 
     // Pane should be closed
@@ -103,14 +93,13 @@ test.describe('Pane component', () => {
   });
 
   test('temporary overlay pane closes on Escape', async ({ page }) => {
-    const section = page.locator('.card', { has: page.locator('h3', { hasText: 'Temporary Overlay Pane' }) });
-    await section.scrollIntoViewIfNeeded();
+    const paneSection = page.getByRole('heading', { name: 'Pane Component Examples', exact: true });
+    await paneSection.scrollIntoViewIfNeeded();
 
-    // Open the pane
-    const openButton = section.locator('button', { hasText: 'Open Settings Pane' });
+    const openButton = page.locator('button', { hasText: 'Open Left Pane' });
     await openButton.click();
 
-    const pane = section.locator('.pane');
+    const pane = page.locator('.pane--fixed.pane--left');
     await expect(pane).toHaveClass(/pane--open/);
 
     // Press Escape
@@ -120,40 +109,17 @@ test.describe('Pane component', () => {
     await expect(pane).toHaveClass(/pane--closed/);
   });
 
-  test('top and bottom panes have correct position classes', async ({ page }) => {
-    const section = page.locator('.card', { has: page.locator('h3', { hasText: 'Top & Bottom Positions' }) });
-    await section.scrollIntoViewIfNeeded();
-
-    const topPane = section.locator('.pane--top');
-    const bottomPane = section.locator('.pane--bottom');
-
-    await expect(topPane).toBeVisible();
-    await expect(bottomPane).toBeVisible();
-  });
-
-  test('size variant panes render correctly', async ({ page }) => {
-    const section = page.locator('.card', { has: page.locator('h3', { hasText: 'Size Variants' }) }).last();
-    await section.scrollIntoViewIfNeeded();
-
-    const compactPane = section.locator('.pane--compact');
-    const spaciousPane = section.locator('.pane--spacious');
-
-    await expect(compactPane).toBeVisible();
-    await expect(spaciousPane).toBeVisible();
-  });
-
   test('pane aria-expanded reflects state', async ({ page }) => {
-    const section = page.locator('.card', { has: page.locator('h3', { hasText: 'Permanent Pane with Partial State' }) });
-    await section.scrollIntoViewIfNeeded();
+    const pane = page.locator('.pane--permanent.pane--left').first();
+    const handle = pane.locator('.pane__handle');
 
-    const pane = section.locator('.pane').first();
-    const handle = section.locator('.pane__handle').first();
-
-    // Closed - aria-expanded should be false
-    await expect(pane).toHaveAttribute('aria-expanded', 'false');
-
-    // Open it
-    await handle.click();
+    // Partial — aria-expanded should be true
     await expect(pane).toHaveAttribute('aria-expanded', 'true');
+
+    // Close it
+    await handle.click(); // partial → open
+    await handle.click(); // open → closed
+
+    await expect(pane).toHaveAttribute('aria-expanded', 'false');
   });
 });

@@ -24,24 +24,40 @@ describe('Pane', () => {
     expect(getByText('Pane content')).toBeInTheDocument();
   });
 
-  it('renders partialChildren when in partial state', () => {
-    const { getByText, queryByText } = render(() => (
+  it('partial content is active in partial state', () => {
+    const { container } = render(() => (
       <Pane defaultState="partial" partialChildren={<div>Partial view</div>}>
         Full content
       </Pane>
     ));
-    expect(getByText('Partial view')).toBeInTheDocument();
-    expect(queryByText('Full content')).not.toBeInTheDocument();
+    const partial = container.querySelector('.pane__content--partial');
+    const full = container.querySelector('.pane__content--full');
+    expect(partial?.classList.contains('pane__content--active')).toBe(true);
+    expect(full?.classList.contains('pane__content--active')).toBe(false);
   });
 
-  it('renders children (not partialChildren) in open state', () => {
-    const { getByText, queryByText } = render(() => (
+  it('full content is active in open state', () => {
+    const { container } = render(() => (
       <Pane defaultState="open" partialChildren={<div>Partial view</div>}>
         Full content
       </Pane>
     ));
-    expect(getByText('Full content')).toBeInTheDocument();
-    expect(queryByText('Partial view')).not.toBeInTheDocument();
+    const partial = container.querySelector('.pane__content--partial');
+    const full = container.querySelector('.pane__content--full');
+    expect(full?.classList.contains('pane__content--active')).toBe(true);
+    expect(partial?.classList.contains('pane__content--active')).toBe(false);
+  });
+
+  it('no content is active when closed', () => {
+    const { container } = render(() => (
+      <Pane defaultState="closed" partialChildren={<div>Partial view</div>}>
+        Full content
+      </Pane>
+    ));
+    const partial = container.querySelector('.pane__content--partial');
+    const full = container.querySelector('.pane__content--full');
+    expect(full?.classList.contains('pane__content--active')).toBe(false);
+    expect(partial?.classList.contains('pane__content--active')).toBe(false);
   });
 
   it('applies custom class', () => {
