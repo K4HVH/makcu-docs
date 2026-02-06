@@ -2631,23 +2631,35 @@ const Test: Component = () => {
           </Card>
 
           <Card>
-            <CardHeader title="Controlled Tabs" subtitle="External state controls the active tab" />
-            <div class="grid--sm">
-              <Tabs
-                value={tabValue()}
-                onChange={setTabValue}
-                options={[
-                  { value: 'dashboard', label: 'Dashboard' },
-                  { value: 'analytics', label: 'Analytics' },
-                  { value: 'reports', label: 'Reports' },
-                ]}
-              />
-              <div class="flex--sm">
-                <Button size="compact" variant={tabValue() === 'dashboard' ? 'primary' : 'subtle'} onClick={() => setTabValue('dashboard')}>Dashboard</Button>
-                <Button size="compact" variant={tabValue() === 'analytics' ? 'primary' : 'subtle'} onClick={() => setTabValue('analytics')}>Analytics</Button>
-                <Button size="compact" variant={tabValue() === 'reports' ? 'primary' : 'subtle'} onClick={() => setTabValue('reports')}>Reports</Button>
-              </div>
-              <p><small>Active tab: {tabValue()}</small></p>
+            <CardHeader title="Content Switching" subtitle="Tabs control which panel is displayed" />
+            <Tabs
+              value={tabValue()}
+              onChange={setTabValue}
+              options={[
+                { value: 'dashboard', label: 'Dashboard', icon: BsStar },
+                { value: 'analytics', label: 'Analytics', icon: BsLightning },
+                { value: 'reports', label: 'Reports', icon: BsBookmark },
+              ]}
+            />
+            <div style={{ padding: "var(--g-spacing)", "border-radius": "var(--g-radius)", border: "1px solid var(--g-border-color)", "margin-top": "var(--g-spacing-sm)" }}>
+              {tabValue() === 'dashboard' && (
+                <div>
+                  <h4 style={{ margin: "0 0 var(--g-spacing-sm) 0" }}>Dashboard</h4>
+                  <p style={{ margin: "0", color: "var(--g-text-secondary)" }}>Welcome back. You have 3 unread notifications and 12 pending tasks.</p>
+                </div>
+              )}
+              {tabValue() === 'analytics' && (
+                <div>
+                  <h4 style={{ margin: "0 0 var(--g-spacing-sm) 0" }}>Analytics</h4>
+                  <p style={{ margin: "0", color: "var(--g-text-secondary)" }}>Page views are up 24% this week. Top referrer: direct traffic.</p>
+                </div>
+              )}
+              {tabValue() === 'reports' && (
+                <div>
+                  <h4 style={{ margin: "0 0 var(--g-spacing-sm) 0" }}>Reports</h4>
+                  <p style={{ margin: "0", color: "var(--g-text-secondary)" }}>2 reports generated this month. Next scheduled report: Friday.</p>
+                </div>
+              )}
             </div>
           </Card>
 
