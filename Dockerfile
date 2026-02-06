@@ -1,9 +1,6 @@
-FROM oven/bun:1-alpine AS builder
+FROM oven/bun:1-debian AS builder
 
 WORKDIR /app
-
-# Build tools for native packages (canvas)
-RUN apk add --no-cache build-base cairo-dev pango-dev jpeg-dev giflib-dev librsvg-dev python3
 
 # Copy dependency files
 COPY package.json bun.lock* ./
