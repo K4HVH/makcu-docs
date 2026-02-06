@@ -1,0 +1,257 @@
+/* =============================================================================
+   Pane Component
+   A collapsible panel that attaches to any edge of its container or viewport.
+   Supports closed/partial/open states, permanent/temporary modes,
+   and push/overlay layout behaviors.
+   ============================================================================= */
+
+/* --- CSS Custom Properties --- */
+.pane {
+  --pane-open-size: 280px;
+  --pane-partial-size: 56px;
+  --pane-handle-size: 24px;
+  --pane-transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
+  display: flex;
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* =============================================================================
+   Position Layout
+   ============================================================================= */
+
+/* Horizontal panes (left/right) */
+.pane--left,
+.pane--right {
+  flex-direction: row;
+  height: 100%;
+}
+
+/* Vertical panes (top/bottom) */
+.pane--top,
+.pane--bottom {
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Handle ordering: for right/bottom, handle comes first (closest to main content) */
+.pane--right > .pane__handle,
+.pane--bottom > .pane__handle {
+  order: -1;
+}
+
+/* =============================================================================
+   Border (on the edge facing main content)
+   ============================================================================= */
+
+.pane--left {
+  border-right: var(--g-border-width) solid var(--g-border-color);
+}
+
+.pane--right {
+  border-left: var(--g-border-width) solid var(--g-border-color);
+}
+
+.pane--top {
+  border-bottom: var(--g-border-width) solid var(--g-border-color);
+}
+
+.pane--bottom {
+  border-top: var(--g-border-width) solid var(--g-border-color);
+}
+
+/* No border when fully closed (temporary) */
+.pane--temporary.pane--closed {
+  border-color: transparent;
+}
+
+/* =============================================================================
+   Pane Body (content area — transitions in size)
+   ============================================================================= */
+
+.pane__body {
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* Horizontal body */
+.pane--left > .pane__body,
+.pane--right > .pane__body {
+  height: 100%;
+  transition: width var(--pane-transition);
+}
+
+/* Vertical body */
+.pane--top > .pane__body,
+.pane--bottom > .pane__body {
+  width: 100%;
+  transition: height var(--pane-transition);
+}
+
+/* --- State: Closed --- */
+.pane--left.pane--closed > .pane__body,
+.pane--right.pane--closed > .pane__body {
+  width: 0;
+}
+
+.pane--top.pane--closed > .pane__body,
+.pane--bottom.pane--closed > .pane__body {
+  height: 0;
+}
+
+/* --- State: Partial --- */
+.pane--left.pane--partial > .pane__body,
+.pane--right.pane--partial > .pane__body {
+  width: var(--pane-partial-size);
+}
+
+.pane--top.pane--partial > .pane__body,
+.pane--bottom.pane--partial > .pane__body {
+  height: var(--pane-partial-size);
+}
+
+/* --- State: Open --- */
+.pane--left.pane--open > .pane__body,
+.pane--right.pane--open > .pane__body {
+  width: var(--pane-open-size);
+}
+
+.pane--top.pane--open > .pane__body,
+.pane--bottom.pane--open > .pane__body {
+  height: var(--pane-open-size);
+}
+
+/* =============================================================================
+   Pane Content (fills the body, handles overflow)
+   ============================================================================= */
+
+.pane__content {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+/* Hide scrollbar in closed state */
+.pane--closed .pane__content {
+  overflow: hidden;
+}
+
+/* =============================================================================
+   Handle
+   ============================================================================= */
+
+.pane__handle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--g-text-muted);
+  font-size: var(--font-size-xs);
+  padding: 0;
+  transition: color var(--g-transition), background var(--g-transition);
+}
+
+.pane__handle:hover {
+  color: var(--g-text-secondary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.pane__handle:active {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.pane__handle:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -2px;
+}
+
+/* Horizontal handle (left/right panes) */
+.pane--left > .pane__handle,
+.pane--right > .pane__handle {
+  width: var(--pane-handle-size);
+  height: 100%;
+}
+
+/* Vertical handle (top/bottom panes) */
+.pane--top > .pane__handle,
+.pane--bottom > .pane__handle {
+  height: var(--pane-handle-size);
+  width: 100%;
+}
+
+/* =============================================================================
+   Overlay Mode
+   ============================================================================= */
+
+.pane--overlay {
+  position: absolute;
+  z-index: 100;
+}
+
+.pane--overlay.pane--left {
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.pane--overlay.pane--right {
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.pane--overlay.pane--top {
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.pane--overlay.pane--bottom {
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+/* =============================================================================
+   Backdrop
+   ============================================================================= */
+
+.pane__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 99;
+  opacity: 0;
+  transition: opacity var(--pane-transition);
+  pointer-events: none;
+}
+
+.pane__backdrop--visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* =============================================================================
+   Size Variants (affect handle dimensions)
+   ============================================================================= */
+
+.pane--compact {
+  --pane-handle-size: 20px;
+}
+
+.pane--compact > .pane__handle {
+  font-size: 10px;
+}
+
+.pane--spacious {
+  --pane-handle-size: 32px;
+}
+
+.pane--spacious > .pane__handle {
+  font-size: var(--font-size-sm);
+}

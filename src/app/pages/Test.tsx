@@ -16,6 +16,7 @@ import { Tooltip } from '../../components/display/Tooltip';
 import { Badge } from '../../components/display/Badge';
 import { Avatar } from '../../components/display/Avatar';
 import { AvatarGroup } from '../../components/display/AvatarGroup';
+import { Pane } from '../../components/navigation/Pane';
 import { getCSSVariable } from '../../utils/cssVariables';
 import { BsBookmark, BsBookmarkFill, BsHeart, BsHeartFill, BsStar, BsStarFill, BsPlus, BsTrash, BsPencil, BsDownload, BsUpload, BsGear, BsCircle, BsCircleFill, BsSquare, BsTriangle, BsSearch, BsEnvelope, BsInfoCircle, BsQuestionCircle, BsCheck, BsBell, BsFire, BsLightning, BsPerson } from 'solid-icons/bs';
 
@@ -64,6 +65,7 @@ const Test: Component = () => {
   const [dialogOpen4, setDialogOpen4] = createSignal(false);
   const [dialogOpen5, setDialogOpen5] = createSignal(false);
   const [dialogOpen6, setDialogOpen6] = createSignal(false);
+  const [tempPaneOpen, setTempPaneOpen] = createSignal(false);
 
   const handleLoadingClick = () => {
     setLoading(true);
@@ -2328,6 +2330,136 @@ const Test: Component = () => {
             </div>
           </Card>
         </div>
+
+          {/* ================================================================
+              Pane Component Examples
+              ================================================================ */}
+          <h2>Pane Component</h2>
+
+          {/* Permanent Left Pane with Partial State */}
+          <Card>
+            <CardHeader title="Permanent Pane with Partial State" subtitle="Handle cycles: closed → partial → open → closed" />
+            <div style={{ position: "relative", height: "250px", display: "flex", border: `1px solid var(--g-border-color)`, "border-radius": "var(--g-radius)", overflow: "hidden" }}>
+              <Pane
+                position="left"
+                mode="permanent"
+                openSize="200px"
+                partialSize="56px"
+                partialChildren={
+                  <div style={{ display: "flex", "flex-direction": "column", "align-items": "center", gap: "var(--g-spacing)", padding: "var(--g-spacing-sm)" }}>
+                    <BsPerson />
+                    <BsGear />
+                    <BsBell />
+                  </div>
+                }
+              >
+                <div style={{ padding: "var(--g-spacing)" }}>
+                  <h5 style={{ "margin-bottom": "var(--g-spacing-sm)" }}>Navigation</h5>
+                  <div style={{ display: "flex", "flex-direction": "column", gap: "var(--g-spacing-sm)" }}>
+                    <div style={{ display: "flex", "align-items": "center", gap: "var(--g-spacing-sm)" }}><BsPerson /> <span>Profile</span></div>
+                    <div style={{ display: "flex", "align-items": "center", gap: "var(--g-spacing-sm)" }}><BsGear /> <span>Settings</span></div>
+                    <div style={{ display: "flex", "align-items": "center", gap: "var(--g-spacing-sm)" }}><BsBell /> <span>Notifications</span></div>
+                  </div>
+                </div>
+              </Pane>
+              <div style={{ flex: 1, padding: "var(--g-spacing)", overflow: "auto" }}>
+                <p style={{ color: "var(--g-text-muted)" }}>Main content area. Click the handle to cycle through closed → partial (icons only) → open (full nav) → closed.</p>
+              </div>
+            </div>
+          </Card>
+
+          {/* Permanent Right Pane */}
+          <Card>
+            <CardHeader title="Right Position" subtitle="Push behavior, no partial state" />
+            <div style={{ position: "relative", height: "200px", display: "flex", border: `1px solid var(--g-border-color)`, "border-radius": "var(--g-radius)", overflow: "hidden" }}>
+              <div style={{ flex: 1, padding: "var(--g-spacing)", overflow: "auto" }}>
+                <p style={{ color: "var(--g-text-muted)" }}>Main content. The right pane pushes this content when opened.</p>
+              </div>
+              <Pane position="right" mode="permanent" openSize="180px">
+                <div style={{ padding: "var(--g-spacing)" }}>
+                  <h5>Details</h5>
+                  <small>Properties panel on the right side.</small>
+                </div>
+              </Pane>
+            </div>
+          </Card>
+
+          {/* Temporary Overlay Pane */}
+          <Card>
+            <CardHeader title="Temporary Overlay Pane" subtitle="Overlay with backdrop, closes on backdrop click or Escape" />
+            <div style={{ position: "relative", height: "200px", border: `1px solid var(--g-border-color)`, "border-radius": "var(--g-radius)", overflow: "hidden" }}>
+              <div style={{ padding: "var(--g-spacing)" }}>
+                <Button onClick={() => setTempPaneOpen(true)}>Open Settings Pane</Button>
+                <p style={{ color: "var(--g-text-muted)", "margin-top": "var(--g-spacing-sm)" }}>Click the button to open a temporary overlay pane. Click backdrop or press Escape to dismiss.</p>
+              </div>
+              <Pane
+                position="right"
+                mode="temporary"
+                behavior="overlay"
+                state={tempPaneOpen() ? 'open' : 'closed'}
+                onStateChange={(s) => setTempPaneOpen(s !== 'closed')}
+                openSize="220px"
+              >
+                <div style={{ padding: "var(--g-spacing)" }}>
+                  <h5>Settings</h5>
+                  <small>This pane overlays the content and shows a backdrop.</small>
+                </div>
+              </Pane>
+            </div>
+          </Card>
+
+          {/* Top and Bottom Panes */}
+          <Card>
+            <CardHeader title="Top & Bottom Positions" subtitle="Vertical panes with push behavior" />
+            <div style={{ display: "flex", gap: "var(--g-spacing)" }}>
+              <div style={{ flex: 1, position: "relative", height: "220px", display: "flex", "flex-direction": "column", border: `1px solid var(--g-border-color)`, "border-radius": "var(--g-radius)", overflow: "hidden" }}>
+                <Pane position="top" mode="permanent" openSize="80px">
+                  <div style={{ padding: "var(--g-spacing-sm)", "text-align": "center" }}>
+                    <small>Top toolbar pane</small>
+                  </div>
+                </Pane>
+                <div style={{ flex: 1, padding: "var(--g-spacing)", display: "flex", "align-items": "center", "justify-content": "center" }}>
+                  <small style={{ color: "var(--g-text-muted)" }}>Content</small>
+                </div>
+              </div>
+              <div style={{ flex: 1, position: "relative", height: "220px", display: "flex", "flex-direction": "column", border: `1px solid var(--g-border-color)`, "border-radius": "var(--g-radius)", overflow: "hidden" }}>
+                <div style={{ flex: 1, padding: "var(--g-spacing)", display: "flex", "align-items": "center", "justify-content": "center" }}>
+                  <small style={{ color: "var(--g-text-muted)" }}>Content</small>
+                </div>
+                <Pane position="bottom" mode="permanent" openSize="80px">
+                  <div style={{ padding: "var(--g-spacing-sm)", "text-align": "center" }}>
+                    <small>Bottom console pane</small>
+                  </div>
+                </Pane>
+              </div>
+            </div>
+          </Card>
+
+          {/* Size Variants */}
+          <Card>
+            <CardHeader title="Size Variants" subtitle="Compact, normal, and spacious handle sizes" />
+            <div style={{ display: "flex", gap: "var(--g-spacing)" }}>
+              <div style={{ flex: 1, position: "relative", height: "150px", display: "flex", border: `1px solid var(--g-border-color)`, "border-radius": "var(--g-radius)", overflow: "hidden" }}>
+                <Pane size="compact" mode="permanent" openSize="120px" defaultState="open">
+                  <div style={{ padding: "var(--g-spacing-sm)" }}><small>Compact</small></div>
+                </Pane>
+                <div style={{ flex: 1 }} />
+              </div>
+              <div style={{ flex: 1, position: "relative", height: "150px", display: "flex", border: `1px solid var(--g-border-color)`, "border-radius": "var(--g-radius)", overflow: "hidden" }}>
+                <Pane size="normal" mode="permanent" openSize="120px" defaultState="open">
+                  <div style={{ padding: "var(--g-spacing-sm)" }}><small>Normal</small></div>
+                </Pane>
+                <div style={{ flex: 1 }} />
+              </div>
+              <div style={{ flex: 1, position: "relative", height: "150px", display: "flex", border: `1px solid var(--g-border-color)`, "border-radius": "var(--g-radius)", overflow: "hidden" }}>
+                <Pane size="spacious" mode="permanent" openSize="120px" defaultState="open">
+                  <div style={{ padding: "var(--g-spacing-sm)" }}><small>Spacious</small></div>
+                </Pane>
+                <div style={{ flex: 1 }} />
+              </div>
+            </div>
+          </Card>
+
       </div>
     </>
   );
