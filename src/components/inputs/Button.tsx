@@ -1,5 +1,5 @@
 import { Component, JSX, splitProps, Show } from 'solid-js';
-import { Spinner } from './Spinner';
+import { Spinner } from '../feedback/Spinner';
 import '../../styles/components/inputs/Button.css';
 
 interface ButtonProps extends JSX.ButtonHTMLAttributes<HTMLButtonElement> {

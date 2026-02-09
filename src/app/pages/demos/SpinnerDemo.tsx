@@ -1,6 +1,6 @@
 import type { Component } from 'solid-js';
 import { Card, CardHeader } from '../../../components/surfaces/Card';
-import { Spinner } from '../../../components/inputs/Spinner';
+import { Spinner } from '../../../components/feedback/Spinner';
 
 const SpinnerDemo: Component = () => {
   return (
