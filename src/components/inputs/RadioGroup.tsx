@@ -13,10 +13,13 @@ interface RadioGroupProps {
   name: string;
   value?: string;
   onChange?: (value: string) => void;
+  onBlur?: () => void;
   options: RadioOption[];
   size?: 'normal' | 'compact';
   orientation?: 'horizontal' | 'vertical';
   disabled?: boolean;
+  error?: string;
+  invalid?: boolean;
   class?: string;
 }
 
@@ -90,10 +93,13 @@ export const RadioGroup: Component<RadioGroupProps> = (props) => {
     'name',
     'value',
     'onChange',
+    'onBlur',
     'options',
     'size',
     'orientation',
     'disabled',
+    'error',
+    'invalid',
     'class',
   ]);
 
@@ -112,6 +118,10 @@ export const RadioGroup: Component<RadioGroupProps> = (props) => {
       classes.push('radio-group--horizontal');
     }
 
+    if (local.invalid || local.error) {
+      classes.push('radio-group--invalid');
+    }
+
     if (local.class) {
       classes.push(local.class);
     }
@@ -120,7 +130,7 @@ export const RadioGroup: Component<RadioGroupProps> = (props) => {
   };
 
   return (
-    <div class={classNames()} {...rest}>
+    <div class={classNames()} onBlur={local.onBlur} {...rest}>
       <For each={local.options}>
         {(option) => (
           <Radio

@@ -21,6 +21,7 @@ import BadgeDemo from './pages/demos/BadgeDemo';
 import AvatarDemo from './pages/demos/AvatarDemo';
 import TabsDemo from './pages/demos/TabsDemo';
 import PaneDemo from './pages/demos/PaneDemo';
+import FormDemo from './pages/demos/FormDemo';
 
 const App: Component = () => {
   return (
@@ -46,6 +47,7 @@ const App: Component = () => {
           <Route path="avatar" component={AvatarDemo} />
           <Route path="tabs" component={TabsDemo} />
           <Route path="pane" component={PaneDemo} />
+          <Route path="form" component={FormDemo} />
         </Route>
       </Router>
     </NotificationProvider>

@@ -6,11 +6,14 @@ interface TextFieldProps {
   value?: string;
   onChange?: (value: string) => void;
   onInput?: (value: string) => void;
+  onBlur?: () => void;
   type?: 'text' | 'password' | 'email' | 'number' | 'tel' | 'url' | 'search';
   placeholder?: string;
   disabled?: boolean;
   size?: 'normal' | 'compact';
   label?: string;
+  error?: string;
+  invalid?: boolean;
   maxLength?: number;
   showCount?: boolean;
   prefix?: JSX.Element | string;
@@ -29,11 +32,14 @@ export const TextField: Component<TextFieldProps> = (props) => {
     'value',
     'onChange',
     'onInput',
+    'onBlur',
     'type',
     'placeholder',
     'disabled',
     'size',
     'label',
+    'error',
+    'invalid',
     'maxLength',
     'showCount',
     'prefix',
@@ -85,6 +91,12 @@ export const TextField: Component<TextFieldProps> = (props) => {
     }
   };
 
+  const handleBlur = () => {
+    if (local.onBlur) {
+      local.onBlur();
+    }
+  };
+
   const handleClear = () => {
     if (local.onChange) {
       local.onChange('');
@@ -106,6 +118,10 @@ export const TextField: Component<TextFieldProps> = (props) => {
 
     if (local.disabled) {
       classes.push('textfield--disabled');
+    }
+
+    if (local.invalid || local.error) {
+      classes.push('textfield--invalid');
     }
 
     if (local.class) {
@@ -169,6 +185,8 @@ export const TextField: Component<TextFieldProps> = (props) => {
               disabled={local.disabled}
               maxLength={local.maxLength}
               onInput={handleInput}
+              onBlur={handleBlur}
+              aria-invalid={local.invalid || !!local.error}
             />
           }
         >
@@ -183,6 +201,8 @@ export const TextField: Component<TextFieldProps> = (props) => {
             maxLength={local.maxLength}
             rows={rows()}
             onInput={handleInput}
+            onBlur={handleBlur}
+            aria-invalid={local.invalid || !!local.error}
             style={{ resize: local.maxRows ? 'none' : 'vertical' }}
           />
         </Show>

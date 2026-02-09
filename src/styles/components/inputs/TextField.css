@@ -76,6 +76,15 @@
   cursor: not-allowed;
 }
 
+/* Invalid state */
+.textfield--invalid .textfield__wrapper {
+  border-color: var(--color-danger);
+}
+
+.textfield--invalid .textfield__wrapper:focus-within {
+  border-color: var(--color-danger);
+}
+
 /* Input field */
 .textfield__input {
   flex: 1;

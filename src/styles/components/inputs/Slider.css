@@ -23,6 +23,14 @@
   cursor: not-allowed;
 }
 
+.slider--invalid .slider__range {
+  background: var(--color-danger);
+}
+
+.slider--invalid .slider__thumb {
+  border-color: var(--color-danger);
+}
+
 /* Track */
 .slider__track {
   position: relative;

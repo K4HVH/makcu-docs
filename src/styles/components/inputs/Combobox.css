@@ -13,6 +13,14 @@
   cursor: not-allowed;
 }
 
+.combobox--invalid .combobox__trigger {
+  border-color: var(--color-danger);
+}
+
+.combobox--invalid .combobox__option--selected {
+  color: var(--color-danger);
+}
+
 /* Trigger button */
 .combobox__trigger {
   display: flex;

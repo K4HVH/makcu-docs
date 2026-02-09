@@ -15,6 +15,19 @@
   opacity: 0.5;
 }
 
+.checkbox--invalid .checkbox__box {
+  border-color: var(--color-danger);
+}
+
+.checkbox--invalid.checkbox--icon .checkbox__icon-wrapper {
+  color: var(--color-danger);
+}
+
+.checkbox--invalid.checkbox--icon .checkbox__input:checked ~ .checkbox__icon-wrapper,
+.checkbox--invalid.checkbox--icon .checkbox__input:indeterminate ~ .checkbox__icon-wrapper {
+  color: var(--color-danger);
+}
+
 /* Hidden native input */
 .checkbox__input {
   position: absolute;

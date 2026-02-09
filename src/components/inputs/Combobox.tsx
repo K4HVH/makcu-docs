@@ -17,11 +17,14 @@ interface ComboboxProps {
   name?: string;
   value?: string | string[];
   onChange?: (value: string | string[]) => void;
+  onBlur?: () => void;
   options: ComboboxOption[];
   placeholder?: string;
   size?: 'normal' | 'compact';
   disabled?: boolean;
   multiple?: boolean;
+  error?: string;
+  invalid?: boolean;
   class?: string;
 }
 
@@ -30,11 +33,14 @@ export const Combobox: Component<ComboboxProps> = (props) => {
     'name',
     'value',
     'onChange',
+    'onBlur',
     'options',
     'placeholder',
     'size',
     'disabled',
     'multiple',
+    'error',
+    'invalid',
     'class',
   ]);
 
@@ -161,6 +167,10 @@ export const Combobox: Component<ComboboxProps> = (props) => {
       classes.push('combobox--open');
     }
 
+    if (local.invalid || local.error) {
+      classes.push('combobox--invalid');
+    }
+
     if (local.class) {
       classes.push(local.class);
     }
@@ -174,6 +184,8 @@ export const Combobox: Component<ComboboxProps> = (props) => {
       class={classNames()}
       tabIndex={local.disabled ? -1 : 0}
       onKeyDown={handleKeyDown}
+      onBlur={local.onBlur}
+      aria-invalid={local.invalid || !!local.error}
       {...rest}
     >
       <div class="combobox__trigger" onClick={handleToggle}>

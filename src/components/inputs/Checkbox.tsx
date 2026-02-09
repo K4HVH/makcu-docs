@@ -7,6 +7,8 @@ interface CheckboxProps extends Omit<JSX.InputHTMLAttributes<HTMLInputElement>, 
   indeterminate?: boolean;
   iconUnchecked?: Component;
   iconChecked?: Component;
+  error?: string;
+  invalid?: boolean;
 }
 
 export const Checkbox: Component<CheckboxProps> = (props) => {
@@ -17,6 +19,8 @@ export const Checkbox: Component<CheckboxProps> = (props) => {
     'indeterminate',
     'iconUnchecked',
     'iconChecked',
+    'error',
+    'invalid',
     'class',
   ]);
 
@@ -46,6 +50,10 @@ export const Checkbox: Component<CheckboxProps> = (props) => {
       classes.push('checkbox--icon');
     }
 
+    if (local.invalid || local.error) {
+      classes.push('checkbox--invalid');
+    }
+
     if (local.class) {
       classes.push(local.class);
     }
@@ -60,6 +68,7 @@ export const Checkbox: Component<CheckboxProps> = (props) => {
         type="checkbox"
         class="checkbox__input"
         disabled={local.disabled}
+        aria-invalid={local.invalid || !!local.error}
         {...rest}
       />
       <Show

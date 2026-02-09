@@ -16,6 +16,18 @@
   cursor: not-allowed;
 }
 
+.radio-group--invalid .radio__circle {
+  border-color: var(--color-danger);
+}
+
+.radio-group--invalid .radio--icon .radio__icon-wrapper {
+  color: var(--color-danger);
+}
+
+.radio-group--invalid .radio--icon .radio__input:checked ~ .radio__icon-wrapper {
+  color: var(--color-danger);
+}
+
 /* Hide native radio input */
 .radio__input {
   position: absolute;

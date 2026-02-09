@@ -10,6 +10,7 @@ interface SliderMark {
 interface SliderProps {
   value?: number | [number, number];
   onChange?: (value: number | [number, number]) => void;
+  onBlur?: () => void;
   min?: number;
   max?: number;
   step?: number | null;
@@ -19,6 +20,8 @@ interface SliderProps {
   range?: boolean;
   marks?: SliderMark[];
   showTooltip?: boolean;
+  error?: string;
+  invalid?: boolean;
   class?: string;
 }
 
@@ -26,6 +29,7 @@ export const Slider: Component<SliderProps> = (props) => {
   const [local, rest] = splitProps(props, [
     'value',
     'onChange',
+    'onBlur',
     'min',
     'max',
     'step',
@@ -35,6 +39,8 @@ export const Slider: Component<SliderProps> = (props) => {
     'range',
     'marks',
     'showTooltip',
+    'error',
+    'invalid',
     'class',
   ]);
 
@@ -216,6 +222,10 @@ export const Slider: Component<SliderProps> = (props) => {
       classes.push('slider--dragging');
     }
 
+    if (local.invalid || local.error) {
+      classes.push('slider--invalid');
+    }
+
     if (local.class) {
       classes.push(local.class);
     }
@@ -225,7 +235,7 @@ export const Slider: Component<SliderProps> = (props) => {
 
   return (
     <>
-      <div class={classNames()} {...rest}>
+      <div class={classNames()} onBlur={local.onBlur} aria-invalid={local.invalid || !!local.error} {...rest}>
         <div
           ref={trackRef}
           class="slider__track"

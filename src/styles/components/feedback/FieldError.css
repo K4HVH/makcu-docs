@@ -1,0 +1,24 @@
+.field-error {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  color: var(--color-danger);
+  font-size: var(--font-size-sm);
+  margin-top: var(--spacing-1);
+  animation: field-error-fade-in 0.2s ease;
+}
+
+.field-error__message {
+  line-height: 1.4;
+}
+
+@keyframes field-error-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
