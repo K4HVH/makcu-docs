@@ -6,6 +6,8 @@ import { BsStar, BsHeart, BsGear, BsSearch, BsBell, BsPerson, BsFire, BsLightnin
 
 const TabsDemo: Component = () => {
   const [tabValue, setTabValue] = createSignal('dashboard');
+  const [scrollableTab, setScrollableTab] = createSignal('month1');
+  const [verticalScrollableTab, setVerticalScrollableTab] = createSignal('feature1');
 
   return (
     <>
@@ -269,6 +271,101 @@ const TabsDemo: Component = () => {
               <p style={{ margin: "0", color: "var(--g-text-secondary)" }}>2 reports generated this month. Next scheduled report: Friday.</p>
             </div>
           )}
+        </div>
+      </Card>
+
+      <Card>
+        <CardHeader title="Scrollable Tabs (Horizontal)" />
+        <div style={{ display: "flex", "flex-direction": "column", gap: "var(--g-spacing-lg)" }}>
+          <div>
+            <h3 style={{ margin: "0 0 var(--g-spacing-sm) 0" }}>Many Tabs with Scroll Indicators</h3>
+            <p style={{ margin: "0 0 var(--g-spacing) 0", color: "var(--g-text-secondary)" }}>
+              When there are too many tabs to fit, scroll indicators appear. Click to scroll one tab, hold to continuously scroll.
+            </p>
+            <div style={{ width: "400px" }}>
+              <Tabs
+                scrollable
+                variant="primary"
+                value={scrollableTab()}
+                onChange={setScrollableTab}
+                options={[
+                  { value: 'month1', label: 'January' },
+                  { value: 'month2', label: 'February' },
+                  { value: 'month3', label: 'March' },
+                  { value: 'month4', label: 'April' },
+                  { value: 'month5', label: 'May' },
+                  { value: 'month6', label: 'June' },
+                  { value: 'month7', label: 'July' },
+                  { value: 'month8', label: 'August' },
+                  { value: 'month9', label: 'September' },
+                  { value: 'month10', label: 'October' },
+                  { value: 'month11', label: 'November' },
+                  { value: 'month12', label: 'December' },
+                ]}
+              />
+            </div>
+            <div style={{ "margin-top": "var(--g-spacing)", padding: "var(--g-spacing)", background: "var(--g-background)", "border-radius": "var(--g-radius)" }}>
+              <strong>Selected:</strong> {scrollableTab()}
+            </div>
+          </div>
+
+          <div>
+            <h3 style={{ margin: "0 0 var(--g-spacing-sm) 0" }}>Scrollable with Icons</h3>
+            <div style={{ width: "300px" }}>
+              <Tabs
+                scrollable
+                variant="secondary"
+                value={scrollableTab()}
+                onChange={setScrollableTab}
+                options={[
+                  { value: 'month1', label: 'January', icon: BsStar },
+                  { value: 'month2', label: 'February', icon: BsHeart },
+                  { value: 'month3', label: 'March', icon: BsGear },
+                  { value: 'month4', label: 'April', icon: BsSearch },
+                  { value: 'month5', label: 'May', icon: BsBell },
+                  { value: 'month6', label: 'June', icon: BsPerson },
+                  { value: 'month7', label: 'July', icon: BsFire },
+                  { value: 'month8', label: 'August', icon: BsLightning },
+                ]}
+              />
+            </div>
+          </div>
+        </div>
+      </Card>
+
+      <Card>
+        <CardHeader title="Scrollable Tabs (Vertical)" />
+        <div style={{ display: "flex", "flex-direction": "column", gap: "var(--g-spacing-lg)" }}>
+          <div>
+            <h3 style={{ margin: "0 0 var(--g-spacing-sm) 0" }}>Vertical Scrollable Tabs</h3>
+            <p style={{ margin: "0 0 var(--g-spacing) 0", color: "var(--g-text-secondary)" }}>
+              Scroll indicators work in vertical orientation too. This is useful for sidebars with many options.
+            </p>
+            <div style={{ height: "300px", width: "200px" }}>
+              <Tabs
+                scrollable
+                orientation="vertical"
+                variant="subtle"
+                value={verticalScrollableTab()}
+                onChange={setVerticalScrollableTab}
+                options={[
+                  { value: 'feature1', label: 'Dashboard', icon: BsStar },
+                  { value: 'feature2', label: 'Analytics', icon: BsSearch },
+                  { value: 'feature3', label: 'Reports', icon: BsBookmark },
+                  { value: 'feature4', label: 'Settings', icon: BsGear },
+                  { value: 'feature5', label: 'Users', icon: BsPerson },
+                  { value: 'feature6', label: 'Notifications', icon: BsBell },
+                  { value: 'feature7', label: 'Messages', icon: BsHeart },
+                  { value: 'feature8', label: 'Activity', icon: BsLightning },
+                  { value: 'feature9', label: 'Trending', icon: BsFire },
+                  { value: 'feature10', label: 'Bookmarks', icon: BsBookmark },
+                ]}
+              />
+            </div>
+            <div style={{ "margin-top": "var(--g-spacing)", padding: "var(--g-spacing)", background: "var(--g-background)", "border-radius": "var(--g-radius)" }}>
+              <strong>Selected:</strong> {verticalScrollableTab()}
+            </div>
+          </div>
         </div>
       </Card>
     </>

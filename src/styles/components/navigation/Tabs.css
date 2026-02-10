@@ -241,3 +241,205 @@
 .tabs--labels-hidden .tabs__tab-label {
   display: none;
 }
+
+/* =============================================================================
+   Scrollable Tabs
+   ============================================================================= */
+
+.tabs-scrollable-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.tabs-scrollable-wrapper--vertical {
+  height: 100%;
+  width: auto;
+}
+
+.tabs__scroll-container {
+  width: 100%;
+  min-width: 0; /* Allow shrinking below content size */
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.tabs-scrollable-wrapper--vertical .tabs__scroll-container {
+  height: 100%;
+  min-height: 0; /* Allow shrinking below content size */
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.tabs__scroll-container::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Webkit */
+}
+
+/* Prevent tabs from shrinking in scrollable container */
+.tabs__scroll-container > .tabs {
+  flex-wrap: nowrap;
+  width: max-content;
+}
+
+.tabs-scrollable-wrapper--vertical .tabs__scroll-container > .tabs {
+  width: auto;
+  height: max-content;
+}
+
+.tabs__scroll-container .tabs__tab {
+  flex-shrink: 0;
+}
+
+/* Scroll Indicators - Absolute positioned overlays */
+.tabs__scroll-indicator {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: var(--g-text-secondary);
+  cursor: pointer;
+  transition: all var(--g-transition);
+  z-index: 10;
+  pointer-events: auto;
+  user-select: none;
+}
+
+/* Focus state */
+.tabs__scroll-indicator:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Horizontal indicators */
+.tabs__scroll-indicator--start {
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 32px;
+}
+
+.tabs__scroll-indicator--end {
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 32px;
+}
+
+/* Vertical indicators */
+.tabs-scrollable-wrapper--vertical .tabs__scroll-indicator--start {
+  left: 0;
+  right: 0;
+  top: 0;
+  width: auto;
+  height: 32px;
+}
+
+.tabs-scrollable-wrapper--vertical .tabs__scroll-indicator--end {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: auto;
+  width: auto;
+  height: 32px;
+}
+
+/* Gradient fade effect - extends beyond button */
+.tabs__scroll-indicator::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  transition: opacity var(--g-transition);
+}
+
+/* Hover overlay effect (on the button itself) */
+.tabs__scroll-indicator::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0);
+  transition: background var(--g-transition);
+  pointer-events: none;
+  border-radius: var(--g-radius);
+}
+
+.tabs__scroll-indicator:hover::before {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.tabs__scroll-indicator:active::before {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* Horizontal start indicator gradient (left) */
+.tabs__scroll-indicator--start::after {
+  right: -8px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  background: linear-gradient(
+    to right,
+    var(--g-background-subtle) 0%,
+    transparent 100%
+  );
+}
+
+/* Horizontal end indicator gradient (right) */
+.tabs__scroll-indicator--end::after {
+  left: -8px;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 40px;
+  background: linear-gradient(
+    to left,
+    var(--g-background-subtle) 0%,
+    transparent 100%
+  );
+}
+
+/* Vertical start indicator gradient (top) */
+.tabs-scrollable-wrapper--vertical .tabs__scroll-indicator--start::after {
+  right: 0;
+  left: 0;
+  bottom: -8px;
+  top: 0;
+  width: auto;
+  height: 40px;
+  background: linear-gradient(
+    to bottom,
+    var(--g-background-subtle) 0%,
+    transparent 100%
+  );
+}
+
+/* Vertical end indicator gradient (bottom) */
+.tabs-scrollable-wrapper--vertical .tabs__scroll-indicator--end::after {
+  right: 0;
+  left: 0;
+  top: -8px;
+  bottom: 0;
+  width: auto;
+  height: 40px;
+  background: linear-gradient(
+    to top,
+    var(--g-background-subtle) 0%,
+    transparent 100%
+  );
+}
+
+/* Hover state - text color change */
+.tabs__scroll-indicator:hover {
+  color: var(--g-text-primary);
+}
+
+/* Icon size */
+.tabs__scroll-indicator svg {
+  font-size: 20px;
+  position: relative;
+  z-index: 1;
+}

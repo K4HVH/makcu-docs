@@ -53,6 +53,7 @@ const Test = (props: RouteSectionProps) => {
           onStateChange={setPaneState}
         >
           <Tabs
+            scrollable
             orientation="vertical"
             variant="subtle"
             value={activeDemo()}

@@ -432,3 +432,80 @@ describe('Tabs', () => {
     expect(handleChange).toHaveBeenCalledWith('tab2');
   });
 });
+
+describe('Scrollable Tabs', () => {
+  const manyOptions: TabOption[] = Array.from({ length: 12 }, (_, i) => ({
+    value: `tab${i + 1}`,
+    label: `Tab ${i + 1}`,
+  }));
+
+  const fewOptions: TabOption[] = [
+    { value: 'tab1', label: 'Tab 1' },
+    { value: 'tab2', label: 'Tab 2' },
+    { value: 'tab3', label: 'Tab 3' },
+  ];
+
+  it('should render with scrollable prop', () => {
+    const { container } = render(() => <Tabs scrollable options={manyOptions} />);
+
+    expect(container.querySelector('.tabs-scrollable-wrapper')).toBeInTheDocument();
+    expect(container.querySelector('.tabs__scroll-container')).toBeInTheDocument();
+  });
+
+  it('should render without scroll indicators when all tabs fit', () => {
+    const { container } = render(() => <Tabs scrollable options={fewOptions} />);
+
+    expect(container.querySelector('.tabs__scroll-indicator')).not.toBeInTheDocument();
+  });
+
+  it('should have hidden scrollbar', () => {
+    const { container } = render(() => <Tabs scrollable options={manyOptions} />);
+    const scrollContainer = container.querySelector('.tabs__scroll-container') as HTMLElement;
+
+    expect(scrollContainer).toBeInTheDocument();
+    expect(scrollContainer).toHaveClass('tabs__scroll-container');
+  });
+
+  it('should render tabs inside scroll container', () => {
+    const { container } = render(() => <Tabs scrollable options={manyOptions} />);
+    const scrollContainer = container.querySelector('.tabs__scroll-container');
+    const tabs = scrollContainer?.querySelectorAll('[role="tab"]');
+
+    expect(tabs).toHaveLength(12);
+  });
+
+  it('should show scroll indicators when content overflows', () => {
+    const { container } = render(() => <Tabs scrollable options={manyOptions} />);
+    const scrollContainer = container.querySelector('.tabs__scroll-container') as HTMLElement;
+
+    // Trigger scroll position update to show indicators
+    Object.defineProperty(scrollContainer, 'scrollWidth', { value: 1000, configurable: true });
+    Object.defineProperty(scrollContainer, 'clientWidth', { value: 500, configurable: true });
+    Object.defineProperty(scrollContainer, 'scrollLeft', { value: 0, configurable: true });
+
+    fireEvent.scroll(scrollContainer);
+
+    // Should show end indicator when at start
+    const endIndicator = container.querySelector('.tabs__scroll-indicator--end');
+    expect(endIndicator).toBeInTheDocument();
+  });
+
+  it('should work with vertical orientation', () => {
+    const { container } = render(() => (
+      <Tabs scrollable orientation="vertical" options={manyOptions} />
+    ));
+
+    const wrapper = container.querySelector('.tabs-scrollable-wrapper');
+    expect(wrapper).toHaveClass('tabs-scrollable-wrapper--vertical');
+
+    const scrollContainer = container.querySelector('.tabs__scroll-container');
+    expect(scrollContainer).toHaveClass('tabs--vertical');
+  });
+
+  it('should apply scrollable class', () => {
+    const { container } = render(() => <Tabs scrollable options={manyOptions} />);
+    const scrollContainer = container.querySelector('.tabs__scroll-container');
+
+    expect(scrollContainer).toHaveClass('tabs');
+  });
+});

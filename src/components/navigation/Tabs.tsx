@@ -1,5 +1,6 @@
-import { Component, For, Show, splitProps, createSignal } from 'solid-js';
+import { Component, For, Show, splitProps, createSignal, createEffect, onCleanup } from 'solid-js';
 import { Dynamic } from 'solid-js/web';
+import { BsChevronUp, BsChevronDown, BsChevronLeft, BsChevronRight } from 'solid-icons/bs';
 import '../../styles/components/navigation/Tabs.css';
 
 export interface TabOption {
@@ -19,6 +20,7 @@ interface TabsProps {
   size?: 'compact' | 'normal' | 'spacious';
   iconOnly?: boolean;
   disabled?: boolean;
+  scrollable?: boolean;
   class?: string;
 }
 
@@ -33,12 +35,20 @@ export const Tabs: Component<TabsProps> = (props) => {
     'size',
     'iconOnly',
     'disabled',
+    'scrollable',
     'class',
   ]);
 
   const variant = () => local.variant ?? 'primary';
   const orientation = () => local.orientation ?? 'horizontal';
   const size = () => local.size ?? 'normal';
+
+  // Scrollable tabs state
+  let scrollContainerRef: HTMLDivElement | undefined;
+  let scrollIntervalRef: number | undefined;
+  let isButtonScrolling = false;
+  const [canScrollStart, setCanScrollStart] = createSignal(false);
+  const [canScrollEnd, setCanScrollEnd] = createSignal(false);
 
   // Controlled / uncontrolled state
   const isControlled = () => local.value !== undefined;
@@ -106,6 +116,153 @@ export const Tabs: Component<TabsProps> = (props) => {
     }
   };
 
+  // Scrollable tabs logic
+  const updateScrollIndicators = () => {
+    if (!local.scrollable || !scrollContainerRef) return;
+
+    const isHorizontal = orientation() === 'horizontal';
+    const scrollPos = isHorizontal ? scrollContainerRef.scrollLeft : scrollContainerRef.scrollTop;
+    const scrollSize = isHorizontal ? scrollContainerRef.scrollWidth : scrollContainerRef.scrollHeight;
+    const clientSize = isHorizontal ? scrollContainerRef.clientWidth : scrollContainerRef.clientHeight;
+
+    setCanScrollStart(scrollPos > 1);
+    setCanScrollEnd(scrollPos < scrollSize - clientSize - 1);
+  };
+
+  const handleScroll = () => {
+    // If user is manually scrolling (button not held), stop any continuous scroll
+    if (!isButtonScrolling && scrollIntervalRef !== undefined) {
+      stopContinuousScroll();
+    }
+    updateScrollIndicators();
+  };
+
+  const scrollOneTab = (direction: -1 | 1) => {
+    if (!scrollContainerRef) return;
+
+    const isHorizontal = orientation() === 'horizontal';
+    const tabs = scrollContainerRef.querySelectorAll<HTMLButtonElement>('[role="tab"]');
+    if (tabs.length === 0) return;
+
+    // Get the size of one tab plus gap
+    const firstTab = tabs[0];
+    const computedStyle = window.getComputedStyle(scrollContainerRef);
+    const gap = parseFloat(computedStyle.gap || '0');
+
+    const tabSize = isHorizontal
+      ? firstTab.offsetWidth + gap
+      : firstTab.offsetHeight + gap;
+
+    const scrollAmount = tabSize * direction;
+
+    if (isHorizontal) {
+      scrollContainerRef.scrollBy({
+        left: scrollAmount,
+        behavior: 'smooth'
+      });
+    } else {
+      scrollContainerRef.scrollBy({
+        top: scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const startContinuousScroll = (direction: -1 | 1) => {
+    if (!scrollContainerRef) return;
+
+    const isHorizontal = orientation() === 'horizontal';
+    const scrollStep = 3; // pixels per frame
+
+    scrollIntervalRef = window.setInterval(() => {
+      if (!scrollContainerRef) return;
+
+      if (isHorizontal) {
+        scrollContainerRef.scrollBy({
+          left: scrollStep * direction,
+          behavior: 'auto'
+        });
+      } else {
+        scrollContainerRef.scrollBy({
+          top: scrollStep * direction,
+          behavior: 'auto'
+        });
+      }
+    }, 16); // ~60fps
+  };
+
+  const stopContinuousScroll = () => {
+    if (scrollIntervalRef !== undefined) {
+      clearInterval(scrollIntervalRef);
+      scrollIntervalRef = undefined;
+    }
+    isButtonScrolling = false;
+  };
+
+  const handleIndicatorMouseDown = (direction: -1 | 1, e: MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    // Mark that button is being held FIRST (before any other operations)
+    isButtonScrolling = true;
+
+    // Clear any existing interval
+    if (scrollIntervalRef !== undefined) {
+      clearInterval(scrollIntervalRef);
+      scrollIntervalRef = undefined;
+    }
+
+    // Add global mouseUp listener to catch release even if mouse moves off button
+    const handleGlobalMouseUp = () => {
+      stopContinuousScroll();
+      document.removeEventListener('mouseup', handleGlobalMouseUp);
+    };
+    document.addEventListener('mouseup', handleGlobalMouseUp);
+
+    // Start scrolling immediately on mouse down
+    startContinuousScroll(direction);
+  };
+
+  const handleIndicatorMouseUp = (e: MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    stopContinuousScroll();
+  };
+
+  // Set up scroll listener and initial update
+  createEffect(() => {
+    if (!local.scrollable || !scrollContainerRef) return;
+
+    // Initial update
+    updateScrollIndicators();
+
+    // Update on scroll - use handleScroll which detects manual scrolling
+    scrollContainerRef.addEventListener('scroll', handleScroll);
+
+    // Update after a short delay to ensure layout is complete
+    const timeoutId = setTimeout(() => {
+      updateScrollIndicators();
+    }, 100);
+
+    onCleanup(() => {
+      scrollContainerRef?.removeEventListener('scroll', handleScroll);
+      stopContinuousScroll();
+      clearTimeout(timeoutId);
+    });
+  });
+
+  // Update on resize
+  createEffect(() => {
+    if (!local.scrollable) return;
+
+    const handleResize = () => updateScrollIndicators();
+    window.addEventListener('resize', handleResize);
+
+    onCleanup(() => {
+      window.removeEventListener('resize', handleResize);
+    });
+  });
+
   const classNames = () => {
     const classes = ['tabs'];
 
@@ -127,12 +284,110 @@ export const Tabs: Component<TabsProps> = (props) => {
       classes.push('tabs--disabled');
     }
 
+    if (local.scrollable) {
+      classes.push('tabs--scrollable');
+    }
+
     if (local.class) {
       classes.push(local.class);
     }
 
     return classes.join(' ');
   };
+
+  const getScrollIcon = (position: 'start' | 'end') => {
+    const isHorizontal = orientation() === 'horizontal';
+    if (isHorizontal) {
+      return position === 'start' ? BsChevronLeft : BsChevronRight;
+    } else {
+      return position === 'start' ? BsChevronUp : BsChevronDown;
+    }
+  };
+
+  const renderTabs = () => (
+    <For each={local.options}>
+      {(option) => {
+        const isActive = () => currentValue() === option.value;
+        const isDisabled = () => local.disabled || option.disabled;
+
+        const tabClasses = () => {
+          const classes = ['tabs__tab'];
+          if (isActive()) classes.push('tabs__tab--active');
+          if (isDisabled()) classes.push('tabs__tab--disabled');
+          return classes.join(' ');
+        };
+
+        return (
+          <button
+            class={tabClasses()}
+            role="tab"
+            aria-selected={isActive()}
+            aria-label={local.iconOnly ? option.label : undefined}
+            tabIndex={isActive() ? 0 : -1}
+            disabled={isDisabled()}
+            onClick={() => handleClick(option)}
+          >
+            <Show when={option.icon}>
+              <span class="tabs__tab-icon">
+                <Dynamic component={option.icon!} />
+              </span>
+            </Show>
+            <Show when={!local.iconOnly}>
+              <span class="tabs__tab-label">{option.label}</span>
+            </Show>
+          </button>
+        );
+      }}
+    </For>
+  );
+
+  const wrapperClassNames = () => {
+    const classes = ['tabs-scrollable-wrapper'];
+    if (orientation() === 'vertical') {
+      classes.push('tabs-scrollable-wrapper--vertical');
+    }
+    return classes.join(' ');
+  };
+
+  if (local.scrollable) {
+    return (
+      <div class={wrapperClassNames()}>
+        <div
+          ref={scrollContainerRef}
+          class={`${classNames()} tabs__scroll-container`}
+          role="tablist"
+          aria-orientation={orientation()}
+          onKeyDown={handleKeyDown}
+        >
+          {renderTabs()}
+        </div>
+
+        <Show when={canScrollStart()}>
+          <button
+            class="tabs__scroll-indicator tabs__scroll-indicator--start"
+            onMouseDown={(e) => handleIndicatorMouseDown(-1, e)}
+            onMouseUp={handleIndicatorMouseUp}
+            onMouseLeave={handleIndicatorMouseUp}
+            aria-label="Scroll to previous tabs"
+          >
+            <Dynamic component={getScrollIcon('start')} />
+          </button>
+        </Show>
+
+        <Show when={canScrollEnd()}>
+          <button
+            class="tabs__scroll-indicator tabs__scroll-indicator--end"
+            onMouseDown={(e) => handleIndicatorMouseDown(1, e)}
+            onMouseUp={handleIndicatorMouseUp}
+            onMouseLeave={handleIndicatorMouseUp}
+            aria-label="Scroll to next tabs"
+          >
+            <Dynamic component={getScrollIcon('end')} />
+          </button>
+        </Show>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -141,40 +396,7 @@ export const Tabs: Component<TabsProps> = (props) => {
       aria-orientation={orientation()}
       onKeyDown={handleKeyDown}
     >
-      <For each={local.options}>
-        {(option) => {
-          const isActive = () => currentValue() === option.value;
-          const isDisabled = () => local.disabled || option.disabled;
-
-          const tabClasses = () => {
-            const classes = ['tabs__tab'];
-            if (isActive()) classes.push('tabs__tab--active');
-            if (isDisabled()) classes.push('tabs__tab--disabled');
-            return classes.join(' ');
-          };
-
-          return (
-            <button
-              class={tabClasses()}
-              role="tab"
-              aria-selected={isActive()}
-              aria-label={local.iconOnly ? option.label : undefined}
-              tabIndex={isActive() ? 0 : -1}
-              disabled={isDisabled()}
-              onClick={() => handleClick(option)}
-            >
-              <Show when={option.icon}>
-                <span class="tabs__tab-icon">
-                  <Dynamic component={option.icon!} />
-                </span>
-              </Show>
-              <Show when={!local.iconOnly}>
-                <span class="tabs__tab-label">{option.label}</span>
-              </Show>
-            </button>
-          );
-        }}
-      </For>
+      {renderTabs()}
     </div>
   );
 };
