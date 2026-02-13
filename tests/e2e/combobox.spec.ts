@@ -61,15 +61,15 @@ test.describe('Combobox behavior', () => {
   });
 
   test('dropdown position updates when scrolling', async ({ page }) => {
-    // Find the "Long List" combobox - scroll to it first
+    // Scroll the page to top first to ensure clean state
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await page.waitForTimeout(100);
+
+    // Find the "Long List" combobox
     const comboboxCard = page.locator('.card', { hasText: 'Long List' }).first();
     await comboboxCard.scrollIntoViewIfNeeded();
 
     const trigger = comboboxCard.locator('.combobox__trigger');
-
-    // Scroll the page to top first
-    await page.evaluate(() => window.scrollTo(0, 0));
-    await page.waitForTimeout(100);
 
     // Open the dropdown
     await trigger.click();
@@ -77,17 +77,31 @@ test.describe('Combobox behavior', () => {
     // Wait for dropdown to appear
     await page.waitForSelector('.combobox__dropdown', { state: 'visible' });
 
-    // Get initial dropdown position
-    const dropdown = page.locator('.combobox__dropdown');
-    const initialBox = await dropdown.boundingBox();
-    expect(initialBox).not.toBeNull();
+    // Wait for menu positioning to complete (Menu uses RAF for positioning)
+    await page.waitForTimeout(100);
 
-    // Get trigger position to calculate expected dropdown position
-    const triggerBox = await trigger.boundingBox();
-    expect(triggerBox).not.toBeNull();
+    // Get the menu container (what's actually positioned by Menu component)
+    const menu = page.locator('.menu').filter({ has: page.locator('.combobox__dropdown') });
+    await expect(menu).toBeVisible();
+    const initialMenuBox = await menu.boundingBox();
+    const initialTriggerBox = await trigger.boundingBox();
+    expect(initialMenuBox).not.toBeNull();
+    expect(initialTriggerBox).not.toBeNull();
 
-    // Dropdown should be positioned just below the trigger (initially)
-    const initialOffset = initialBox!.y - (triggerBox!.y + triggerBox!.height);
+    // Determine if menu is above or below trigger (auto-flip may place it either way)
+    const isAbove = initialMenuBox!.y < initialTriggerBox!.y;
+
+    // Calculate offset based on placement
+    let initialOffset: number;
+    if (isAbove) {
+      // Menu is above: measure gap from menu bottom to trigger top
+      initialOffset = initialTriggerBox!.y - (initialMenuBox!.y + initialMenuBox!.height);
+    } else {
+      // Menu is below: measure gap from trigger bottom to menu top
+      initialOffset = initialMenuBox!.y - (initialTriggerBox!.y + initialTriggerBox!.height);
+    }
+
+    // Gap should be approximately 4px
     expect(Math.abs(initialOffset - 4)).toBeLessThan(10);
 
     // Scroll the page down
@@ -95,13 +109,24 @@ test.describe('Combobox behavior', () => {
     await page.waitForTimeout(200); // Wait for scroll event handlers
 
     // Get new positions after scrolling
-    const newDropdownBox = await dropdown.boundingBox();
+    const newMenuBox = await menu.boundingBox();
     const newTriggerBox = await trigger.boundingBox();
-    expect(newDropdownBox).not.toBeNull();
+    expect(newMenuBox).not.toBeNull();
     expect(newTriggerBox).not.toBeNull();
 
-    // Dropdown should still be positioned just below the trigger (maintained relationship)
-    const newOffset = newDropdownBox!.y - (newTriggerBox!.y + newTriggerBox!.height);
+    // Calculate new offset - should maintain same relationship (above or below)
+    let newOffset: number;
+    if (isAbove) {
+      // Should still be above
+      newOffset = newTriggerBox!.y - (newMenuBox!.y + newMenuBox!.height);
+      expect(newMenuBox!.y).toBeLessThan(newTriggerBox!.y);
+    } else {
+      // Should still be below
+      newOffset = newMenuBox!.y - (newTriggerBox!.y + newTriggerBox!.height);
+      expect(newMenuBox!.y).toBeGreaterThan(newTriggerBox!.y + newTriggerBox!.height);
+    }
+
+    // Gap should still be approximately 4px
     expect(Math.abs(newOffset - 4)).toBeLessThan(10);
   });
 });
