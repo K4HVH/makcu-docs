@@ -349,11 +349,11 @@ describe('Menu', () => {
     render(() => (
       <Menu trigger={<Button>Open Menu</Button>}>
         <MenuItem
-          submenu={
+          submenu={() => (
             <>
               <MenuItem>Submenu Item</MenuItem>
             </>
-          }
+          )}
         >
           Has Submenu
         </MenuItem>

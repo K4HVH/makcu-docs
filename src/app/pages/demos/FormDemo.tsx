@@ -166,7 +166,6 @@ const BasicFormExample: Component = () => {
 
         <FormField label="Age" error={form.errors.age} required helpText="You must be at least 18">
           <Slider
-            name="age"
             value={form.values.age}
             onChange={form.handleChange('age')}
             onBlur={form.handleBlur('age')}
