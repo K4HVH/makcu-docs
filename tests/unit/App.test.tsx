@@ -5,7 +5,7 @@ import App from '../../src/app/App';
 describe('App', () => {
   it('renders the design system test page', () => {
     const { getByText } = render(() => <App />);
-    expect(getByText('Design System Test Page')).toBeInTheDocument();
+    expect(getByText('MidnightUI Component Library')).toBeInTheDocument();
   });
 
   it('renders typography section by default', () => {

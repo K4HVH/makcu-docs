@@ -25,13 +25,13 @@ test.describe('Design System Test Page', () => {
   test('should load the test page', async ({ page }) => {
     await page.goto('/');
 
-    await expect(page.getByRole('heading', { name: 'Design System Test Page' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'MidnightUI Component Library' })).toBeVisible();
   });
 
   test('has correct title', async ({ page }) => {
     await page.goto('/');
 
-    await expect(page).toHaveTitle(/Solid App/);
+    await expect(page).toHaveTitle(/MidnightUI/);
   });
 
   test('displays typography section', async ({ page }) => {

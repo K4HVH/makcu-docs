@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-Guidance for Claude Code when working in this repository. This is a SolidJS component library and personal homepage with a dark "Midnight" theme.
+Guidance for Claude Code when working in this repository. **MidnightUI** is a SolidJS component library and design system with a dark "Midnight" theme, designed as a foundation for future projects.
 
 ## Tech Stack
 

@@ -1,12 +1,12 @@
-# Documentation
+# MidnightUI Documentation
 
-Comprehensive reference for the SolidJS component library. Combines the component reference, design system tokens, and architecture documentation.
+Comprehensive reference for MidnightUI, a SolidJS component library with a dark Midnight theme. Combines the component reference, design system tokens, and architecture documentation.
 
 ---
 
 # Part 1: Component Reference
 
-A comprehensive reference for all 25 components in this SolidJS design system, organized by category.
+A comprehensive reference for all 25 components in MidnightUI, organized by category.
 
 ---
 
@@ -2116,7 +2116,7 @@ import { BsType, BsCursor } from 'solid-icons/bs';
 
 # Part 2: Design System
 
-Reference for the Midnight Theme design tokens, color scales, and styling patterns. All values are extracted directly from `src/styles/global.css`.
+Reference for MidnightUI's design tokens, color scales, and styling patterns. All values are extracted directly from `src/styles/global.css`.
 
 ---
 
@@ -2598,7 +2598,7 @@ The global stylesheet applies a minimal reset:
 
 # Part 3: Architecture
 
-Technical architecture reference for the SolidJS component library. Covers the reactivity model, file organization, build pipeline, testing, Docker, and CI/CD.
+Technical architecture reference for MidnightUI. Covers the reactivity model, file organization, build pipeline, testing, Docker, and CI/CD.
 
 ---
 

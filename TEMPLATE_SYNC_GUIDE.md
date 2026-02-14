@@ -1,6 +1,6 @@
 # Template Sync Guide
 
-This document explains how to use this project as a base template for new applications while maintaining the ability to sync updates bidirectionally.
+This document explains how to use MidnightUI as a base template for new applications while maintaining the ability to sync updates bidirectionally.
 
 ## Overview
 

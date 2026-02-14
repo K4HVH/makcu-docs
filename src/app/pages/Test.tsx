@@ -70,7 +70,7 @@ const Test = (props: RouteSectionProps) => {
 
         <div style={{ flex: 1, overflow: "auto" }}>
           <div class="container grid">
-            <h1>Design System Test Page</h1>
+            <h1>MidnightUI Component Library</h1>
             {props.children}
           </div>
         </div>

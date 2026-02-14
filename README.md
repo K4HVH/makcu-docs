@@ -1,4 +1,4 @@
-# Homepage v2
+# MidnightUI
 
 A SolidJS component library and design system built with Vite and Bun. Features a dark "Midnight" theme with 25 components across 5 categories, comprehensive test coverage, and Docker containerized deployment.
 
@@ -183,10 +183,10 @@ The project uses a multi-stage Docker build:
 
 ```bash
 # Build the image
-docker build -t homepage-v2 .
+docker build -t midnightui .
 
 # Run on port 3000
-docker run -p 3000:3000 homepage-v2
+docker run -p 3000:3000 midnightui
 ```
 
 ### CI/CD
@@ -200,7 +200,7 @@ The GitHub Actions pipeline (`.github/workflows/ci.yml`) runs on every push to `
 Image tags: `latest` (main branch), `main`, `sha-<commit>`, `v*.*.*` (semver tags).
 
 ```bash
-docker pull ghcr.io/<your-username>/homepage-v2:latest
+docker pull ghcr.io/<your-username>/midnightui:latest
 ```
 
 ## Design System
