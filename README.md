@@ -6,6 +6,7 @@ A SolidJS component library and design system built with Vite and Bun. Features 
 
 - **32 components** across 5 categories (inputs, display, feedback, surfaces, navigation)
 - **Dark theme design system** using CSS custom properties ("Midnight" black and blue scheme)
+- **Protobuf + gRPC-Web** for type-safe, bandwidth-efficient client-server communication (binary protobuf on the wire)
 - **Unit testing** with Vitest and @solidjs/testing-library
 - **E2E testing** with Playwright across Chromium, Firefox, and WebKit
 - **Docker deployment** with multi-stage builds and native Bun server
@@ -103,14 +104,25 @@ Page layout and navigation components.
 ## Project Structure
 
 ```
+proto/                          # Protobuf definitions (source of truth)
+└── midnightui/
+    └── health.proto            # HealthService RPC definition
+buf.yaml                        # Buf module config
+buf.gen.yaml                    # Code generation config
 src/
 ├── index.html                  # HTML entry point
 ├── index.tsx                   # JavaScript entry point
+├── gen/                        # Generated protobuf TypeScript (gitignored)
+│   └── midnightui/
+│       └── health_pb.ts        # Generated types + service descriptors
+├── api/                        # gRPC-Web transport and service clients
+│   ├── transport.ts            # gRPC-Web transport factory
+│   └── health.ts               # HealthService client
 ├── app/
 │   ├── App.tsx                 # Router setup with nested routes, NotificationProvider
 │   └── pages/
 │       ├── Test.tsx            # Layout shell: sidebar Pane + Tabs nav
-│       └── demos/              # 29 demo files (TypographyDemo.tsx, ButtonDemo.tsx, TableDemo.tsx, MenuDemo.tsx, FormDemo.tsx, BreadcrumbsDemo.tsx, ProgressDemo.tsx, AccordionDemo.tsx, ChipDemo.tsx, DatePickerDemo.tsx, FileUploadDemo.tsx, CommandPaletteDemo.tsx, etc.)
+│       └── demos/              # 31 demo files (TypographyDemo.tsx, ButtonDemo.tsx, TableDemo.tsx, MenuDemo.tsx, FormDemo.tsx, BreadcrumbsDemo.tsx, ProgressDemo.tsx, AccordionDemo.tsx, ChipDemo.tsx, DatePickerDemo.tsx, FileUploadDemo.tsx, CommandPaletteDemo.tsx, ServerDemo.tsx, etc.)
 ├── components/
 │   ├── inputs/                 # Button, Checkbox, Combobox, Slider, etc.
 │   ├── display/                # Avatar, Badge, Tooltip, etc.
@@ -151,6 +163,8 @@ scripts/
 | `bun run build` | Production build to `dist/` |
 | `bun run serve` | Preview build with Vite |
 | `bun run serve:prod` | Preview with native Bun server |
+| `bun run buf:generate` | Generate TypeScript from `.proto` files |
+| `bun run buf:lint` | Lint `.proto` files against Buf STANDARD rules |
 
 ### Testing
 
@@ -238,6 +252,9 @@ Each component has its own CSS file in `src/styles/components/{category}/` that 
 - [Vitest](https://vitest.dev) -- unit testing
 - [Playwright](https://playwright.dev) -- end-to-end testing
 - [solid-icons](https://github.com/x64Bits/solid-icons) -- icon library
+- [@bufbuild/protobuf](https://github.com/bufbuild/protobuf-es) -- Protocol Buffers runtime (v2)
+- [@connectrpc/connect](https://connectrpc.com) -- gRPC-Web client (typed service clients)
+- [Buf](https://buf.build) -- protobuf toolchain (lint, codegen, breaking change detection)
 
 ## License
 

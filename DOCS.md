@@ -3452,6 +3452,7 @@ Routing is handled by `@solidjs/router` (v0.15.4), configured in `src/app/App.ts
 | `/avatar` | `AvatarDemo` | Avatar examples |
 | `/tabs` | `TabsDemo` | Tabs examples |
 | `/pane` | `PaneDemo` | Pane examples |
+| `/server` | `ServerDemo` | Server & Protobuf examples |
 
 The `NotificationProvider` wraps the entire router, making the notification system available on every route.
 
@@ -3462,12 +3463,23 @@ Demo files are located in `src/app/pages/demos/`. The layout shell is at `src/ap
 ## File Organization
 
 ```
+proto/
+  midnightui/
+    health.proto                     -- HealthService RPC definition
+buf.yaml                             -- Buf module config (lint + breaking change rules)
+buf.gen.yaml                         -- Code generation config (protoc-gen-es → src/gen/)
 src/
+  gen/                               -- Generated protobuf TypeScript (gitignored)
+    midnightui/
+      health_pb.ts                   -- Generated types + service descriptor
+  api/                               -- gRPC-Web transport and service clients
+    transport.ts                     -- gRPC-Web transport factory (createTransport, createServiceClient)
+    health.ts                        -- HealthService client (checkHealth convenience function)
   app/
     App.tsx                          -- Root component with Router, nested routes, providers
     pages/
       Test.tsx                       -- Layout shell: sidebar Pane + Tabs nav, renders routed children
-      demos/                         -- 22 individual demo files
+      demos/                         -- 31 individual demo files
         TypographyDemo.tsx
         TextFieldDemo.tsx
         CardDemo.tsx
@@ -3491,6 +3503,7 @@ src/
         MenuDemo.tsx
         PaginationDemo.tsx
         BreadcrumbsDemo.tsx
+        ServerDemo.tsx
   components/
     display/                         -- Data presentation components
       Avatar.tsx

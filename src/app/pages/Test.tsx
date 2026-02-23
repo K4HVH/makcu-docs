@@ -12,6 +12,7 @@ import {
   BsCloudUpload,
   BsCommand,
   BsDashLg,
+  BsHddNetwork,
 } from 'solid-icons/bs';
 
 const tabOptions = [
@@ -45,6 +46,7 @@ const tabOptions = [
   { value: 'fileupload', label: 'FileUpload', icon: BsCloudUpload },
   { value: 'commandpalette', label: 'CommandPalette', icon: BsCommand },
   { value: 'divider', label: 'Divider', icon: BsDashLg },
+  { value: 'server', label: 'Server', icon: BsHddNetwork },
 ];
 
 const Test = (props: RouteSectionProps) => {
