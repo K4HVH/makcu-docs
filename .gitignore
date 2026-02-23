@@ -28,6 +28,9 @@ test-results
 # Temp
 gitignore
 
+# Protobuf generated code (regenerate via: bun run buf:generate)
+src/gen/
+
 # System Files
 .DS_Store
 Thumbs.db

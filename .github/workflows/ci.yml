@@ -26,6 +26,18 @@ jobs:
         with:
           bun-version: latest
 
+      - name: Cache Buf CLI
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/buf
+          key: ${{ runner.os }}-buf-1.65.0
+
+      - name: Setup Buf
+        uses: bufbuild/buf-setup-action@v1
+        with:
+          version: '1.65.0'
+          github_token: ${{ github.token }}
+
       - name: Cache Bun dependencies
         uses: actions/cache@v4
         with:

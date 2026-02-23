@@ -13,6 +13,10 @@ Guidance for Claude Code when working in this repository. **MidnightUI** is a So
 - **solid-icons** (`solid-icons@^1.2.0`) - Bootstrap icons via `solid-icons/bs`
 - **@solidjs/router** (`@solidjs/router@^0.15.4`) - Client-side routing
 - **canvas** (`canvas@^3.2.1`) - Node.js canvas implementation for `GridBackground` jsdom compatibility
+- **@bufbuild/protobuf** (`@bufbuild/protobuf@^2.11.0`) - Protocol Buffers runtime (protobuf-es v2)
+- **@connectrpc/connect** (`@connectrpc/connect@^2.1.1`) - gRPC-Web client framework (typed service clients)
+- **@connectrpc/connect-web** (`@connectrpc/connect-web@^2.1.1`) - gRPC-Web browser transport (binary protobuf on the wire)
+- **Buf CLI** (`buf@1.65.0`) - Protobuf linting, breaking change detection, and code generation
 
 ## Essential Commands
 
@@ -20,6 +24,8 @@ Guidance for Claude Code when working in this repository. **MidnightUI** is a So
 ```bash
 bun run dev                  # Start dev server (http://localhost:3000)
 bunx tsc --noEmit           # Type check
+bun run buf:generate        # Generate TypeScript from .proto files
+bun run buf:lint            # Lint .proto files against Buf STANDARD rules
 ```
 
 ### Testing
@@ -43,14 +49,25 @@ bun run serve:prod         # Preview with native Bun server (serve.ts)
 ## Project Structure
 
 ```
+proto/
+  midnightui/                # Protobuf service definitions (source of truth)
+    health.proto             # HealthService: server health check RPC
+buf.yaml                     # Buf module config (lint + breaking change rules)
+buf.gen.yaml                 # Code generation config (protoc-gen-es → src/gen/)
 src/
   index.html               # HTML entry point (Vite root is src/)
   index.tsx                 # App bootstrap
+  gen/                       # Generated protobuf TypeScript (gitignored, run buf:generate)
+    midnightui/
+      health_pb.ts           # Generated types + service descriptor for HealthService
+  api/
+    transport.ts             # gRPC-Web transport factory (createTransport, createServiceClient)
+    health.ts                # HealthService client (checkHealth convenience function)
   app/
     App.tsx                 # Router setup with nested routes, wraps in NotificationProvider
     pages/
       Test.tsx              # Layout shell: sidebar Pane + Tabs nav, renders routed demo via children
-      demos/                # 30 individual demo files (TypographyDemo.tsx, ButtonDemo.tsx, TableDemo.tsx, MenuDemo.tsx, FormDemo.tsx, BreadcrumbsDemo.tsx, ProgressDemo.tsx, AccordionDemo.tsx, ChipDemo.tsx, NumberInputDemo.tsx, DatePickerDemo.tsx, FileUploadDemo.tsx, CommandPaletteDemo.tsx, DividerDemo.tsx, etc.)
+      demos/                # 31 individual demo files (TypographyDemo.tsx, ButtonDemo.tsx, TableDemo.tsx, MenuDemo.tsx, FormDemo.tsx, BreadcrumbsDemo.tsx, ProgressDemo.tsx, AccordionDemo.tsx, ChipDemo.tsx, NumberInputDemo.tsx, DatePickerDemo.tsx, FileUploadDemo.tsx, CommandPaletteDemo.tsx, DividerDemo.tsx, ServerDemo.tsx, etc.)
   components/
     inputs/                 # Interactive form controls (10 components)
     surfaces/               # Layout and background (2 components)
