@@ -4,8 +4,10 @@ WORKDIR /app
 
 # Install Buf CLI for protobuf code generation
 ARG BUF_VERSION=1.65.0
-RUN curl -sSL "https://github.com/bufbuild/buf/releases/download/v${BUF_VERSION}/buf-Linux-$(uname -m)" -o /usr/local/bin/buf && \
-    chmod +x /usr/local/bin/buf
+RUN apt-get update && apt-get install -y --no-install-recommends curl ca-certificates && \
+    curl -sSL "https://github.com/bufbuild/buf/releases/download/v${BUF_VERSION}/buf-Linux-$(uname -m)" -o /usr/local/bin/buf && \
+    chmod +x /usr/local/bin/buf && \
+    apt-get purge -y curl && apt-get autoremove -y && rm -rf /var/lib/apt/lists/*
 
 # Copy dependency files
 COPY package.json bun.lock* ./
