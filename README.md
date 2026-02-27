@@ -105,19 +105,21 @@ Page layout and navigation components.
 
 ```
 proto/                          # Protobuf definitions (source of truth)
-└── midnightui/
-    └── health.proto            # HealthService RPC definition
+└── midnight/
+    ├── midnight.proto          # Core messages: ServiceHealth, ServiceHealthList
+    └── midnight_services.proto # Service RPCs: ListHealthServices, GetHealthService
 buf.yaml                        # Buf module config
 buf.gen.yaml                    # Code generation config
 src/
 ├── index.html                  # HTML entry point
 ├── index.tsx                   # JavaScript entry point
 ├── gen/                        # Generated protobuf TypeScript (gitignored)
-│   └── midnightui/
-│       └── health_pb.ts        # Generated types + service descriptors
+│   └── midnight/
+│       ├── midnight_pb.ts      # Generated types + enum descriptors
+│       └── midnight_services_pb.ts # Generated service + request descriptors
 ├── api/                        # gRPC-Web transport and service clients
 │   ├── transport.ts            # gRPC-Web transport factory
-│   └── health.ts               # HealthService client
+│   └── health.ts               # HealthService client (listHealthServices, getHealthService)
 ├── app/
 │   ├── App.tsx                 # Router setup with nested routes, NotificationProvider
 │   └── pages/

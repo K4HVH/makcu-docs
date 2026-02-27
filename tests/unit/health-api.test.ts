@@ -1,10 +1,12 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { create } from '@bufbuild/protobuf';
 import {
-  CheckResponseSchema,
-  CheckResponse_ServingStatus,
+  ServiceHealthSchema,
+  ServiceHealth_ServingStatus,
+} from '../../src/gen/midnight/midnight_pb';
+import {
   HealthService,
-} from '../../src/gen/midnightui/health_pb';
+} from '../../src/gen/midnight/midnight_services_pb';
 
 // ── Transport tests ──
 // Mock connect libraries to test the transport factory in isolation
@@ -19,7 +21,8 @@ vi.mock('@connectrpc/connect-web', () => ({
 vi.mock('@connectrpc/connect', () => ({
   createClient: vi.fn((_service: unknown, transport: unknown) => ({
     __transport: transport,
-    check: vi.fn(),
+    listHealthServices: vi.fn(),
+    getHealthService: vi.fn(),
   })),
 }));
 
