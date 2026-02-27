@@ -29,9 +29,9 @@ export const transport = createTransport();
  *
  * @example
  * ```ts
- * import { HealthService } from '../gen/midnightui/health_pb';
+ * import { HealthService } from '../gen/midnight/midnight_services_pb';
  * const healthClient = createServiceClient(HealthService);
- * const response = await healthClient.check({ service: '' });
+ * const response = await healthClient.listHealthServices({});
  * ```
  */
 export function createServiceClient<T extends GenService<any>>(

@@ -1,5 +1,5 @@
 import { createServiceClient } from './transport';
-import { HealthService } from '../gen/midnightui/health_pb';
+import { HealthService } from '../gen/midnight/midnight_services_pb';
 
 /**
  * Pre-configured health service client.
@@ -8,11 +8,17 @@ import { HealthService } from '../gen/midnightui/health_pb';
 export const healthClient = createServiceClient(HealthService);
 
 /**
- * Convenience function to perform a health check.
- * Returns the server's health status, version, and uptime.
- *
- * @param service - Optional service name to check. Empty string checks overall health.
+ * List all registered health services and their current status.
  */
-export async function checkHealth(service = '') {
-  return healthClient.check({ service });
+export async function listHealthServices() {
+  return healthClient.listHealthServices({});
+}
+
+/**
+ * Get the health of a specific service by ID, or the overall server health.
+ *
+ * @param id - Optional service UUID. Omit or leave empty for overall server health.
+ */
+export async function getHealthService(id?: string) {
+  return healthClient.getHealthService({ id });
 }

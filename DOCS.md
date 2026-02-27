@@ -3464,17 +3464,19 @@ Demo files are located in `src/app/pages/demos/`. The layout shell is at `src/ap
 
 ```
 proto/
-  midnightui/
-    health.proto                     -- HealthService RPC definition
+  midnight/
+    midnight.proto                   -- Core messages: ServiceHealth, ServiceHealthList, ServingStatus
+    midnight_services.proto          -- Service RPCs: HealthService (ListHealthServices, GetHealthService)
 buf.yaml                             -- Buf module config (lint + breaking change rules)
 buf.gen.yaml                         -- Code generation config (protoc-gen-es → src/gen/)
 src/
   gen/                               -- Generated protobuf TypeScript (gitignored)
-    midnightui/
-      health_pb.ts                   -- Generated types + service descriptor
+    midnight/
+      midnight_pb.ts                 -- Generated types: ServiceHealth, ServiceHealthList, ServingStatus
+      midnight_services_pb.ts        -- Generated service: HealthService, IdRequest, OptionalIdRequest
   api/                               -- gRPC-Web transport and service clients
     transport.ts                     -- gRPC-Web transport factory (createTransport, createServiceClient)
-    health.ts                        -- HealthService client (checkHealth convenience function)
+    health.ts                        -- HealthService client (listHealthServices, getHealthService)
   app/
     App.tsx                          -- Root component with Router, nested routes, providers
     pages/

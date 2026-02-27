@@ -50,19 +50,21 @@ bun run serve:prod         # Preview with native Bun server (serve.ts)
 
 ```
 proto/
-  midnightui/                # Protobuf service definitions (source of truth)
-    health.proto             # HealthService: server health check RPC
+  midnight/                  # Protobuf definitions (source of truth)
+    midnight.proto           # Core messages: ServiceHealth, ServiceHealthList, ServingStatus
+    midnight_services.proto  # Service RPCs: HealthService (ListHealthServices, GetHealthService)
 buf.yaml                     # Buf module config (lint + breaking change rules)
 buf.gen.yaml                 # Code generation config (protoc-gen-es → src/gen/)
 src/
   index.html               # HTML entry point (Vite root is src/)
   index.tsx                 # App bootstrap
   gen/                       # Generated protobuf TypeScript (gitignored, run buf:generate)
-    midnightui/
-      health_pb.ts           # Generated types + service descriptor for HealthService
+    midnight/
+      midnight_pb.ts         # Generated types: ServiceHealth, ServiceHealthList, ServingStatus
+      midnight_services_pb.ts # Generated service: HealthService, IdRequest, OptionalIdRequest
   api/
     transport.ts             # gRPC-Web transport factory (createTransport, createServiceClient)
-    health.ts                # HealthService client (checkHealth convenience function)
+    health.ts                # HealthService client (listHealthServices, getHealthService)
   app/
     App.tsx                 # Router setup with nested routes, wraps in NotificationProvider
     pages/
