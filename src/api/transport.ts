@@ -2,9 +2,18 @@ import { createGrpcWebTransport } from '@connectrpc/connect-web';
 import { createClient, type Client } from '@connectrpc/connect';
 import type { GenService } from '@bufbuild/protobuf/codegenv2';
 
+declare global {
+  interface Window {
+    __RUNTIME_CONFIG__?: { apiBaseUrl?: string };
+  }
+}
+
 /**
  * Default base URL for the gRPC-Web backend.
- * Override via VITE_API_BASE_URL environment variable.
+ * Resolution order (highest to lowest priority):
+ *   1. window.__RUNTIME_CONFIG__.apiBaseUrl  — injected by serve.ts from API_BASE_URL env var
+ *   2. import.meta.env.VITE_API_BASE_URL     — Vite build-time env var (dev / preview)
+ *   3. DEFAULT_BASE_URL                       — fallback for local development
  */
 const DEFAULT_BASE_URL = 'http://localhost:50051';
 
@@ -14,7 +23,7 @@ const DEFAULT_BASE_URL = 'http://localhost:50051';
  */
 export function createTransport(baseUrl?: string) {
   return createGrpcWebTransport({
-    baseUrl: baseUrl ?? import.meta.env.VITE_API_BASE_URL ?? DEFAULT_BASE_URL,
+    baseUrl: baseUrl ?? window.__RUNTIME_CONFIG__?.apiBaseUrl ?? import.meta.env.VITE_API_BASE_URL ?? DEFAULT_BASE_URL,
   });
 }
 
