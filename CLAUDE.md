@@ -69,13 +69,13 @@ src/
     App.tsx                 # Router setup with nested routes, wraps in NotificationProvider
     pages/
       Test.tsx              # Layout shell: sidebar Pane + Tabs nav, renders routed demo via children
-      demos/                # 31 individual demo files (TypographyDemo.tsx, ButtonDemo.tsx, TableDemo.tsx, MenuDemo.tsx, FormDemo.tsx, BreadcrumbsDemo.tsx, ProgressDemo.tsx, AccordionDemo.tsx, ChipDemo.tsx, NumberInputDemo.tsx, DatePickerDemo.tsx, FileUploadDemo.tsx, CommandPaletteDemo.tsx, DividerDemo.tsx, ServerDemo.tsx, etc.)
+      demos/                # 32 individual demo files (TypographyDemo.tsx, ButtonDemo.tsx, TableDemo.tsx, MenuDemo.tsx, FormDemo.tsx, BreadcrumbsDemo.tsx, ProgressDemo.tsx, AccordionDemo.tsx, ChipDemo.tsx, NumberInputDemo.tsx, DatePickerDemo.tsx, FileUploadDemo.tsx, CommandPaletteDemo.tsx, DividerDemo.tsx, TitlebarDemo.tsx, ServerDemo.tsx, etc.)
   components/
     inputs/                 # Interactive form controls (10 components)
     surfaces/               # Layout and background (2 components)
     display/                # Data presentation (7 components)
     feedback/               # User feedback (6 components)
-    navigation/             # Navigation patterns (7 components)
+    navigation/             # Navigation patterns (8 components)
   styles/
     global.css              # Theme tokens, resets, typography, utilities
     components/{category}/  # Per-component CSS files (mirror component tree)
@@ -91,8 +91,8 @@ src/
     FormFieldContext.tsx     # FormFieldContext + useFormField() for automatic label/aria ID wiring
 tests/
   setup.ts                  # Imports @testing-library/jest-dom
-  unit/                     # Vitest unit tests (37 test files)
-  e2e/                      # Playwright e2e tests (17 spec files)
+  unit/                     # Vitest unit tests (38 test files)
+  e2e/                      # Playwright e2e tests (18 spec files)
   .output/                  # Test reports and results (git-ignored)
 serve.ts                     # Native Bun static file server with SPA fallback
 Dockerfile                   # Multi-stage build (Debian builder + Alpine runner)
@@ -143,6 +143,7 @@ src/components/
     Pagination.tsx           # Page navigation control. Controlled via page/onPageChange. Variants: primary, secondary, subtle. Sizes: compact, normal, spacious. Features: page numbers with ellipsis, first/last buttons (toggleable), prev/next buttons (toggleable), configurable siblingCount for page density.
     Pane.tsx                 # Collapsible side/top/bottom panel. States: closed, partial, open. Modes: permanent (push, with handle) or temporary (overlay, with backdrop). Controlled or uncontrolled. Position: left (default), right, top, bottom.
     Tabs.tsx                 # Tab bar for content switching. Variants: primary, secondary, subtle. Orientation: horizontal (default), vertical. Options array with value/label/icon. Controlled or uncontrolled. Sizes: compact, normal, spacious.
+    Titlebar.tsx              # Top-of-page title/actions bar. Three content zones: left (JSX slot), center (title + optional subtitle), right (JSX slot). Variants: default, emphasized, subtle. Sizes: compact, normal, spacious. Sticky mode (position: sticky). Bordered like Card. Disabled state.
     CommandPalette.tsx        # Modal command launcher via Portal. Controlled open/onClose + optional Ctrl+K/Cmd+K keybinding. Fuzzy search/filter over items. Grouped items with descriptions, tags (Chip), shortcut badges. Sizes: compact, normal, spacious. Reuses Chip component for tags. Keyboard navigation (ArrowUp/Down, Enter, Escape). Reserved shortcut validation: browser-reserved (Ctrl+N/T/W) and text-editing (Ctrl+A/C/V/X/Z/Y) shortcuts are blocked at runtime with console.warn and excluded from interception. Exports: ReservedShortcut type, RESERVED_SHORTCUTS set, isReservedShortcut(), createCommandItem().
 ```
 
@@ -327,7 +328,7 @@ The project uses CSS custom properties defined in `src/styles/global.css` with a
 
 ### Unit Tests (Vitest)
 
-- Located in `tests/unit/` (37 test files covering all components + gRPC layer)
+- Located in `tests/unit/` (38 test files covering all components + gRPC layer)
 - Config: `vitest.config.ts` -- jsdom environment, setup file imports `@testing-library/jest-dom`
 - Uses `@solidjs/testing-library` for component rendering
 - **All Portal-rendered content must be queried via `document`, not `container`** (affects Combobox, Slider tooltip, Tooltip, Dialog, Notification, CommandPalette)
@@ -335,7 +336,7 @@ The project uses CSS custom properties defined in `src/styles/global.css` with a
 
 ### E2E Tests (Playwright)
 
-- Located in `tests/e2e/` (16 spec files)
+- Located in `tests/e2e/` (18 spec files)
 - Config: `playwright.config.ts` -- tests Chromium, Firefox, and WebKit
 - Uses `127.0.0.1` instead of `localhost` (critical for cross-browser compat)
 - Dev server auto-starts via `bun run dev --host 127.0.0.1` on port 3000

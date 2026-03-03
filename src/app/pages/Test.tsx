@@ -12,6 +12,7 @@ import {
   BsCloudUpload,
   BsCommand,
   BsDashLg,
+  BsWindowSidebar,
   BsHddNetwork,
 } from 'solid-icons/bs';
 
@@ -46,6 +47,7 @@ const tabOptions = [
   { value: 'fileupload', label: 'FileUpload', icon: BsCloudUpload },
   { value: 'commandpalette', label: 'CommandPalette', icon: BsCommand },
   { value: 'divider', label: 'Divider', icon: BsDashLg },
+  { value: 'titlebar', label: 'Titlebar', icon: BsWindowSidebar },
   { value: 'server', label: 'Server', icon: BsHddNetwork },
 ];
 

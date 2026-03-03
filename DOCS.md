@@ -6,7 +6,7 @@ Comprehensive reference for MidnightUI, a SolidJS component library with a dark 
 
 # Part 1: Component Reference
 
-A comprehensive reference for all 32 components in MidnightUI, organized by category.
+A comprehensive reference for all 33 components in MidnightUI, organized by category.
 
 ---
 
@@ -2778,6 +2778,75 @@ import { BsType, BsCursor } from 'solid-icons/bs';
 | `.tabs__tab--active` | Active/selected tab |
 | `.tabs__tab-icon` | Icon wrapper span |
 | `.tabs__tab-label` | Label text span |
+
+---
+
+### Titlebar
+
+A top-of-page title/actions bar with three content zones: left (JSX slot), center (title + optional subtitle), and right (JSX slot). Supports sticky positioning, three visual variants, three size variants, and a disabled state. Bordered like Card.
+
+**Props Interface**
+
+```typescript
+interface TitlebarProps extends JSX.HTMLAttributes<HTMLDivElement> {
+  title: string;                                    // required title text
+  subtitle?: string;                                // optional subtitle
+  left?: JSX.Element;                               // left zone content
+  right?: JSX.Element;                              // right zone content
+  variant?: 'default' | 'emphasized' | 'subtle';    // default: 'default'
+  size?: 'compact' | 'normal' | 'spacious';         // default: 'normal'
+  sticky?: boolean;                                  // default: false
+  disabled?: boolean;                                // default: false
+  class?: string;
+}
+```
+
+**Variants and States**
+
+- **Variants**: `default` (standard background/border), `emphasized` (elevated background, accent border), `subtle` (subtle background, subtle border)
+- **Sizes**: `compact` (smaller padding/font), `normal`, `spacious` (larger padding/font)
+- **Sticky**: When enabled, the titlebar sticks to the top of its scroll container via `position: sticky`
+- **Disabled**: Reduces opacity to 0.5 and disables pointer events on all children
+
+**Usage Example**
+
+```tsx
+import { Titlebar } from '../components/navigation/Titlebar';
+import { Button } from '../components/inputs/Button';
+import { BsArrowLeft, BsGear, BsBell } from 'solid-icons/bs';
+
+<Titlebar title="Dashboard" />
+
+<Titlebar
+  title="Settings"
+  subtitle="Manage your account"
+  variant="emphasized"
+  left={<Button variant="subtle" icon={BsArrowLeft} size="compact" />}
+  right={
+    <>
+      <Button variant="subtle" icon={BsBell} size="compact" />
+      <Button variant="subtle" icon={BsGear} size="compact" />
+    </>
+  }
+/>
+
+<Titlebar title="Sticky Bar" sticky size="compact" />
+```
+
+**Key CSS Classes**
+
+| Class | Description |
+|---|---|
+| `.titlebar` | Base class |
+| `.titlebar--default`, `.titlebar--emphasized`, `.titlebar--subtle` | Variant modifiers |
+| `.titlebar--compact`, `.titlebar--spacious` | Size modifiers |
+| `.titlebar--sticky` | Sticky positioning |
+| `.titlebar--disabled` | Disabled state |
+| `.titlebar__left` | Left content zone |
+| `.titlebar__center` | Center zone (title/subtitle) |
+| `.titlebar__right` | Right content zone |
+| `.titlebar__title` | Title text |
+| `.titlebar__subtitle` | Subtitle text |
 
 ---
 

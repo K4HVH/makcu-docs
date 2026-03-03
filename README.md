@@ -4,7 +4,7 @@ A SolidJS component library and design system built with Vite and Bun. Features 
 
 ## Features
 
-- **32 components** across 5 categories (inputs, display, feedback, surfaces, navigation)
+- **33 components** across 5 categories (inputs, display, feedback, surfaces, navigation)
 - **Dark theme design system** using CSS custom properties ("Midnight" black and blue scheme)
 - **Protobuf + gRPC-Web** for type-safe, bandwidth-efficient client-server communication (binary protobuf on the wire)
 - **Unit testing** with Vitest and @solidjs/testing-library
@@ -100,6 +100,7 @@ Page layout and navigation components.
 | **Pane** | Collapsible side/top/bottom panel |
 | **Tabs** | Tab bar for content switching with icon support |
 | **CommandPalette** | Modal command launcher with fuzzy search, grouped items, and keyboard navigation |
+| **Titlebar** | Top-of-page title/actions bar with left/right content slots, sticky mode, and variants |
 
 ## Project Structure
 
@@ -124,13 +125,13 @@ src/
 │   ├── App.tsx                 # Router setup with nested routes, NotificationProvider
 │   └── pages/
 │       ├── Test.tsx            # Layout shell: sidebar Pane + Tabs nav
-│       └── demos/              # 31 demo files (TypographyDemo.tsx, ButtonDemo.tsx, TableDemo.tsx, MenuDemo.tsx, FormDemo.tsx, BreadcrumbsDemo.tsx, ProgressDemo.tsx, AccordionDemo.tsx, ChipDemo.tsx, DatePickerDemo.tsx, FileUploadDemo.tsx, CommandPaletteDemo.tsx, ServerDemo.tsx, etc.)
+│       └── demos/              # 32 demo files (TypographyDemo.tsx, ButtonDemo.tsx, TableDemo.tsx, MenuDemo.tsx, FormDemo.tsx, BreadcrumbsDemo.tsx, ProgressDemo.tsx, AccordionDemo.tsx, ChipDemo.tsx, DatePickerDemo.tsx, FileUploadDemo.tsx, CommandPaletteDemo.tsx, TitlebarDemo.tsx, ServerDemo.tsx, etc.)
 ├── components/
 │   ├── inputs/                 # Button, Checkbox, Combobox, Slider, etc.
 │   ├── display/                # Avatar, Badge, Tooltip, etc.
 │   ├── feedback/               # Dialog, FieldError, Form, FormField, Notification, Progress
 │   ├── surfaces/               # Card, GridBackground
-│   └── navigation/             # Accordion, Breadcrumbs, CommandPalette, Menu, Pagination, Pane, Tabs
+│   └── navigation/             # Accordion, Breadcrumbs, CommandPalette, Menu, Pagination, Pane, Tabs, Titlebar
 ├── styles/
 │   ├── global.css              # Theme tokens and global styles
 │   └── components/             # Per-component CSS files
