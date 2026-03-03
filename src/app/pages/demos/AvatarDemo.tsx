@@ -12,7 +12,6 @@ const AvatarDemo: Component = () => {
 
   return (
     <>
-      <h2>Avatar Component Examples</h2>
 
       <Card>
         <CardHeader title="Avatar with Images" />

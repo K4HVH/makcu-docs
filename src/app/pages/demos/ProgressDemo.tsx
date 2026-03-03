@@ -39,7 +39,6 @@ const ProgressDemo: Component = () => {
 
   return (
     <>
-      <h2>Progress Component Examples</h2>
 
       <Card>
         <CardHeader title="Linear Progress - Determinate" />

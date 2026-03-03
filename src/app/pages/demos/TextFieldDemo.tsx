@@ -23,7 +23,6 @@ const TextFieldDemo: Component = () => {
 
   return (
     <>
-      <h2>TextField Component Examples</h2>
 
       <Card>
         <CardHeader title="Basic TextField" />

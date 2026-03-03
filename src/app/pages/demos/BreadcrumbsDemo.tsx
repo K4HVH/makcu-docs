@@ -65,7 +65,6 @@ export default function BreadcrumbsDemo() {
 
   return (
     <>
-      <h2>Breadcrumbs Component Examples</h2>
 
       {/* Basic Usage */}
       <Card>

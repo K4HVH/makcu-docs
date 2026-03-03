@@ -11,7 +11,6 @@ const MultiSelectComboboxDemo: Component = () => {
 
   return (
     <>
-      <h2>Multi-Select Combobox Examples</h2>
 
       <Card>
         <CardHeader title="Basic Multi-Select" />

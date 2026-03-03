@@ -4,7 +4,6 @@ import { Card, CardHeader } from '../../../components/surfaces/Card';
 const CardDemo: Component = () => {
   return (
     <>
-      <h2>Card Component Examples</h2>
 
       <Card>
         <CardHeader title="Default Card" subtitle="Basic card with default styling" />

@@ -16,8 +16,7 @@ test.describe('Chip component', () => {
       }
     });
 
-    const heading = page.getByRole('heading', { name: 'Chip Component Examples', exact: true });
-    await heading.scrollIntoViewIfNeeded();
+    await page.locator('.card').first().scrollIntoViewIfNeeded();
   });
 
   test('renders static chips', async ({ page }) => {

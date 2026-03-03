@@ -16,8 +16,7 @@ test.describe('Titlebar component', () => {
       }
     });
 
-    const heading = page.getByRole('heading', { name: 'Titlebar Component Examples', exact: true });
-    await heading.scrollIntoViewIfNeeded();
+    await page.locator('.card').first().scrollIntoViewIfNeeded();
   });
 
   test('renders basic titlebar with title', async ({ page }) => {

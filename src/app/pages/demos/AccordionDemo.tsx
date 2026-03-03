@@ -9,7 +9,6 @@ const AccordionDemo: Component = () => {
 
   return (
     <>
-      <h2>Accordion Component Examples</h2>
 
       <Card>
         <CardHeader title="Basic Accordion (Exclusive Mode)" />

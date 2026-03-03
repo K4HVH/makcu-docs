@@ -18,12 +18,10 @@ test.describe('FileUpload component', () => {
       }
     });
 
-    const heading = page.getByRole('heading', { name: 'FileUpload Component Examples', exact: true });
-    await heading.scrollIntoViewIfNeeded();
+    await page.locator('.card').first().scrollIntoViewIfNeeded();
   });
 
   test('renders all demo cards', async ({ page }) => {
-    await expect(page.getByRole('heading', { name: 'FileUpload Component Examples', exact: true })).toBeVisible();
     await expect(page.locator('.card').first()).toBeVisible();
   });
 

@@ -99,7 +99,6 @@ const CommandPaletteDemo: Component = () => {
 
   return (
     <>
-      <h2>CommandPalette Component Examples</h2>
 
       <Card>
         <CardHeader title="Last Action" />

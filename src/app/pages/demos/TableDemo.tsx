@@ -173,7 +173,6 @@ const TableDemo: Component = () => {
 
   return (
     <>
-      <h2>Table Component Examples</h2>
 
       <Card>
         <CardHeader title="Basic Table" subtitle="Simple table with data display" />

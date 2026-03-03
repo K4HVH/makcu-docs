@@ -24,7 +24,6 @@ export default function DatePickerDemo() {
 
   return (
     <>
-      <h2>DatePicker Component Examples</h2>
 
       {/* Basic date */}
       <Card>

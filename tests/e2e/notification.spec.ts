@@ -14,8 +14,7 @@ test.describe('Notification behavior', () => {
     });
 
     // Scroll to the Notification section
-    const notificationSection = page.locator('h2', { hasText: 'Notification Component Examples' });
-    await notificationSection.scrollIntoViewIfNeeded();
+    await page.locator('.card').first().scrollIntoViewIfNeeded();
   });
 
   test('shows success notification', async ({ page }) => {

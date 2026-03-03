@@ -132,7 +132,6 @@ const ServerDemo: Component = () => {
 
   return (
     <>
-      <h2>Server Communication Examples</h2>
 
       <Card>
         <CardHeader title="List Health Services" subtitle="Retrieve all registered services and their current status" />

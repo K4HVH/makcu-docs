@@ -31,7 +31,6 @@ const FileUploadDemo: Component = () => {
 
   return (
     <>
-      <h2>FileUpload Component Examples</h2>
 
       <Card>
         <CardHeader title="Dropzone — Single File" subtitle="Default variant, one file at a time" />

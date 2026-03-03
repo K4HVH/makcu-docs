@@ -8,7 +8,6 @@ import { BsPlus, BsTrash, BsPencil, BsDownload, BsUpload, BsGear, BsStar, BsStar
 const TooltipDemo: Component = () => {
   return (
     <>
-      <h2>Tooltip Component Examples</h2>
 
       <Card>
         <CardHeader title="Basic Tooltips" />

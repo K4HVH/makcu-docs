@@ -13,8 +13,7 @@ test.describe('Tabs component', () => {
       }
     });
 
-    const heading = page.getByRole('heading', { name: 'Tabs Component Examples', exact: true });
-    await heading.scrollIntoViewIfNeeded();
+    await page.locator('.card').first().scrollIntoViewIfNeeded();
   });
 
   test('renders tabs with correct labels', async ({ page }) => {

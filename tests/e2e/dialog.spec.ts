@@ -14,8 +14,7 @@ test.describe('Dialog behavior', () => {
     });
 
     // Scroll to the Dialog section
-    const dialogSection = page.locator('h2', { hasText: 'Dialog Component Examples' });
-    await dialogSection.scrollIntoViewIfNeeded();
+    await page.locator('.card').first().scrollIntoViewIfNeeded();
   });
 
   test('opens and closes basic dialog', async ({ page }) => {

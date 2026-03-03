@@ -15,7 +15,6 @@ const ComboboxDemo: Component = () => {
 
   return (
     <>
-      <h2>Combobox Examples</h2>
 
       <Card>
         <CardHeader title="Basic Combobox" />

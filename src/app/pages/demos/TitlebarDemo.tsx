@@ -13,7 +13,6 @@ import {
 const TitlebarDemo: Component = () => {
   return (
     <>
-      <h2>Titlebar Component Examples</h2>
 
       {/* Basic Usage */}
       <Card>

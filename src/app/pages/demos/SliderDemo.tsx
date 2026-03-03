@@ -12,7 +12,6 @@ const SliderDemo: Component = () => {
 
   return (
     <>
-      <h2>Slider Component Examples</h2>
 
       <Card>
         <CardHeader title="Basic Slider" />
