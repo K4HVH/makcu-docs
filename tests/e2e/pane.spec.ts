@@ -66,8 +66,7 @@ test.describe('Pane component', () => {
       }
     });
 
-    const paneSection = page.getByRole('heading', { name: 'Pane Component Examples', exact: true });
-    await paneSection.scrollIntoViewIfNeeded();
+    await page.locator('.card').first().scrollIntoViewIfNeeded();
 
     const openButton = page.locator('button', { hasText: 'Open Right Pane' });
     await openButton.click();
@@ -92,8 +91,7 @@ test.describe('Pane component', () => {
       }
     });
 
-    const paneSection = page.getByRole('heading', { name: 'Pane Component Examples', exact: true });
-    await paneSection.scrollIntoViewIfNeeded();
+    await page.locator('.card').first().scrollIntoViewIfNeeded();
 
     const openButton = page.locator('button', { hasText: 'Open Right Pane' });
     await openButton.click();
@@ -119,8 +117,7 @@ test.describe('Pane component', () => {
       }
     });
 
-    const paneSection = page.getByRole('heading', { name: 'Pane Component Examples', exact: true });
-    await paneSection.scrollIntoViewIfNeeded();
+    await page.locator('.card').first().scrollIntoViewIfNeeded();
 
     const openButton = page.locator('button', { hasText: 'Open Left Pane' });
     await openButton.click();

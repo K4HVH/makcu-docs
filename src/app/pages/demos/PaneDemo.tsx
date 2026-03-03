@@ -52,11 +52,6 @@ const PaneDemo: Component = () => {
         </div>
       </Pane>
 
-      {/* ================================================================
-          Pane Component Examples
-          ================================================================ */}
-      <h2>Pane Component Examples</h2>
-
       <Card>
         <CardHeader title="Permanent Push Pane" subtitle="Handle cycles through closed → partial → open states" />
         <div style={{ position: "relative", height: "200px", display: "flex", overflow: "hidden", border: "1px solid var(--g-border-color)", "border-radius": "var(--g-radius)" }}>

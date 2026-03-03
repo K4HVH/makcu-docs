@@ -18,7 +18,7 @@ test.describe('Breadcrumbs component', () => {
   });
 
   test('renders breadcrumb navigation', async ({ page }) => {
-    await expect(page.getByRole('heading', { name: 'Breadcrumbs Component Examples', exact: true })).toBeVisible();
+    await expect(page.locator('.card').first()).toBeVisible();
 
     // Wait for the basic breadcrumbs card
     const basicCard = page.locator('.card', { hasText: 'Basic Breadcrumbs' }).first();

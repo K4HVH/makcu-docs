@@ -15,7 +15,6 @@ const DialogDemo: Component = () => {
 
   return (
     <>
-      <h2>Dialog Component Examples</h2>
 
       <Card>
         <CardHeader title="Basic Dialog" />

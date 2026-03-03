@@ -11,7 +11,6 @@ const CheckboxDemo: Component = () => {
 
   return (
     <>
-      <h2>Checkbox Component Examples</h2>
 
       <Card>
         <CardHeader title="Basic Checkboxes" />

@@ -13,7 +13,6 @@ export default function PaginationDemo() {
 
   return (
     <>
-      <h2>Pagination Component Examples</h2>
 
       {/* Basic Usage */}
       <Card>

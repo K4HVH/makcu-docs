@@ -16,8 +16,7 @@ test.describe('Divider component', () => {
       }
     });
 
-    const heading = page.getByRole('heading', { name: 'Divider Component Examples', exact: true });
-    await heading.scrollIntoViewIfNeeded();
+    await page.locator('.card').first().scrollIntoViewIfNeeded();
   });
 
   test('renders horizontal dividers', async ({ page }) => {

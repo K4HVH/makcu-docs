@@ -14,8 +14,7 @@ test.describe('CommandPalette behavior', () => {
     });
 
     // Wait for the demo heading
-    const heading = page.locator('h2', { hasText: 'CommandPalette Component Examples' });
-    await heading.scrollIntoViewIfNeeded();
+    await page.locator('.card').first().scrollIntoViewIfNeeded();
   });
 
   test('opens and closes basic command palette', async ({ page }) => {

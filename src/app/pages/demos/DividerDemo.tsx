@@ -22,7 +22,6 @@ const DividerDemo: Component = () => {
 
   return (
     <>
-      <h2>Divider Component Examples</h2>
 
       <Card>
         <CardHeader title="Basic Horizontal Divider" subtitle="Default solid line separator" />

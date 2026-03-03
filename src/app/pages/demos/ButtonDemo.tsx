@@ -14,7 +14,6 @@ const ButtonDemo: Component = () => {
 
   return (
     <>
-      <h2>Button Component Examples</h2>
 
       <Card>
         <CardHeader title="Button Variants" />

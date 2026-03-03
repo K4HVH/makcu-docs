@@ -8,7 +8,6 @@ import { BsBell, BsEnvelope, BsStar, BsGear, BsHeart, BsCheck, BsLightning, BsFi
 const BadgeDemo: Component = () => {
   return (
     <>
-      <h2>Badge Component Examples</h2>
 
       <Card>
         <CardHeader title="Notification Badges on Buttons" />

@@ -16,8 +16,7 @@ test.describe('Accordion component', () => {
       }
     });
 
-    const heading = page.getByRole('heading', { name: 'Accordion Component Examples', exact: true });
-    await heading.scrollIntoViewIfNeeded();
+    await page.locator('.card').first().scrollIntoViewIfNeeded();
   });
 
   test('renders accordion items with headers', async ({ page }) => {

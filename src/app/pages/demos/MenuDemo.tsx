@@ -15,7 +15,6 @@ const MenuDemo: Component = () => {
 
   return (
     <>
-      <h2>Menu Component Examples</h2>
 
       <Card>
         <CardHeader title="Basic Menu" subtitle="Simple dropdown menu with actions" />

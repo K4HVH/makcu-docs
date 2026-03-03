@@ -5,12 +5,12 @@ import App from '../../src/app/App';
 describe('App', () => {
   it('renders the design system test page', () => {
     const { getByText } = render(() => <App />);
-    expect(getByText('MidnightUI Component Library')).toBeInTheDocument();
+    expect(getByText('MidnightUI')).toBeInTheDocument();
   });
 
   it('renders typography section by default', () => {
-    const { getByText } = render(() => <App />);
-    expect(getByText('Typography Examples')).toBeInTheDocument();
+    const { container } = render(() => <App />);
+    expect(container.querySelector('.card')).toBeInTheDocument();
   });
 
   it('renders sidebar navigation with tabs', () => {

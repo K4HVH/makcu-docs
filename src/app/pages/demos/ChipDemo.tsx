@@ -22,7 +22,6 @@ const ChipDemo: Component = () => {
 
   return (
     <>
-      <h2>Chip Component Examples</h2>
 
       <Card>
         <CardHeader title="Basic Chips" subtitle="Static display-only chips" />

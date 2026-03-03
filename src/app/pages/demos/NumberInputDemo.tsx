@@ -14,7 +14,6 @@ const NumberInputDemo: Component = () => {
 
   return (
     <>
-      <h2>NumberInput Component Examples</h2>
 
       <Card>
         <CardHeader title="Basic" />

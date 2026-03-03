@@ -3,6 +3,7 @@ import { type RouteSectionProps, useNavigate, useLocation } from '@solidjs/route
 import { GridBackground } from '../../components/surfaces/GridBackground';
 import { Pane, type PaneState } from '../../components/navigation/Pane';
 import { Tabs } from '../../components/navigation/Tabs';
+import { Titlebar } from '../../components/navigation/Titlebar';
 import {
   BsType, BsInputCursor, BsCardText, BsCheckSquare, BsCircle,
   BsList, BsChevronExpand, BsSliders, BsCursor, BsGrid,
@@ -57,6 +58,7 @@ const Test = (props: RouteSectionProps) => {
   const location = useLocation();
 
   const activeDemo = () => location.pathname.replace(/^\//, '') || 'typography';
+  const activeDemoLabel = () => tabOptions.find(t => t.value === activeDemo())?.label;
 
   return (
     <>
@@ -83,8 +85,13 @@ const Test = (props: RouteSectionProps) => {
         </Pane>
 
         <div style={{ flex: 1, overflow: "auto" }}>
+          <Titlebar
+            title="MidnightUI"
+            subtitle={activeDemoLabel()}
+            sticky
+            style={{ margin: 'var(--g-spacing-sm)', top: 'var(--g-spacing-sm)' }}
+          />
           <div class="container grid">
-            <h1>MidnightUI Component Library</h1>
             {props.children}
           </div>
         </div>

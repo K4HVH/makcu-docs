@@ -11,11 +11,6 @@ const TabsDemo: Component = () => {
 
   return (
     <>
-      {/* ================================================================
-          Tabs Component Examples
-          ================================================================ */}
-      <h2>Tabs Component Examples</h2>
-
       <Card>
         <CardHeader title="Basic Tabs" subtitle="Uncontrolled horizontal tabs with default selection" />
         <div data-testid="tabs-basic">

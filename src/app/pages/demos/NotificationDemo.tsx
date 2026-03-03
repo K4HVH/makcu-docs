@@ -8,7 +8,6 @@ const NotificationDemo: Component = () => {
 
   return (
     <>
-      <h2>Notification Component Examples</h2>
 
       <Card>
         <CardHeader title="Notification Variants" />

@@ -15,12 +15,10 @@ test.describe('DatePicker component', () => {
       }
     });
 
-    const heading = page.getByRole('heading', { name: 'DatePicker Component Examples', exact: true });
-    await heading.scrollIntoViewIfNeeded();
+    await page.locator('.card').first().scrollIntoViewIfNeeded();
   });
 
   test('renders all demo cards', async ({ page }) => {
-    await expect(page.getByRole('heading', { name: 'DatePicker Component Examples', exact: true })).toBeVisible();
     await expect(page.locator('.card').first()).toBeVisible();
   });
 

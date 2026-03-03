@@ -6,7 +6,6 @@ import { ButtonGroup } from '../../../components/inputs/ButtonGroup';
 const ButtonGroupDemo: Component = () => {
   return (
     <>
-      <h2>ButtonGroup Component Examples</h2>
 
       <Card>
         <CardHeader title="Horizontal Button Groups" />

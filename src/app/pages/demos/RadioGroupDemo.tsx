@@ -12,7 +12,6 @@ const RadioGroupDemo: Component = () => {
 
   return (
     <>
-      <h2>Radio Group Examples</h2>
 
       <Card>
         <CardHeader title="Basic Radio Group" />

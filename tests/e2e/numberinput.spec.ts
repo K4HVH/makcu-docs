@@ -15,8 +15,7 @@ test.describe('NumberInput component', () => {
       }
     });
 
-    const heading = page.getByRole('heading', { name: 'NumberInput Component Examples', exact: true });
-    await heading.scrollIntoViewIfNeeded();
+    await page.locator('.card').first().scrollIntoViewIfNeeded();
   });
 
   test('renders with initial value', async ({ page }) => {

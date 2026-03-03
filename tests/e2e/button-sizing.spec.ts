@@ -16,7 +16,7 @@ test.describe('Button sizing consistency', () => {
 
   test('icon-only buttons should match height of text buttons', async ({ page }) => {
     // Navigate to button section
-    await page.getByText('Button Component Examples').scrollIntoViewIfNeeded();
+    await page.locator('.card').first().scrollIntoViewIfNeeded();
 
     // Get text button height (from "Button Sizes" section)
     const normalTextButton = page.getByRole('button', { name: 'Normal', exact: true });
