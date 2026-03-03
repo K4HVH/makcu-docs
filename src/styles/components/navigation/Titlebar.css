@@ -1,0 +1,156 @@
+/* =============================================================================
+   Titlebar Component
+   ============================================================================= */
+
+.titlebar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--g-spacing);
+  padding: var(--g-spacing-sm) var(--g-spacing);
+  background: var(--g-background);
+  border: var(--g-border-width) solid var(--g-border-color);
+  border-radius: var(--g-radius);
+  transition: all var(--g-transition);
+  overflow: hidden;
+}
+
+/* Hover overlay (consistent with Card and other components) */
+.titlebar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0);
+  transition: background var(--g-transition);
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 0;
+}
+
+.titlebar > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* =============================================================================
+   Variants
+   ============================================================================= */
+
+.titlebar--default {
+  background: var(--g-background);
+  border-color: var(--g-border-color);
+}
+
+.titlebar--emphasized {
+  background: var(--g-background-elevated);
+  border-color: var(--g-border-color-emphasis);
+}
+
+.titlebar--subtle {
+  background: var(--g-background-subtle);
+  border-color: var(--g-border-color-subtle);
+}
+
+/* =============================================================================
+   Size Variants
+   ============================================================================= */
+
+.titlebar--compact {
+  padding: var(--g-spacing-xs) var(--g-spacing-sm);
+  gap: var(--g-spacing-sm);
+}
+
+.titlebar--compact .titlebar__title {
+  font-size: var(--font-size-sm);
+}
+
+.titlebar--compact .titlebar__subtitle {
+  font-size: var(--font-size-xs);
+}
+
+.titlebar--spacious {
+  padding: var(--g-spacing) var(--g-spacing-lg);
+  gap: var(--g-spacing-lg);
+}
+
+.titlebar--spacious .titlebar__title {
+  font-size: var(--font-size-xl);
+}
+
+.titlebar--spacious .titlebar__subtitle {
+  font-size: var(--font-size-base);
+}
+
+/* =============================================================================
+   Sticky
+   ============================================================================= */
+
+.titlebar--sticky {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* =============================================================================
+   Disabled
+   ============================================================================= */
+
+.titlebar--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* =============================================================================
+   Layout Regions
+   ============================================================================= */
+
+.titlebar__left {
+  display: flex;
+  align-items: center;
+  gap: var(--g-spacing-sm);
+  flex-shrink: 0;
+}
+
+.titlebar__center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+}
+
+.titlebar__right {
+  display: flex;
+  align-items: center;
+  gap: var(--g-spacing-sm);
+  flex-shrink: 0;
+}
+
+/* =============================================================================
+   Title & Subtitle
+   ============================================================================= */
+
+.titlebar__title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--g-text-primary);
+  line-height: var(--line-height-tight);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.titlebar__subtitle {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-normal);
+  color: var(--g-text-muted);
+  line-height: var(--line-height-tight);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
