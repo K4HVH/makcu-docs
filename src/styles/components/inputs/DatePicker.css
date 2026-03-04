@@ -551,3 +551,33 @@
   color: var(--g-text-muted);
   font-style: italic;
 }
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .date-picker__panel {
+    min-width: auto;
+    width: calc(100vw - var(--g-spacing) * 2);
+    max-width: 320px;
+  }
+
+  .date-picker__day {
+    height: 40px;
+  }
+
+  .date-picker__time-btn {
+    padding: var(--g-spacing-xs) var(--g-spacing-sm);
+    min-width: 32px;
+    min-height: 32px;
+  }
+
+  .date-picker__nav-btn {
+    padding: var(--g-spacing-xs);
+    min-width: 32px;
+    min-height: 32px;
+  }
+
+  .date-picker__ampm-btn {
+    min-height: 32px;
+    min-width: 44px;
+  }
+}

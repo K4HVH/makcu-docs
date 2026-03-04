@@ -603,7 +603,7 @@ export const CommandPalette: Component<CommandPaletteProps> = (props) => {
                               aria-selected={isActive()}
                               aria-disabled={item.disabled}
                               onClick={() => handleItemClick(item)}
-                              onMouseEnter={() => {
+                              onPointerEnter={() => {
                                 if (!item.disabled) setActiveIndex(itemIndex());
                               }}
                             >

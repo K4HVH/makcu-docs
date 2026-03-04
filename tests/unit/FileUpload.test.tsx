@@ -394,7 +394,7 @@ describe('FileUpload', () => {
     const dropzone = container.querySelector('.file-upload__dropzone') as HTMLElement;
 
     // Hover the dropzone so this instance claims the paste
-    fireEvent.mouseEnter(dropzone);
+    fireEvent.pointerEnter(dropzone);
 
     const file = makeFile('pasted.png', 500, 'image/png');
     const item = { kind: 'file', getAsFile: () => file };
@@ -408,7 +408,7 @@ describe('FileUpload', () => {
     const { container } = render(() => <FileUpload variant="button" onChange={onChange} />);
     const buttonArea = container.querySelector('.file-upload__button-area') as HTMLElement;
 
-    fireEvent.mouseEnter(buttonArea);
+    fireEvent.pointerEnter(buttonArea);
 
     const file = makeFile('pasted.txt', 100, 'text/plain');
     const item = { kind: 'file', getAsFile: () => file };
@@ -455,7 +455,7 @@ describe('FileUpload', () => {
     const dropzones = container.querySelectorAll('.file-upload__dropzone');
 
     // Hover the second instance only
-    fireEvent.mouseEnter(dropzones[1]);
+    fireEvent.pointerEnter(dropzones[1]);
 
     const file = makeFile('targeted.txt', 100, 'text/plain');
     const item = { kind: 'file', getAsFile: () => file };
@@ -470,7 +470,7 @@ describe('FileUpload', () => {
     const { container } = render(() => <FileUpload onChange={onChange} />);
     const dropzone = container.querySelector('.file-upload__dropzone') as HTMLElement;
 
-    fireEvent.mouseEnter(dropzone);
+    fireEvent.pointerEnter(dropzone);
 
     const item = { kind: 'string', getAsFile: () => null };
     fireEvent.paste(document, { clipboardData: { items: [item] } });
@@ -483,7 +483,7 @@ describe('FileUpload', () => {
     const { container } = render(() => <FileUpload disabled onChange={onChange} />);
     const dropzone = container.querySelector('.file-upload__dropzone') as HTMLElement;
 
-    fireEvent.mouseEnter(dropzone);
+    fireEvent.pointerEnter(dropzone);
 
     const file = makeFile('test.png', 100, 'image/png');
     const item = { kind: 'file', getAsFile: () => file };

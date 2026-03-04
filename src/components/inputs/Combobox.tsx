@@ -294,13 +294,13 @@ export const Combobox: Component<ComboboxProps> = (props) => {
               role="option"
               aria-selected={isSelected(option.value)}
               aria-disabled={option.disabled}
-              onMouseDown={(e) => {
+              onPointerDown={(e) => {
                 if (option.disabled) {
                   e.stopPropagation();
                   e.preventDefault();
                 }
               }}
-              onMouseEnter={() => {
+              onPointerEnter={() => {
                 if (!option.disabled) setActiveIndex(index());
               }}
               onClick={(e) => {

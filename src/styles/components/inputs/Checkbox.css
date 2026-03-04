@@ -219,3 +219,20 @@
 .checkbox--icon:not(.checkbox--disabled):hover .checkbox__input:indeterminate ~ .checkbox__icon-wrapper {
   color: var(--color-accent);
 }
+
+/* Mobile: increase touch target */
+@media (max-width: 768px) {
+  .checkbox {
+    min-height: 44px;
+    padding: var(--g-spacing-xs) 0;
+  }
+
+  .checkbox__icon-wrapper {
+    width: 24px;
+    height: 24px;
+  }
+
+  .checkbox__icon {
+    font-size: 24px;
+  }
+}

@@ -517,7 +517,7 @@ describe('CommandPalette', () => {
       expect(onClose).not.toHaveBeenCalled();
     });
 
-    it('highlights item on mouse enter', () => {
+    it('highlights item on pointer enter', () => {
       const items: CommandPaletteItem[] = [
         { id: '1', label: 'First', onSelect: vi.fn() },
         { id: '2', label: 'Second', onSelect: vi.fn() },
@@ -526,7 +526,7 @@ describe('CommandPalette', () => {
         <CommandPalette open={true} onClose={() => {}} items={items} />
       ));
       const secondItem = document.querySelectorAll('.command-palette__item')[1] as HTMLElement;
-      fireEvent.mouseEnter(secondItem);
+      fireEvent.pointerEnter(secondItem);
 
       expect(secondItem.classList.contains('command-palette__item--active')).toBe(true);
     });

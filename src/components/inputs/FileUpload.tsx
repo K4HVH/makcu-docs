@@ -267,8 +267,8 @@ export const FileUpload: Component<FileUploadProps> = (props) => {
           ref={dropzoneRef}
           class="file-upload__dropzone"
           onClick={openFilePicker}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
+          onPointerEnter={() => setIsHovered(true)}
+          onPointerLeave={() => setIsHovered(false)}
           onDragEnter={handleDragEnter}
           onDragLeave={handleDragLeave}
           onDragOver={handleDragOver}
@@ -306,8 +306,8 @@ export const FileUpload: Component<FileUploadProps> = (props) => {
       <Show when={variant() === 'button'}>
         <div
           class="file-upload__button-area"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
+          onPointerEnter={() => setIsHovered(true)}
+          onPointerLeave={() => setIsHovered(false)}
           onDragEnter={handleDragEnter}
           onDragLeave={handleDragLeave}
           onDragOver={handleDragOver}

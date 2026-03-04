@@ -147,7 +147,7 @@ describe('Slider', () => {
     const { container } = render(() => <Slider value={50} showTooltip />);
     const thumb = container.querySelector('.slider__thumb--end') as HTMLElement;
 
-    fireEvent.mouseEnter(thumb);
+    fireEvent.pointerEnter(thumb);
 
     await waitFor(() => {
       const tooltip = document.querySelector('.slider__tooltip');
@@ -160,12 +160,12 @@ describe('Slider', () => {
     const { container } = render(() => <Slider value={50} showTooltip />);
     const thumb = container.querySelector('.slider__thumb--end') as HTMLElement;
 
-    fireEvent.mouseEnter(thumb);
+    fireEvent.pointerEnter(thumb);
     await waitFor(() => {
       expect(document.querySelector('.slider__tooltip')).toBeInTheDocument();
     }, { timeout: 100 });
 
-    fireEvent.mouseLeave(thumb);
+    fireEvent.pointerLeave(thumb);
     await waitFor(() => {
       expect(document.querySelector('.slider__tooltip')).not.toBeInTheDocument();
     }, { timeout: 100 });
@@ -175,7 +175,7 @@ describe('Slider', () => {
     const { container } = render(() => <Slider value={50} showTooltip={false} />);
     const thumb = container.querySelector('.slider__thumb--end') as HTMLElement;
 
-    fireEvent.mouseEnter(thumb);
+    fireEvent.pointerEnter(thumb);
     const tooltip = document.querySelector('.slider__tooltip');
     expect(tooltip).not.toBeInTheDocument();
   });

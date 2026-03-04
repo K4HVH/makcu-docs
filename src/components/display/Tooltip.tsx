@@ -199,8 +199,8 @@ export const Tooltip: Component<TooltipProps> = (props) => {
         ref={triggerRef}
         class="tooltip__trigger"
         aria-describedby={isMounted() ? tooltipId : undefined}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        onPointerEnter={handleMouseEnter}
+        onPointerLeave={handleMouseLeave}
         onFocus={handleFocus}
         onBlur={handleBlur}
         onKeyDown={handleKeyDown}

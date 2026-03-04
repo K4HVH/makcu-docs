@@ -266,3 +266,20 @@
   padding: var(--spacing-3) var(--g-spacing);
   font-size: var(--font-size-lg);
 }
+
+/* Mobile: horizontal scroll for overflow */
+@media (max-width: 768px) {
+  .breadcrumbs {
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .breadcrumbs__list {
+    flex-wrap: nowrap;
+  }
+
+  .breadcrumbs__link {
+    min-height: 36px;
+  }
+}

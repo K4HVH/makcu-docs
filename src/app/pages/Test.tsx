@@ -1,9 +1,10 @@
-import { createSignal } from 'solid-js';
+import { createSignal, onCleanup, onMount, Show } from 'solid-js';
 import { type RouteSectionProps, useNavigate, useLocation } from '@solidjs/router';
 import { GridBackground } from '../../components/surfaces/GridBackground';
 import { Pane, type PaneState } from '../../components/navigation/Pane';
 import { Tabs } from '../../components/navigation/Tabs';
 import { Titlebar } from '../../components/navigation/Titlebar';
+import { Button } from '../../components/inputs/Button';
 import {
   BsType, BsInputCursor, BsCardText, BsCheckSquare, BsCircle,
   BsList, BsChevronExpand, BsSliders, BsCursor, BsGrid,
@@ -54,8 +55,22 @@ const tabOptions = [
 
 const Test = (props: RouteSectionProps) => {
   const [paneState, setPaneState] = createSignal<PaneState>('partial');
+  const [isMobile, setIsMobile] = createSignal(false);
   const navigate = useNavigate();
   const location = useLocation();
+
+  onMount(() => {
+    const mql = window.matchMedia('(max-width: 768px)');
+    setIsMobile(mql.matches);
+    const handler = (e: MediaQueryListEvent) => {
+      setIsMobile(e.matches);
+      if (e.matches) setPaneState('closed');
+      else setPaneState('partial');
+    };
+    mql.addEventListener('change', handler);
+    onCleanup(() => mql.removeEventListener('change', handler));
+    if (mql.matches) setPaneState('closed');
+  });
 
   const activeDemo = () => location.pathname.replace(/^\//, '') || 'typography';
   const activeDemoLabel = () => tabOptions.find(t => t.value === activeDemo())?.label;
@@ -67,7 +82,8 @@ const Test = (props: RouteSectionProps) => {
       <div class="content" style={{ display: "flex", height: "100%", width: "100%" }}>
         <Pane
           position="left"
-          mode="permanent"
+          mode={isMobile() ? 'temporary' : 'permanent'}
+          fixed={isMobile()}
           openSize="200px"
           partialSize="50px"
           state={paneState()}
@@ -78,7 +94,10 @@ const Test = (props: RouteSectionProps) => {
             orientation="vertical"
             variant="subtle"
             value={activeDemo()}
-            onChange={(value: string) => navigate(`/${value}`)}
+            onChange={(value: string) => {
+              navigate(`/${value}`);
+              if (isMobile()) setPaneState('closed');
+            }}
             options={tabOptions}
             class={paneState() !== 'open' ? 'tabs--labels-hidden' : ''}
           />
@@ -90,6 +109,17 @@ const Test = (props: RouteSectionProps) => {
             subtitle={activeDemoLabel()}
             sticky
             style={{ margin: 'var(--g-spacing-sm)', top: 'var(--g-spacing-sm)' }}
+            left={
+              <Show when={isMobile()}>
+                <Button
+                  variant="subtle"
+                  size="compact"
+                  icon={BsList}
+                  onClick={() => setPaneState(s => s === 'open' ? 'closed' : 'open')}
+                  aria-label="Toggle navigation"
+                />
+              </Show>
+            }
           />
           <div class="container grid">
             {props.children}

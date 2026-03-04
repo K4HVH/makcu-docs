@@ -197,3 +197,11 @@
 .number-input__suffix {
   border-left: var(--g-border-width) solid var(--g-border-color);
 }
+
+/* Mobile: larger stepper touch targets */
+@media (max-width: 768px) {
+  .number-input__stepper {
+    min-width: 44px;
+    padding: 0 var(--g-spacing);
+  }
+}

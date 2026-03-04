@@ -199,7 +199,7 @@ export const Tabs: Component<TabsProps> = (props) => {
     isButtonScrolling = false;
   };
 
-  const handleIndicatorMouseDown = (direction: -1 | 1, e: MouseEvent) => {
+  const handleIndicatorPointerDown = (direction: -1 | 1, e: PointerEvent) => {
     e.preventDefault();
     e.stopPropagation();
 
@@ -212,18 +212,18 @@ export const Tabs: Component<TabsProps> = (props) => {
       scrollIntervalRef = undefined;
     }
 
-    // Add global mouseUp listener to catch release even if mouse moves off button
-    const handleGlobalMouseUp = () => {
+    // Add global pointerup listener to catch release even if pointer moves off button
+    const handleGlobalPointerUp = () => {
       stopContinuousScroll();
-      document.removeEventListener('mouseup', handleGlobalMouseUp);
+      document.removeEventListener('pointerup', handleGlobalPointerUp);
     };
-    document.addEventListener('mouseup', handleGlobalMouseUp);
+    document.addEventListener('pointerup', handleGlobalPointerUp);
 
-    // Start scrolling immediately on mouse down
+    // Start scrolling immediately on pointer down
     startContinuousScroll(direction);
   };
 
-  const handleIndicatorMouseUp = (e: MouseEvent) => {
+  const handleIndicatorPointerUp = (e: PointerEvent) => {
     e.preventDefault();
     e.stopPropagation();
     stopContinuousScroll();
@@ -365,9 +365,10 @@ export const Tabs: Component<TabsProps> = (props) => {
         <Show when={canScrollStart()}>
           <button
             class="tabs__scroll-indicator tabs__scroll-indicator--start"
-            onMouseDown={(e) => handleIndicatorMouseDown(-1, e)}
-            onMouseUp={handleIndicatorMouseUp}
-            onMouseLeave={handleIndicatorMouseUp}
+            onPointerDown={(e) => handleIndicatorPointerDown(-1, e)}
+            onPointerUp={handleIndicatorPointerUp}
+            onPointerLeave={handleIndicatorPointerUp}
+            onContextMenu={(e) => e.preventDefault()}
             aria-label="Scroll to previous tabs"
           >
             <Dynamic component={getScrollIcon('start')} />
@@ -377,9 +378,10 @@ export const Tabs: Component<TabsProps> = (props) => {
         <Show when={canScrollEnd()}>
           <button
             class="tabs__scroll-indicator tabs__scroll-indicator--end"
-            onMouseDown={(e) => handleIndicatorMouseDown(1, e)}
-            onMouseUp={handleIndicatorMouseUp}
-            onMouseLeave={handleIndicatorMouseUp}
+            onPointerDown={(e) => handleIndicatorPointerDown(1, e)}
+            onPointerUp={handleIndicatorPointerUp}
+            onPointerLeave={handleIndicatorPointerUp}
+            onContextMenu={(e) => e.preventDefault()}
             aria-label="Scroll to next tabs"
           >
             <Dynamic component={getScrollIcon('end')} />

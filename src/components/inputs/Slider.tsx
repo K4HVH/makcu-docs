@@ -392,14 +392,15 @@ export const Slider: Component<SliderProps> = (props) => {
               onPointerDown={(e) => handlePointerDown(e, 'start')}
               onPointerMove={handlePointerMove}
               onPointerUp={handlePointerUp}
+              onContextMenu={(e) => e.preventDefault()}
               onKeyDown={(e) => handleThumbKeyDown(e, 'start')}
-              onMouseEnter={() => {
+              onPointerEnter={() => {
                 if (local.showTooltip !== false) {
                   setHoveredThumb('start');
                   updateTooltipPosition();
                 }
               }}
-              onMouseLeave={() => setHoveredThumb(null)}
+              onPointerLeave={() => setHoveredThumb(null)}
               tabIndex={local.disabled ? -1 : 0}
               role="slider"
               aria-valuemin={min()}
@@ -419,14 +420,15 @@ export const Slider: Component<SliderProps> = (props) => {
             onPointerDown={(e) => handlePointerDown(e, 'end')}
             onPointerMove={handlePointerMove}
             onPointerUp={handlePointerUp}
+            onContextMenu={(e) => e.preventDefault()}
             onKeyDown={(e) => handleThumbKeyDown(e, 'end')}
-            onMouseEnter={() => {
+            onPointerEnter={() => {
               if (local.showTooltip !== false) {
                 setHoveredThumb('end');
                 updateTooltipPosition();
               }
             }}
-            onMouseLeave={() => setHoveredThumb(null)}
+            onPointerLeave={() => setHoveredThumb(null)}
             tabIndex={local.disabled ? -1 : 0}
             role="slider"
             aria-valuemin={local.range ? getValue()[0] : min()}

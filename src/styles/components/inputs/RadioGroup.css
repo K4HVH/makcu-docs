@@ -203,3 +203,20 @@
   flex-direction: row;
   flex-wrap: wrap;
 }
+
+/* Mobile: increase touch target */
+@media (max-width: 768px) {
+  .radio {
+    min-height: 44px;
+    padding: var(--g-spacing-xs) 0;
+  }
+
+  .radio__icon-wrapper {
+    width: 24px;
+    height: 24px;
+  }
+
+  .radio__icon {
+    font-size: 24px;
+  }
+}

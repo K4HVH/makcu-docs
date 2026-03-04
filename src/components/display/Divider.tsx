@@ -149,6 +149,7 @@ export const Divider: Component<DividerProps> = (props) => {
       onPointerDown={local.draggable ? handlePointerDown : undefined}
       onPointerMove={local.draggable ? handlePointerMove : undefined}
       onPointerUp={local.draggable ? handlePointerUp : undefined}
+      onContextMenu={local.draggable ? (e: MouseEvent) => e.preventDefault() : undefined}
       onKeyDown={local.draggable ? handleKeyDown : undefined}
       {...rest}
     >

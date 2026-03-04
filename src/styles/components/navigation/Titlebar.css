@@ -154,3 +154,19 @@
   text-overflow: ellipsis;
   max-width: 100%;
 }
+
+/* Mobile: compact spacing */
+@media (max-width: 768px) {
+  .titlebar {
+    padding: var(--g-spacing-xs) var(--g-spacing-sm);
+    gap: var(--g-spacing-sm);
+  }
+
+  .titlebar__title {
+    font-size: var(--font-size-base);
+  }
+
+  .titlebar__subtitle {
+    font-size: var(--font-size-xs);
+  }
+}

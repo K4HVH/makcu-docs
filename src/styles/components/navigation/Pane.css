@@ -271,7 +271,7 @@
 
 .pane--overlay {
   position: absolute;
-  z-index: 100;
+  z-index: 1000;
 }
 
 .pane--overlay.pane--left {
@@ -314,7 +314,7 @@
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.4);
-  z-index: 99;
+  z-index: 999;
   opacity: 0;
   transition: opacity var(--pane-transition);
   pointer-events: none;

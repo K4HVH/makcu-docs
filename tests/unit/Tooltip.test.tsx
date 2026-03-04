@@ -39,7 +39,7 @@ describe('Tooltip', () => {
     ));
 
     const trigger = container.querySelector('.tooltip__trigger') as HTMLElement;
-    fireEvent.mouseEnter(trigger);
+    fireEvent.pointerEnter(trigger);
 
     // Should not show immediately
     expect(document.querySelector('[role="tooltip"]')).not.toBeInTheDocument();
@@ -64,7 +64,7 @@ describe('Tooltip', () => {
     const trigger = container.querySelector('.tooltip__trigger') as HTMLElement;
 
     // Show tooltip
-    fireEvent.mouseEnter(trigger);
+    fireEvent.pointerEnter(trigger);
     vi.advanceTimersByTime(200);
 
     await waitFor(() => {
@@ -72,7 +72,7 @@ describe('Tooltip', () => {
     });
 
     // Hide tooltip
-    fireEvent.mouseLeave(trigger);
+    fireEvent.pointerLeave(trigger);
 
     // Should still be visible
     expect(document.querySelector('[role="tooltip"]')).toBeInTheDocument();
@@ -140,7 +140,7 @@ describe('Tooltip', () => {
     ));
 
     const trigger = container.querySelector('.tooltip__trigger') as HTMLElement;
-    fireEvent.mouseEnter(trigger);
+    fireEvent.pointerEnter(trigger);
     vi.advanceTimersByTime(200);
 
     await waitFor(() => {
@@ -157,7 +157,7 @@ describe('Tooltip', () => {
     ));
 
     const trigger = container.querySelector('.tooltip__trigger') as HTMLElement;
-    fireEvent.mouseEnter(trigger);
+    fireEvent.pointerEnter(trigger);
     vi.advanceTimersByTime(200);
 
     await waitFor(() => {
@@ -174,7 +174,7 @@ describe('Tooltip', () => {
     ));
 
     const trigger = container.querySelector('.tooltip__trigger') as HTMLElement;
-    fireEvent.mouseEnter(trigger);
+    fireEvent.pointerEnter(trigger);
     vi.advanceTimersByTime(200);
 
     await waitFor(() => {
@@ -191,7 +191,7 @@ describe('Tooltip', () => {
     ));
 
     const trigger = container.querySelector('.tooltip__trigger') as HTMLElement;
-    fireEvent.mouseEnter(trigger);
+    fireEvent.pointerEnter(trigger);
     vi.advanceTimersByTime(200);
 
     await waitFor(() => {
@@ -208,7 +208,7 @@ describe('Tooltip', () => {
     ));
 
     const trigger = container.querySelector('.tooltip__trigger') as HTMLElement;
-    fireEvent.mouseEnter(trigger);
+    fireEvent.pointerEnter(trigger);
     vi.advanceTimersByTime(200);
 
     await waitFor(() => {
@@ -224,7 +224,7 @@ describe('Tooltip', () => {
     ));
 
     const trigger = container.querySelector('.tooltip__trigger') as HTMLElement;
-    fireEvent.mouseEnter(trigger);
+    fireEvent.pointerEnter(trigger);
     vi.advanceTimersByTime(200);
 
     await waitFor(() => {
@@ -245,7 +245,7 @@ describe('Tooltip', () => {
     // Should not have aria-describedby initially
     expect(trigger.hasAttribute('aria-describedby')).toBe(false);
 
-    fireEvent.mouseEnter(trigger);
+    fireEvent.pointerEnter(trigger);
     vi.advanceTimersByTime(200);
 
     await waitFor(() => {
@@ -264,7 +264,7 @@ describe('Tooltip', () => {
     ));
 
     const trigger = container.querySelector('.tooltip__trigger') as HTMLElement;
-    fireEvent.mouseEnter(trigger);
+    fireEvent.pointerEnter(trigger);
     vi.advanceTimersByTime(200);
 
     await waitFor(() => {
@@ -283,11 +283,11 @@ describe('Tooltip', () => {
     const trigger = container.querySelector('.tooltip__trigger') as HTMLElement;
 
     // Start showing
-    fireEvent.mouseEnter(trigger);
+    fireEvent.pointerEnter(trigger);
     vi.advanceTimersByTime(100); // Only halfway through show delay
 
     // Leave before show delay completes
-    fireEvent.mouseLeave(trigger);
+    fireEvent.pointerLeave(trigger);
     vi.advanceTimersByTime(200);
 
     // Tooltip should not appear
@@ -304,7 +304,7 @@ describe('Tooltip', () => {
     const trigger = container.querySelector('.tooltip__trigger') as HTMLElement;
 
     // Show tooltip
-    fireEvent.mouseEnter(trigger);
+    fireEvent.pointerEnter(trigger);
     vi.advanceTimersByTime(200);
 
     await waitFor(() => {
@@ -312,11 +312,11 @@ describe('Tooltip', () => {
     });
 
     // Start hiding
-    fireEvent.mouseLeave(trigger);
+    fireEvent.pointerLeave(trigger);
     vi.advanceTimersByTime(50); // Only halfway through hide delay
 
     // Re-enter before hide delay completes
-    fireEvent.mouseEnter(trigger);
+    fireEvent.pointerEnter(trigger);
     vi.advanceTimersByTime(200);
 
     // Tooltip should still be visible

@@ -101,7 +101,7 @@ describe('Menu', () => {
     });
 
     const outside = screen.getByTestId('outside');
-    fireEvent.mouseDown(outside);
+    fireEvent.pointerDown(outside);
 
     await waitFor(() => {
       expect(document.querySelector('.menu')).not.toBeInTheDocument();
@@ -336,7 +336,7 @@ describe('Menu', () => {
     expect(itemWithSubmenu).toBeInTheDocument();
 
     // Hover over item
-    fireEvent.mouseEnter(itemWithSubmenu);
+    fireEvent.pointerEnter(itemWithSubmenu);
 
     await waitFor(() => {
       // Should have both main menu and submenu

@@ -215,3 +215,28 @@
 .pagination--spacious .pagination__pages {
   gap: var(--spacing-2);
 }
+
+/* Mobile: allow horizontal scroll for many pages */
+@media (max-width: 768px) {
+  .pagination {
+    max-width: 100%;
+  }
+
+  .pagination__container {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .pagination__button {
+    min-width: 36px;
+    height: 36px;
+  }
+
+  .pagination__button--first,
+  .pagination__button--prev,
+  .pagination__button--next,
+  .pagination__button--last {
+    min-width: 36px;
+  }
+}
