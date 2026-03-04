@@ -283,7 +283,7 @@ export const Menu: Component<MenuProps> = (props) => {
         if (current?.classList.contains('menu__item--has-submenu')) {
           e.preventDefault();
           // Trigger hover to open submenu, then focus first item
-          current.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
+          current.dispatchEvent(new PointerEvent('pointerenter', { bubbles: true }));
           requestAnimationFrame(() => {
             requestAnimationFrame(() => {
               const submenu = document.querySelector('.menu--submenu:last-of-type');
@@ -304,7 +304,7 @@ export const Menu: Component<MenuProps> = (props) => {
         // Native button handles Enter/Space click, but we ensure submenu behavior
         if (items[currentIndex]?.classList.contains('menu__item--has-submenu')) {
           e.preventDefault();
-          items[currentIndex].dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
+          items[currentIndex].dispatchEvent(new PointerEvent('pointerenter', { bubbles: true }));
           requestAnimationFrame(() => {
             requestAnimationFrame(() => {
               const submenu = document.querySelector('.menu--submenu:last-of-type');
@@ -339,8 +339,8 @@ export const Menu: Component<MenuProps> = (props) => {
   };
 
   onMount(() => {
-    // Use mousedown instead of click for faster response and compatibility with existing tests
-    document.addEventListener('mousedown', handleClickOutside);
+    // Use pointerdown for faster response and touch compatibility
+    document.addEventListener('pointerdown', handleClickOutside);
     document.addEventListener('keydown', handleEscape);
 
     // Add scroll and resize listeners if anchored
@@ -350,7 +350,7 @@ export const Menu: Component<MenuProps> = (props) => {
     }
 
     onCleanup(() => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('pointerdown', handleClickOutside);
       document.removeEventListener('keydown', handleEscape);
       clearTimeout(typeAheadTimer);
       if (anchored()) {
@@ -509,8 +509,8 @@ export const MenuItem: Component<{
         class={`menu__item${local.disabled ? ' menu__item--disabled' : ''}${local.submenu ? ' menu__item--has-submenu' : ''}${local.class ? ' ' + local.class : ''}`}
         role="menuitem"
         onClick={handleClick}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        onPointerEnter={handleMouseEnter}
+        onPointerLeave={handleMouseLeave}
         disabled={local.disabled}
         aria-haspopup={local.submenu ? 'menu' : undefined}
         aria-expanded={local.submenu ? isHovered() : undefined}
@@ -531,8 +531,8 @@ export const MenuItem: Component<{
               top: `${submenuPosition().top}px`,
               left: `${submenuPosition().left}px`,
             }}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
+            onPointerEnter={handleMouseEnter}
+            onPointerLeave={handleMouseLeave}
             onKeyDown={(e: KeyboardEvent) => {
               if (e.key === 'ArrowLeft' || e.key === 'Escape') {
                 e.preventDefault();

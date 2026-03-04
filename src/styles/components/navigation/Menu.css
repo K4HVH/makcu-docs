@@ -169,3 +169,15 @@
   opacity: 0.6;
   font-size: 0.875em;
 }
+
+/* Mobile: larger touch targets for menu items */
+@media (max-width: 768px) {
+  .menu {
+    max-width: calc(100vw - var(--g-spacing) * 2);
+  }
+
+  .menu__item {
+    padding: var(--g-spacing-sm) var(--g-spacing);
+    min-height: 44px;
+  }
+}

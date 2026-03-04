@@ -180,6 +180,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html,
@@ -195,6 +196,7 @@ body {
   font-weight: var(--g-font-weight);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
 }
 
 #root {
@@ -461,4 +463,42 @@ hr {
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--g-border-color) transparent;
+}
+
+/* =============================================================================
+   Mobile Responsive
+   ============================================================================= */
+
+@media (max-width: 768px) {
+  /* Responsive typography */
+  h1 { font-size: var(--font-size-3xl); }
+  h2 { font-size: var(--font-size-2xl); }
+  h3 { font-size: var(--font-size-xl); }
+  h4 { font-size: var(--font-size-lg); }
+
+  /* Responsive container */
+  .container {
+    max-width: 100%;
+    padding: var(--g-spacing);
+  }
+
+  .container--wide,
+  .container--narrow {
+    max-width: 100%;
+  }
+
+  /* Reduce grid gaps on mobile */
+  .grid {
+    gap: var(--g-spacing);
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: var(--g-spacing-sm);
+  }
+
+  .grid {
+    gap: var(--g-spacing-sm);
+  }
 }

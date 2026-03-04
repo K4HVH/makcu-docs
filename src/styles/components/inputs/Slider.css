@@ -229,3 +229,28 @@
     opacity: 1;
   }
 }
+
+/* Prevent page scroll while dragging slider */
+.slider__track {
+  touch-action: none;
+}
+
+.slider__thumb {
+  touch-action: none;
+}
+
+/* Mobile: larger touch targets */
+@media (max-width: 768px) {
+  .slider__track {
+    height: 8px;
+  }
+
+  .slider--vertical .slider__track {
+    width: 8px;
+  }
+
+  .slider__thumb {
+    width: 24px;
+    height: 24px;
+  }
+}

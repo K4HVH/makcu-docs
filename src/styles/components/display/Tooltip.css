@@ -32,3 +32,11 @@
   padding: 6px 10px;
   font-size: 12px;
 }
+
+/* Mobile: show tooltip on focus for touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .tooltip__trigger:focus-within + .tooltip,
+  .tooltip__trigger:active + .tooltip {
+    opacity: 1;
+  }
+}

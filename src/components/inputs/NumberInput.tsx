@@ -197,12 +197,13 @@ export const NumberInput: Component<NumberInputProps> = (props) => {
           disabled={local.disabled || !canDecrement()}
           tabIndex={-1}
           aria-label="Decrease value"
-          onMouseDown={(e) => e.preventDefault()}
           onPointerDown={(e) => {
+            e.preventDefault();
             if (!local.disabled && canDecrement()) startRepeat(-1);
           }}
           onPointerUp={stopRepeat}
           onPointerLeave={stopRepeat}
+          onContextMenu={(e) => e.preventDefault()}
         >
           <BsDash />
         </button>
@@ -237,12 +238,13 @@ export const NumberInput: Component<NumberInputProps> = (props) => {
           disabled={local.disabled || !canIncrement()}
           tabIndex={-1}
           aria-label="Increase value"
-          onMouseDown={(e) => e.preventDefault()}
           onPointerDown={(e) => {
+            e.preventDefault();
             if (!local.disabled && canIncrement()) startRepeat(1);
           }}
           onPointerUp={stopRepeat}
           onPointerLeave={stopRepeat}
+          onContextMenu={(e) => e.preventDefault()}
         >
           <BsPlus />
         </button>

@@ -198,7 +198,7 @@ describe('Combobox', () => {
     });
 
     const outside = container.querySelector('[data-testid="outside"]') as HTMLElement;
-    fireEvent.mouseDown(outside);
+    fireEvent.pointerDown(outside);
 
     await waitFor(() => {
       const dropdown = document.querySelector('.combobox__dropdown');

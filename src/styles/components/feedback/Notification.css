@@ -262,8 +262,15 @@
   }
 
   .notification {
-    min-width: 280px;
+    min-width: 0;
     max-width: calc(100vw - var(--g-spacing-sm) * 2);
+  }
+
+  .notification-container--top-right,
+  .notification-container--bottom-right {
+    left: 0;
+    right: 0;
+    max-width: none;
   }
 
   .notification-container--top-center,
@@ -272,5 +279,10 @@
     right: var(--g-spacing-sm);
     transform: none;
     max-width: none;
+  }
+
+  .notification__close {
+    width: 32px;
+    height: 32px;
   }
 }

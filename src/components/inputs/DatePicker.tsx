@@ -360,12 +360,12 @@ export const DatePicker: Component<DatePickerProps> = (props) => {
   });
 
   onMount(() => {
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('pointerdown', handleClickOutside);
     document.addEventListener('keydown', handleGlobalKeyDown);
     window.addEventListener('scroll', updatePosition, true);
     window.addEventListener('resize', updatePosition);
     onCleanup(() => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('pointerdown', handleClickOutside);
       document.removeEventListener('keydown', handleGlobalKeyDown);
       window.removeEventListener('scroll', updatePosition, true);
       window.removeEventListener('resize', updatePosition);
@@ -1015,14 +1015,14 @@ export const DatePicker: Component<DatePickerProps> = (props) => {
                 <div class="date-picker__day-headers">
                   <For each={DAY_SHORT}>{(d) => <div class="date-picker__day-header">{d}</div>}</For>
                 </div>
-                <div class="date-picker__days-grid" onMouseLeave={() => setHoverDate(null)}>
+                <div class="date-picker__days-grid" onPointerLeave={() => setHoverDate(null)}>
                   <For each={calendarDays()}>
                     {(day) => (
                       <button
                         type="button"
                         class={dayClasses(day)}
                         onClick={() => handleDayClick(day.date)}
-                        onMouseEnter={() => local.range && !isDayDisabled(day.date) && setHoverDate(day.date)}
+                        onPointerEnter={() => local.range && !isDayDisabled(day.date) && setHoverDate(day.date)}
                         disabled={isDayDisabled(day.date)}
                         tabIndex={-1}
                         aria-label={`${day.date.getDate()} ${MONTH_NAMES[day.date.getMonth()]} ${day.date.getFullYear()}`}

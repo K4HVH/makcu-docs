@@ -276,3 +276,10 @@
   padding-left: var(--g-spacing-lg);
   padding-right: var(--g-spacing);
 }
+
+/* Mobile: momentum scrolling for horizontal overflow */
+@media (max-width: 768px) {
+  .table__container {
+    -webkit-overflow-scrolling: touch;
+  }
+}
