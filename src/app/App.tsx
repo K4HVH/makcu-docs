@@ -1,80 +1,13 @@
 import type { Component } from 'solid-js';
-import { Router, Route, Navigate } from '@solidjs/router';
+import { Router, Route } from '@solidjs/router';
 import { NotificationProvider } from '../components/feedback/Notification';
-import Test from './pages/Test';
-
-import TypographyDemo from './pages/demos/TypographyDemo';
-import TextFieldDemo from './pages/demos/TextFieldDemo';
-import CardDemo from './pages/demos/CardDemo';
-import CheckboxDemo from './pages/demos/CheckboxDemo';
-import RadioGroupDemo from './pages/demos/RadioGroupDemo';
-import ComboboxDemo from './pages/demos/ComboboxDemo';
-import MultiSelectComboboxDemo from './pages/demos/MultiSelectComboboxDemo';
-import SliderDemo from './pages/demos/SliderDemo';
-import ButtonDemo from './pages/demos/ButtonDemo';
-import ButtonGroupDemo from './pages/demos/ButtonGroupDemo';
-import ProgressDemo from './pages/demos/ProgressDemo';
-import DialogDemo from './pages/demos/DialogDemo';
-import NotificationDemo from './pages/demos/NotificationDemo';
-import TooltipDemo from './pages/demos/TooltipDemo';
-import BadgeDemo from './pages/demos/BadgeDemo';
-import ChipDemo from './pages/demos/ChipDemo';
-import AvatarDemo from './pages/demos/AvatarDemo';
-import TabsDemo from './pages/demos/TabsDemo';
-import PaneDemo from './pages/demos/PaneDemo';
-import FormDemo from './pages/demos/FormDemo';
-import TableDemo from './pages/demos/TableDemo';
-import MenuDemo from './pages/demos/MenuDemo';
-import PaginationDemo from './pages/demos/PaginationDemo';
-import BreadcrumbsDemo from './pages/demos/BreadcrumbsDemo';
-import AccordionDemo from './pages/demos/AccordionDemo';
-import NumberInputDemo from './pages/demos/NumberInputDemo';
-import DatePickerDemo from './pages/demos/DatePickerDemo';
-import FileUploadDemo from './pages/demos/FileUploadDemo';
-import CommandPaletteDemo from './pages/demos/CommandPaletteDemo';
-import DividerDemo from './pages/demos/DividerDemo';
-import TitlebarDemo from './pages/demos/TitlebarDemo';
-import ServerDemo from './pages/demos/ServerDemo';
+import Home from './pages/Home';
 
 const App: Component = () => {
   return (
     <NotificationProvider>
       <Router>
-        <Route path="/" component={Test}>
-          <Route path="/" component={() => <Navigate href="/typography" />} />
-          <Route path="typography" component={TypographyDemo} />
-          <Route path="textfield" component={TextFieldDemo} />
-          <Route path="card" component={CardDemo} />
-          <Route path="checkbox" component={CheckboxDemo} />
-          <Route path="radiogroup" component={RadioGroupDemo} />
-          <Route path="combobox" component={ComboboxDemo} />
-          <Route path="multiselect" component={MultiSelectComboboxDemo} />
-          <Route path="slider" component={SliderDemo} />
-          <Route path="button" component={ButtonDemo} />
-          <Route path="buttongroup" component={ButtonGroupDemo} />
-          <Route path="progress" component={ProgressDemo} />
-          <Route path="dialog" component={DialogDemo} />
-          <Route path="notification" component={NotificationDemo} />
-          <Route path="tooltip" component={TooltipDemo} />
-          <Route path="badge" component={BadgeDemo} />
-          <Route path="chip" component={ChipDemo} />
-          <Route path="avatar" component={AvatarDemo} />
-          <Route path="tabs" component={TabsDemo} />
-          <Route path="pane" component={PaneDemo} />
-          <Route path="form" component={FormDemo} />
-          <Route path="table" component={TableDemo} />
-          <Route path="menu" component={MenuDemo} />
-          <Route path="pagination" component={PaginationDemo} />
-          <Route path="breadcrumbs" component={BreadcrumbsDemo} />
-          <Route path="accordion" component={AccordionDemo} />
-          <Route path="numberinput" component={NumberInputDemo} />
-          <Route path="datepicker" component={DatePickerDemo} />
-          <Route path="fileupload" component={FileUploadDemo} />
-          <Route path="commandpalette" component={CommandPaletteDemo} />
-          <Route path="divider" component={DividerDemo} />
-          <Route path="titlebar" component={TitlebarDemo} />
-          <Route path="server" component={ServerDemo} />
-        </Route>
+        <Route path="/" component={Home} />
       </Router>
     </NotificationProvider>
   );
