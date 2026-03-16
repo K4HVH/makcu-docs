@@ -42,23 +42,21 @@ const Movement: Component = () => {
         <pre><code>{`-->  km.move(100,-50)\\r\\n\n<--  km.move(100,-50)\\r\\n>>> `}</code></pre>
         <div class="callout callout--danger">
           <p>
-            Smooth and bezier movement variants (<code>km.move(x,y,steps)</code>
-            and <code>km.move(x,y,steps,cx,cy)</code>) are present in the firmware but
-            broken. They are accepted without error but only execute in certain directions.
-            Diagonal moves silently produce no movement. Use <code>km.move(x,y)</code> only.
+            Smooth and bezier variants (<code>km.move(x,y,steps)</code>
+            and <code>km.move(x,y,steps,cx,cy)</code>) are accepted without error but
+            broken. Diagonal moves silently produce no movement.
+            Use <code>km.move(x,y)</code> only.
           </p>
         </div>
       </Card>
 
       <Card>
-        <CardHeader title="km.silent(x, y)" subtitle="Silent move (drag operation)" />
+        <CardHeader title="km.silent(x, y)" subtitle="Atomic drag operation" />
         <pre class="api-signature">km.silent(x,y)\r\n</pre>
         <div class="api-response-label">Response Type</div>
         <span class="api-badge api-badge--executed">EXECUTED</span>
         <p>
-          Performs a left-button-down, move, left-button-up sequence across two HID
-          frames. This is useful for drag operations where the press, move, and release
-          need to occur atomically from the host's perspective.
+          Performs a left-button-down, move, left-button-up sequence across two HID frames.
         </p>
         <div class="api-response-label">Parameters</div>
         <table class="api-params">

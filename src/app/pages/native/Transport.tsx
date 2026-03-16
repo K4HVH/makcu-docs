@@ -25,7 +25,7 @@ const Transport: Component = () => {
             </tr>
             <tr>
               <td>Device Name</td>
-              <td><code>USB-Enhanced-SERIAL CH343</code></td>
+              <td><code>USB-Enhanced-SERIAL CH343</code> or <code>USB Single Serial</code></td>
             </tr>
             <tr>
               <td>USB VID</td>
@@ -47,30 +47,23 @@ const Transport: Component = () => {
               <td>Line Terminator</td>
               <td><code>\r\n</code></td>
             </tr>
+            <tr>
+              <td>Linux Path</td>
+              <td><code>/dev/ttyACM0</code> (typical)</td>
+            </tr>
+            <tr>
+              <td>Windows Path</td>
+              <td>Numbered COM port</td>
+            </tr>
           </tbody>
         </table>
       </Card>
 
       <Card>
-        <CardHeader title="Port Identification" subtitle="Finding the MAKCU device" />
-        <p>
-          The device can be identified by its USB Vendor ID (<code>0x1A86</code>) and
-          Product ID (<code>0x55D3</code>). On Linux, it typically appears
-          as <code>/dev/ttyACM0</code>. On Windows, it appears as a numbered COM port.
-        </p>
-        <p>
-          The device name reported by the USB descriptor
-          is <code>USB-Enhanced-SERIAL CH343</code> or <code>USB Single Serial</code>,
-          depending on the driver version.
-        </p>
-      </Card>
-
-      <Card>
         <CardHeader title="Baud Rate" subtitle="Speed negotiation" />
         <p>
-          The device defaults to <strong>115200 baud</strong> on power-up and can be
-          switched to <strong>4 Mbaud</strong> via a binary frame. The higher baud rate
-          is not persistent across power cycles.
+          The device defaults to <strong>115200 baud</strong> on power-up. The higher
+          rate is not persistent across power cycles.
         </p>
         <div class="callout callout--info">
           <p>

@@ -6,11 +6,7 @@ const BrokenCommands: Component = () => {
   return (
     <>
       <Card>
-        <CardHeader title="Known Issues" subtitle="Commands that are non-functional on v3.2 / v3.7" />
-        <p>
-          The following commands were tested and confirmed non-functional on the
-          verified firmware. They should not be used.
-        </p>
+        <CardHeader title="Known Issues" subtitle="Non-functional commands on v3.2 / v3.7" />
       </Card>
 
       <Card>
@@ -25,24 +21,19 @@ const BrokenCommands: Component = () => {
           </thead>
           <tbody>
             <tr>
-              <td><code>km.click(...)</code></td>
-              <td><span class="api-badge api-badge--broken">SILENT</span></td>
-              <td>No click produced. Use separate press and release commands.</td>
-            </tr>
-            <tr>
               <td><code>km.move(x,y,steps)</code></td>
               <td><span class="api-badge api-badge--warning">BROKEN</span></td>
-              <td>Accepted without error but only works in some directions. Diagonal moves produce no movement. Confirmed broken by firmware developer.</td>
+              <td>Only works in some directions. Diagonal moves produce no movement.</td>
             </tr>
             <tr>
               <td><code>km.move(x,y,steps,cx,cy)</code></td>
               <td><span class="api-badge api-badge--warning">BROKEN</span></td>
-              <td>Same as above. Bezier movement is non-functional.</td>
+              <td>Bezier movement. Same issue as above.</td>
             </tr>
             <tr>
               <td><code>km.catch_ml()</code> etc.</td>
               <td><span class="api-badge api-badge--warning">BROKEN</span></td>
-              <td>Commands parse correctly and return <code>0</code>, but the click counter never increments regardless of lock state. Confirmed broken via multiple test methods.</td>
+              <td>Parses correctly and returns <code>0</code>, but the click counter never increments.</td>
             </tr>
           </tbody>
         </table>
@@ -51,8 +42,7 @@ const BrokenCommands: Component = () => {
       <Card>
         <CardHeader title="Silent Commands" subtitle="Not recognised by the firmware" />
         <p>
-          These commands produce no response at all (timeout with no <code>{'>>> '}</code> prompt).
-          They are not part of the current firmware.
+          These commands produce no response (timeout with no <code>{'>>> '}</code> prompt).
         </p>
         <table class="api-params">
           <thead>
@@ -62,6 +52,10 @@ const BrokenCommands: Component = () => {
             </tr>
           </thead>
           <tbody>
+            <tr>
+              <td>Click shorthand</td>
+              <td><code>km.click()</code> and variants</td>
+            </tr>
             <tr>
               <td>Absolute positioning</td>
               <td><code>km.screen()</code>, <code>moveto()</code>, <code>getpos()</code></td>
@@ -104,7 +98,7 @@ const BrokenCommands: Component = () => {
             </tr>
             <tr>
               <td>Wrong button names</td>
-              <td><code>km.side1()</code>, <code>km.side2()</code> (use <code>km.ms1()</code> / <code>km.ms2()</code> instead)</td>
+              <td><code>km.side1()</code>, <code>km.side2()</code> (use <code>km.ms1()</code> / <code>km.ms2()</code>)</td>
             </tr>
           </tbody>
         </table>

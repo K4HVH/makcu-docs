@@ -12,7 +12,7 @@ const Wheel: Component = () => {
         <span class="api-badge api-badge--executed">EXECUTED</span>
         <p>
           Scrolls by <code>n</code> units. Positive values scroll up, negative values
-          scroll down (actual direction depends on OS scroll direction settings).
+          scroll down. Actual direction may vary with OS scroll settings.
         </p>
         <div class="api-response-label">Parameters</div>
         <table class="api-params">
@@ -27,7 +27,7 @@ const Wheel: Component = () => {
             <tr>
               <td><code>n</code></td>
               <td>int</td>
-              <td>Scroll delta. Any integer value is accepted; there is no firmware-level clamping.</td>
+              <td>Scroll delta. No firmware-level clamping.</td>
             </tr>
           </tbody>
         </table>

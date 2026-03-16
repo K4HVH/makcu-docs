@@ -11,8 +11,7 @@ const Version: Component = () => {
         <div class="api-response-label">Response Type</div>
         <span class="api-badge api-badge--responded">RESPONDED</span>
         <p>
-          Returns the firmware identifier string. This command is used to verify
-          that the device is connected and responsive.
+          Returns the firmware identifier string.
         </p>
         <div class="api-response-label">Parameters</div>
         <p class="text-muted text-sm">None.</p>

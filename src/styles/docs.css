@@ -160,7 +160,6 @@ pre.diagram {
 .docs-hero p {
   font-size: var(--font-size-lg);
   color: var(--g-text-secondary);
-  max-width: 640px;
 }
 
 .docs-grid {

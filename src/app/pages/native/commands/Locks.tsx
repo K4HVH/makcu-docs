@@ -8,12 +8,8 @@ const Locks: Component = () => {
       <Card>
         <CardHeader title="Input Locks" subtitle="Block specific inputs from reaching the host" />
         <p>
-          Locks intercept and drop the specified input before it reaches the host PC.
-          Physical input is still received by the device, but it is not forwarded. Each
-          lock is independent and none persist across power cycles.
-        </p>
-        <p>
-          Seven lock targets are available: two movement axes and five buttons.
+          Locks intercept the specified input before it reaches the host PC. Each lock
+          is independent. None persist across power cycles.
         </p>
       </Card>
 
@@ -22,6 +18,7 @@ const Locks: Component = () => {
         <pre class="api-signature">{'km.lock_<target>(1|0)\\r\\n'}</pre>
         <div class="api-response-label">Response Type</div>
         <span class="api-badge api-badge--executed">EXECUTED</span>
+        <div class="api-response-label">Parameters</div>
         <table class="api-params">
           <thead>
             <tr>
@@ -52,15 +49,14 @@ const Locks: Component = () => {
         </p>
         <div class="callout callout--info">
           <p>
-            Lock queries always return <code>0</code> or <code>1</code>. Some external
-            documentation references a 0-3 range, but this is not the case on the
-            tested firmware.
+            Some external documentation references a 0-3 range. This is not the case on
+            the tested firmware.
           </p>
         </div>
       </Card>
 
       <Card>
-        <CardHeader title="Command Reference" subtitle="All lock commands" />
+        <CardHeader title="Command Reference" subtitle="All lock targets" />
         <table class="api-params">
           <thead>
             <tr>
@@ -108,13 +104,10 @@ const Locks: Component = () => {
           </tbody>
         </table>
         <p class="text-sm text-muted">
-          All commands above also accept the zero-argument form to query the current state
+          All commands accept the zero-argument form to query state
           (e.g. <code>km.lock_mx()</code> returns <code>0</code> or <code>1</code>).
         </p>
-      </Card>
-
-      <Card variant="subtle">
-        <CardHeader title="Example" />
+        <div class="api-response-label">Example</div>
         <pre><code>{`-->  km.lock_mx(1)\\r\\n        (lock X-axis)
 <--  km.lock_mx(1)\\r\\n>>>
 
