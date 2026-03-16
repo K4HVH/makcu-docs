@@ -170,3 +170,20 @@ pre.diagram {
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: var(--g-spacing);
 }
+
+/* Search scroll targets */
+[data-search-target] {
+  scroll-margin-top: 80px;
+}
+
+@keyframes search-highlight-ring {
+  0%, 40% { outline-color: var(--color-accent); }
+  100% { outline-color: transparent; }
+}
+
+.search-highlight {
+  outline: 2px solid transparent;
+  outline-offset: 4px;
+  border-radius: var(--g-radius);
+  animation: search-highlight-ring 2s ease-out forwards;
+}
