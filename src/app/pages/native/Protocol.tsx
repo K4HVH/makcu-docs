@@ -29,25 +29,25 @@ const Protocol: Component = () => {
         <table class="api-params">
           <thead>
             <tr>
-              <th>Response Pattern</th>
               <th>Type</th>
+              <th>Pattern</th>
               <th>Description</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><code>{'<echo>\\r\\n>>> '}</code></td>
               <td><span class="api-badge api-badge--executed">EXECUTED</span></td>
+              <td>Echo + prompt</td>
               <td>Command accepted, no return value.</td>
             </tr>
             <tr>
-              <td><code>{'<echo>\\r\\n<value>\\r\\n>>> '}</code></td>
               <td><span class="api-badge api-badge--responded">RESPONDED</span></td>
+              <td>Echo + value + prompt</td>
               <td>Command accepted, returned a value.</td>
             </tr>
             <tr>
-              <td><em>(timeout, no prompt)</em></td>
               <td><span class="api-badge api-badge--broken">SILENT</span></td>
+              <td>Timeout, no prompt</td>
               <td>Command not recognised by the firmware.</td>
             </tr>
           </tbody>
