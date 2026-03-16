@@ -43,8 +43,8 @@ const Home: Component = () => {
             <A href="/library" style={{ "text-decoration": "none" }}>
               <Card interactive padding="normal">
                 <CardHeader
-                  title="Library"
-                  subtitle="Rust library documentation (coming soon)"
+                  title="Rust Library"
+                  subtitle="Library documentation (coming soon)"
                 />
               </Card>
             </A>

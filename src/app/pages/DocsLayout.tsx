@@ -18,7 +18,7 @@ import { buildSearchItems } from '../searchIndex';
 
 const sectionTabs: TabOption[] = [
   { value: 'native', label: 'Native API', icon: BsTerminal },
-  { value: 'library', label: 'Library', icon: BsBook },
+  { value: 'library', label: 'Rust Library', icon: BsBook },
 ];
 
 const nativeOverviewTabs: TabOption[] = [
@@ -47,7 +47,7 @@ const nativeReferenceTabs: TabOption[] = [
 const allNativeTabs = [...nativeOverviewTabs, ...nativeCommandTabs, ...nativeReferenceTabs];
 
 const libraryTabOptions: TabOption[] = [
-  { value: '/library', label: 'Coming Soon', icon: BsBook },
+  { value: '/library', label: 'Overview', icon: BsBook },
 ];
 
 const isMobileQuery = () =>
@@ -187,7 +187,7 @@ const DocsLayout = (props: RouteSectionProps) => {
 
         <div ref={contentRef} style={{ flex: 1, overflow: 'auto' }}>
           <Titlebar
-            title={activeSection() === 'library' ? 'MAKCU - Library' : 'MAKCU - Native API'}
+            title={activeSection() === 'library' ? 'MAKCU - Rust Library' : 'MAKCU - Native API'}
             subtitle={pageTitle()}
             sticky
             style={{ margin: 'var(--g-spacing-sm)', top: 'var(--g-spacing-sm)' }}
