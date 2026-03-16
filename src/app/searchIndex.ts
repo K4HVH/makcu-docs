@@ -143,10 +143,10 @@ const entries: SearchEntry[] = [
   // ── Pages: Library ──────────────────────────────────────────────────────
 
   {
-    label: 'Library Documentation',
-    description: 'MAKCU Rust library (coming soon)',
+    label: 'Rust Library',
+    description: 'MAKCU Rust library documentation (coming soon)',
     path: '/library',
-    group: 'Library',
+    group: 'Rust Library',
     icon: BsBook,
     keywords: ['rust', 'library', 'crate'],
   },
