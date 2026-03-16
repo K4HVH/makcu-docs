@@ -1,4 +1,4 @@
-import { createSignal, onCleanup, onMount, Show, createMemo } from 'solid-js';
+import { createSignal, createEffect, onCleanup, onMount, Show, createMemo } from 'solid-js';
 import { type RouteSectionProps, useNavigate, useLocation } from '@solidjs/router';
 import { GridBackground } from '../../components/surfaces/GridBackground';
 import { Pane, type PaneState } from '../../components/navigation/Pane';
@@ -74,6 +74,13 @@ const DocsLayout = (props: RouteSectionProps) => {
     return all.find(t => t.value === location.pathname)?.label ?? '';
   });
 
+  let contentRef: HTMLDivElement | undefined;
+
+  createEffect(() => {
+    location.pathname;
+    contentRef?.scrollTo(0, 0);
+  });
+
   const handlePageNav = (value: string) => {
     navigate(value);
     if (isMobile()) setPaneState('closed');
@@ -141,7 +148,7 @@ const DocsLayout = (props: RouteSectionProps) => {
           </Show>
         </Pane>
 
-        <div style={{ flex: 1, overflow: 'auto' }}>
+        <div ref={contentRef} style={{ flex: 1, overflow: 'auto' }}>
           <Titlebar
             title={activeSection() === 'library' ? 'MAKCU - Library' : 'MAKCU - Native API'}
             subtitle={pageTitle()}

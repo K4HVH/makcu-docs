@@ -9,8 +9,8 @@ const Protocol: Component = () => {
         <CardHeader title="Request Format" subtitle="How commands are sent to the device" />
         <pre class="api-signature">{'km.<command>(<args>)\\r\\n'}</pre>
         <p>
-          All commands follow this format. There are no spaces anywhere in the command
-          string. Arguments are comma-separated with no whitespace.
+          No spaces anywhere in the command string. Arguments are comma-separated
+          with no whitespace.
         </p>
         <div class="callout callout--warning">
           <p>
@@ -63,13 +63,9 @@ const Protocol: Component = () => {
       <Card>
         <CardHeader title="Reading Responses" subtitle="Parsing strategy" />
         <p>
-          Read bytes from the serial port until the <code>{'>>> '}</code> sequence is
-          detected or a timeout expires. A timeout of <strong>500 ms</strong> is
-          sufficient for all known commands.
-        </p>
-        <p>
-          There is no framing or length prefix in the ASCII protocol. The <code>{'>>> '}</code> prompt
-          is the only delimiter between responses.
+          Read bytes until the <code>{'>>> '}</code> sequence is detected or a
+          timeout of <strong>500 ms</strong> expires. There is no framing or length
+          prefix; the prompt is the only delimiter.
         </p>
         <p>
           When the button event stream is enabled, raw event bytes are interleaved with
@@ -81,13 +77,13 @@ const Protocol: Component = () => {
 
       <Card>
         <CardHeader title="Examples" />
-        <h6>Command with no return value (EXECUTED)</h6>
+        <div class="api-response-label">Command with no return value (EXECUTED)</div>
         <pre><code>{`-->  km.left(1)\\r\\n\n<--  km.left(1)\\r\\n>>> `}</code></pre>
 
-        <h6>Command with a return value (RESPONDED)</h6>
+        <div class="api-response-label">Command with a return value (RESPONDED)</div>
         <pre><code>{`-->  km.left()\\r\\n\n<--  km.left()\\r\\n0\\r\\n>>> `}</code></pre>
 
-        <h6>Unrecognised command (SILENT)</h6>
+        <div class="api-response-label">Unrecognised command (SILENT)</div>
         <pre><code>{`-->  km.nonexistent()\\r\\n\n<--  (no response within timeout)`}</code></pre>
       </Card>
     </>

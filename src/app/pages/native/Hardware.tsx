@@ -7,52 +7,38 @@ const Hardware: Component = () => {
     <>
       <Card>
         <CardHeader title="Hardware Architecture" subtitle="Device layout and USB ports" />
-        <p>
-          MAKCU is a USB passthrough device containing two independent ESP32-S3
-          microcontrollers connected via three USB ports.
-        </p>
         <pre class="diagram">{
 `[USB 1 - Left ]  -->  Gaming PC / Console        (left chip,  v3.2)
 [USB 2 - COM  ]  -->  Control software            (serial command interface)
 [USB 3 - Right]  -->  Mouse                       (right chip, v3.7)`
         }</pre>
-        <p>
-          The <strong>left chip</strong> handles HID relay to the host PC and runs the
-          command interpreter. The <strong>right chip</strong> manages the physical mouse
-          connection. Commands are issued over the COM port (USB 2), which exposes a
-          virtual serial interface.
-        </p>
-      </Card>
-
-      <Card>
-        <CardHeader title="USB Ports" />
         <table class="api-params">
           <thead>
             <tr>
               <th>Port</th>
               <th>Label</th>
-              <th>Connects To</th>
-              <th>Description</th>
+              <th>Chip</th>
+              <th>Role</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td><code>USB 1</code></td>
               <td>Left</td>
-              <td>Host PC</td>
-              <td>HID output to the gaming PC or console. Left chip (v3.2).</td>
+              <td>Left (v3.2)</td>
+              <td>HID output to the host PC. Runs the command interpreter.</td>
             </tr>
             <tr>
               <td><code>USB 2</code></td>
               <td>COM</td>
-              <td>Control PC</td>
-              <td>Serial command interface. This is where software connects.</td>
+              <td>Left (v3.2)</td>
+              <td>Serial command interface. Software connects here.</td>
             </tr>
             <tr>
               <td><code>USB 3</code></td>
               <td>Right</td>
-              <td>Mouse</td>
-              <td>Physical mouse input. Right chip (v3.7).</td>
+              <td>Right (v3.7)</td>
+              <td>Physical mouse input.</td>
             </tr>
           </tbody>
         </table>

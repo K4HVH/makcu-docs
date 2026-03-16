@@ -6,37 +6,65 @@ import '../../../styles/docs.css';
 const Introduction: Component = () => {
   return (
     <>
-      <div class="docs-hero">
-        <h2>MAKCU Native API</h2>
+      <Card>
+        <CardHeader title="MAKCU Native API" subtitle="Firmware command reference for v3.2 (left) / v3.7 (right)" />
         <p>
           Complete reference for the MAKCU device firmware command interface.
-          All commands documented here have been physically verified against
-          firmware v3.2 (left chip) / v3.7 (right chip).
+          All commands have been physically verified against the tested firmware.
         </p>
-      </div>
+        <table class="api-params">
+          <thead>
+            <tr>
+              <th>Property</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Left Chip Firmware</td>
+              <td><code>v3.2</code></td>
+            </tr>
+            <tr>
+              <td>Right Chip Firmware</td>
+              <td><code>v3.7</code></td>
+            </tr>
+            <tr>
+              <td>Protocol</td>
+              <td>ASCII over serial (4 Mbaud)</td>
+            </tr>
+            <tr>
+              <td>Line Terminator</td>
+              <td><code>\r\n</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </Card>
 
-      <div class="docs-grid">
-        <A href="/native/hardware" style={{ "text-decoration": "none" }}>
-          <Card interactive padding="normal">
-            <CardHeader title="Hardware" subtitle="Device architecture and USB port layout" />
-          </Card>
-        </A>
-        <A href="/native/transport" style={{ "text-decoration": "none" }}>
-          <Card interactive padding="normal">
-            <CardHeader title="Transport" subtitle="Serial interface, baud rates, and USB identification" />
-          </Card>
-        </A>
-        <A href="/native/connection" style={{ "text-decoration": "none" }}>
-          <Card interactive padding="normal">
-            <CardHeader title="Connection" subtitle="Baud negotiation and connection sequence" />
-          </Card>
-        </A>
-        <A href="/native/protocol" style={{ "text-decoration": "none" }}>
-          <Card interactive padding="normal">
-            <CardHeader title="Command Protocol" subtitle="Request format, response types, and parsing" />
-          </Card>
-        </A>
-      </div>
+      <Card>
+        <CardHeader title="Overview" subtitle="Device architecture and protocol" />
+        <div class="docs-grid">
+          <A href="/native/hardware" style={{ "text-decoration": "none" }}>
+            <Card interactive variant="subtle" padding="compact">
+              <CardHeader title="Hardware" subtitle="Device architecture and USB port layout" />
+            </Card>
+          </A>
+          <A href="/native/transport" style={{ "text-decoration": "none" }}>
+            <Card interactive variant="subtle" padding="compact">
+              <CardHeader title="Transport" subtitle="Serial interface, baud rates, and USB identification" />
+            </Card>
+          </A>
+          <A href="/native/connection" style={{ "text-decoration": "none" }}>
+            <Card interactive variant="subtle" padding="compact">
+              <CardHeader title="Connection" subtitle="Baud negotiation and connection sequence" />
+            </Card>
+          </A>
+          <A href="/native/protocol" style={{ "text-decoration": "none" }}>
+            <Card interactive variant="subtle" padding="compact">
+              <CardHeader title="Command Protocol" subtitle="Request format, response types, and parsing" />
+            </Card>
+          </A>
+        </div>
+      </Card>
 
       <Card>
         <CardHeader title="Commands" subtitle="Firmware command reference" />
@@ -79,13 +107,20 @@ const Introduction: Component = () => {
         </div>
       </Card>
 
-      <Card variant="subtle">
-        <CardHeader title="Firmware Version" />
-        <p>
-          This documentation covers firmware <strong>v3.2</strong> (left chip) and <strong>v3.7</strong> (right chip).
-          Commands and behaviour may differ on other firmware versions. All entries have been tested
-          and verified through direct hardware interaction.
-        </p>
+      <Card>
+        <CardHeader title="Reference" subtitle="Additional information" />
+        <div class="docs-grid">
+          <A href="/native/broken" style={{ "text-decoration": "none" }}>
+            <Card interactive variant="subtle" padding="compact">
+              <CardHeader title="Known Issues" subtitle="Non-functional and broken commands" />
+            </Card>
+          </A>
+          <A href="/native/notes" style={{ "text-decoration": "none" }}>
+            <Card interactive variant="subtle" padding="compact">
+              <CardHeader title="Notes" subtitle="Implementation details and firmware behaviour" />
+            </Card>
+          </A>
+        </div>
       </Card>
     </>
   );
