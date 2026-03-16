@@ -1,5 +1,5 @@
 import type { Component } from 'solid-js';
-import { Router, Route } from '@solidjs/router';
+import { Router, Route, Navigate } from '@solidjs/router';
 import { NotificationProvider } from '../components/feedback/Notification';
 import Home from './pages/Home';
 import DocsLayout from './pages/DocsLayout';
@@ -41,6 +41,7 @@ const App: Component = () => {
           <Route path="/native/notes" component={Notes} />
           <Route path="/library" component={LibraryPlaceholder} />
         </Route>
+        <Route path="*" component={() => <Navigate href="/" />} />
       </Router>
     </NotificationProvider>
   );

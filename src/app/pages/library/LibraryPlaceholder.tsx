@@ -5,18 +5,11 @@ import '../../../styles/docs.css';
 const LibraryPlaceholder: Component = () => {
   return (
     <>
-      <div class="docs-hero">
-        <h2>Library Documentation</h2>
+      <Card>
+        <CardHeader title="Library Documentation" subtitle="MAKCU Rust library" />
         <p>
-          Documentation for the MAKCU Rust library is in progress.
-        </p>
-      </div>
-
-      <Card variant="subtle">
-        <CardHeader title="Under Construction" />
-        <p>
-          This section will contain the API reference, usage guides, and examples for the
-          MAKCU Rust library. Check back soon.
+          This section is in progress. It will contain the API reference, usage guides,
+          and examples for the MAKCU Rust library.
         </p>
       </Card>
     </>

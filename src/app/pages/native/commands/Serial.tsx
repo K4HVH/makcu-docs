@@ -9,11 +9,17 @@ const Serial: Component = () => {
         <CardHeader title="Serial Number Spoofing" subtitle="Read and modify the mouse serial number" />
         <div class="callout callout--danger">
           <p>
-            Requires hardware support from the connected mouse. If the mouse has no serial
-            number slot, all forms return <code>km.Mouse does not have a serial number</code>.
-            In testing, the connected mouse did not support this feature.
+            This feature has <strong>never been observed to work</strong>. It requires
+            specific hardware support from the connected mouse that no tested mouse has
+            provided. Multiple mice across different manufacturers all
+            return <code>km.Mouse does not have a serial number</code>. The commands
+            are accepted by the firmware, but the spoofing has no effect.
           </p>
         </div>
+        <p>
+          The commands are documented here for completeness. If your mouse does expose
+          a serial number slot, these commands may function, but this has not been verified.
+        </p>
       </Card>
 
       <Card>

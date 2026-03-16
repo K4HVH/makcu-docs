@@ -338,6 +338,7 @@ pre code {
   border: none;
   padding: 0;
   font-size: inherit;
+  white-space: pre;
 }
 
 /* Blockquote */
