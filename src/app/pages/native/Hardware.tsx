@@ -8,7 +8,7 @@ const Hardware: Component = () => {
       <Card>
         <CardHeader title="Hardware Architecture" subtitle="Device layout and USB ports" />
         <pre class="diagram">{
-`[USB 1 - Left ]  -->  Gaming PC / Console        (left chip,  v3.2)
+`[USB 1 - Left ]  -->  Gaming PC / Console         (left chip,  v3.2)
 [USB 2 - COM  ]  -->  Control software            (serial command interface)
 [USB 3 - Right]  -->  Mouse                       (right chip, v3.7)`
         }</pre>
