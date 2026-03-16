@@ -95,7 +95,7 @@ const BrokenCommands: Component = () => {
               </tr>
               <tr>
                 <td>Device management</td>
-                <td><code>km.info()</code>, <code>km.device()</code>, <code>km.fault()</code>, <code>km.baud()</code>, <code>km.echo()</code>, <code>km.log()</code></td>
+                <td><code>km.info()</code>, <code>km.device()</code>, <code>km.fault()</code>, <code>km.baud()</code>, <code>km.echo()</code>, <code>km.log()</code>, <code>km.bypass()</code>, <code>km.led()</code>, <code>km.release()</code></td>
               </tr>
               <tr>
                 <td>Extended locks</td>

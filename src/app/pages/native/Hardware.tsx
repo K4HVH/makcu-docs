@@ -8,6 +8,9 @@ const Hardware: Component = () => {
       <div id="hardware-architecture" data-search-target>
         <Card>
           <CardHeader title="Hardware Architecture" subtitle="Device layout and USB ports" />
+          <p>
+            Two independent ESP32-S3 microcontrollers connected via three USB ports.
+          </p>
           <pre class="diagram">{
 `[USB 1 - Left ]  -->  Gaming PC / Console         (left chip,  v3.2)
 [USB 2 - COM  ]  -->  Control software            (serial command interface)
