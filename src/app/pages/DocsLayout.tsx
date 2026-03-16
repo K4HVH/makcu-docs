@@ -10,7 +10,7 @@ import {
   BsList, BsInfoCircle, BsCpu, BsPlug, BsLink45deg, BsTerminal,
   BsCheckCircle, BsCursor, BsArrowsMove, BsMouse, BsLock,
   BsBroadcast, BsUpcScan, BsExclamationTriangle, BsJournalText,
-  BsBook,
+  BsBook, BsHouseDoor,
 } from 'solid-icons/bs';
 import type { TabOption } from '../../components/navigation/Tabs';
 
@@ -48,15 +48,17 @@ const libraryTabOptions: TabOption[] = [
   { value: '/library', label: 'Coming Soon', icon: BsBook },
 ];
 
+const isMobileQuery = () =>
+  typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches;
+
 const DocsLayout = (props: RouteSectionProps) => {
-  const [paneState, setPaneState] = createSignal<PaneState>('open');
-  const [isMobile, setIsMobile] = createSignal(false);
+  const [paneState, setPaneState] = createSignal<PaneState>(isMobileQuery() ? 'closed' : 'open');
+  const [isMobile, setIsMobile] = createSignal(isMobileQuery());
   const navigate = useNavigate();
   const location = useLocation();
 
   onMount(() => {
     const mql = window.matchMedia('(max-width: 768px)');
-    setIsMobile(mql.matches);
     const handler = (e: MediaQueryListEvent) => {
       setIsMobile(e.matches);
       if (e.matches) setPaneState('closed');
@@ -64,7 +66,6 @@ const DocsLayout = (props: RouteSectionProps) => {
     };
     mql.addEventListener('change', handler);
     onCleanup(() => mql.removeEventListener('change', handler));
-    if (mql.matches) setPaneState('closed');
   });
 
   const activeSection = () => location.pathname.startsWith('/library') ? 'library' : 'native';
@@ -155,15 +156,24 @@ const DocsLayout = (props: RouteSectionProps) => {
             sticky
             style={{ margin: 'var(--g-spacing-sm)', top: 'var(--g-spacing-sm)' }}
             left={
-              <Show when={isMobile()}>
+              <>
+                <Show when={isMobile()}>
+                  <Button
+                    variant="subtle"
+                    size="compact"
+                    icon={BsList}
+                    onClick={() => setPaneState(s => s === 'open' ? 'closed' : 'open')}
+                    aria-label="Toggle navigation"
+                  />
+                </Show>
                 <Button
                   variant="subtle"
                   size="compact"
-                  icon={BsList}
-                  onClick={() => setPaneState(s => s === 'open' ? 'closed' : 'open')}
-                  aria-label="Toggle navigation"
+                  icon={BsHouseDoor}
+                  onClick={() => navigate('/')}
+                  aria-label="Home"
                 />
-              </Show>
+              </>
             }
           />
           <div class="container container--wide grid">
