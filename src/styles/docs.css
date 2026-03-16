@@ -1,0 +1,170 @@
+/* =============================================================================
+   Documentation Site Styles
+   ============================================================================= */
+
+/* API Reference Styles */
+pre.api-signature {
+  color: var(--color-accent);
+  display: block;
+}
+
+.api-params {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: var(--g-spacing);
+  font-size: var(--font-size-sm);
+}
+
+.api-params th {
+  text-align: left;
+  padding: var(--g-spacing-xs) var(--g-spacing-sm);
+  color: var(--g-text-muted);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+  border-bottom: var(--g-border-width) solid var(--g-border-color);
+}
+
+.api-params td {
+  padding: var(--g-spacing-xs) var(--g-spacing-sm);
+  color: var(--g-text-secondary);
+  border-bottom: var(--g-border-width) solid var(--g-border-color-subtle);
+  vertical-align: top;
+}
+
+.api-params td code {
+  font-size: var(--font-size-xs);
+}
+
+.api-response-label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--g-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+  margin-bottom: var(--g-spacing-xs);
+}
+
+.api-badge {
+  display: inline-block;
+  padding: 1px var(--g-spacing-sm);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  border: var(--g-border-width) solid;
+  margin-bottom: var(--g-spacing);
+}
+
+.api-badge--executed {
+  color: var(--color-success);
+  border-color: var(--color-green-800);
+  background: rgba(16, 185, 129, 0.08);
+}
+
+.api-badge--responded {
+  color: var(--color-blue-400);
+  border-color: var(--color-blue-800);
+  background: rgba(0, 128, 255, 0.08);
+}
+
+.api-badge--broken {
+  color: var(--color-red-400);
+  border-color: var(--color-red-800);
+  background: rgba(179, 0, 0, 0.08);
+}
+
+.api-badge--warning {
+  color: var(--color-yellow-400);
+  border-color: var(--color-yellow-800);
+  background: rgba(245, 158, 11, 0.08);
+}
+
+/* Diagram / ASCII art blocks */
+pre.diagram {
+  white-space: pre;
+  line-height: var(--line-height-relaxed);
+}
+
+/* Note/warning callouts */
+.callout {
+  padding: var(--g-spacing-sm) var(--g-spacing);
+  border-radius: var(--g-radius);
+  border-left: var(--g-border-width-accent) solid;
+  margin-bottom: var(--g-spacing);
+  font-size: var(--font-size-sm);
+}
+
+.callout p {
+  margin-bottom: 0;
+}
+
+.callout--info {
+  border-left-color: var(--color-primary);
+  background: rgba(0, 102, 204, 0.06);
+  color: var(--g-text-secondary);
+}
+
+.callout--warning {
+  border-left-color: var(--color-warning);
+  background: rgba(245, 158, 11, 0.06);
+  color: var(--g-text-secondary);
+}
+
+.callout--danger {
+  border-left-color: var(--color-danger);
+  background: rgba(179, 0, 0, 0.06);
+  color: var(--g-text-secondary);
+}
+
+/* Hex dump / byte layout tables */
+.byte-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: var(--g-spacing);
+  font-size: var(--font-size-sm);
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.byte-table th {
+  text-align: left;
+  padding: var(--g-spacing-xs) var(--g-spacing-sm);
+  color: var(--g-text-muted);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-xs);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+  border-bottom: var(--g-border-width) solid var(--g-border-color);
+}
+
+.byte-table td {
+  padding: var(--g-spacing-xs) var(--g-spacing-sm);
+  color: var(--g-text-secondary);
+  border-bottom: var(--g-border-width) solid var(--g-border-color-subtle);
+  vertical-align: top;
+}
+
+/* Landing page hero */
+.docs-hero {
+  display: flex;
+  flex-direction: column;
+  gap: var(--g-spacing);
+}
+
+.docs-hero h2 {
+  font-size: var(--font-size-3xl);
+  margin-bottom: 0;
+}
+
+.docs-hero p {
+  font-size: var(--font-size-lg);
+  color: var(--g-text-secondary);
+  max-width: 640px;
+}
+
+.docs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--g-spacing);
+}
