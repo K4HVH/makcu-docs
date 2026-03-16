@@ -115,7 +115,14 @@ const Locks: Component = () => {
             (e.g. <code>km.lock_mx()</code> returns <code>0</code> or <code>1</code>).
           </p>
           <div class="api-response-label">Example</div>
-          <pre><code>{`-->  km.lock_mx(1)\\r\\n  (lock)\n<--  km.lock_mx(1)\\r\\n>>> \n\n-->  km.lock_mx()\\r\\n  (query)\n<--  km.lock_mx()\\r\\n1\\r\\n>>> \n\n-->  km.lock_mx(0)\\r\\n  (unlock)\n<--  km.lock_mx(0)\\r\\n>>> `}</code></pre>
+          <pre><code>{`-->  km.lock_mx(1)\\r\\n        (lock X-axis)
+<--  km.lock_mx(1)\\r\\n>>>
+
+-->  km.lock_mx()\\r\\n         (query lock state)
+<--  km.lock_mx()\\r\\n1\\r\\n>>>
+
+-->  km.lock_mx(0)\\r\\n        (unlock X-axis)
+<--  km.lock_mx(0)\\r\\n>>> `}</code></pre>
         </Card>
       </div>
     </>
