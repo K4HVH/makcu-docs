@@ -6,13 +6,15 @@ import { Tabs } from '../../components/navigation/Tabs';
 import { Divider } from '../../components/display/Divider';
 import { Titlebar } from '../../components/navigation/Titlebar';
 import { Button } from '../../components/inputs/Button';
+import { CommandPalette } from '../../components/navigation/CommandPalette';
 import {
   BsList, BsInfoCircle, BsCpu, BsPlug, BsLink45deg, BsTerminal,
   BsCheckCircle, BsCursor, BsArrowsMove, BsMouse, BsLock,
   BsBroadcast, BsUpcScan, BsExclamationTriangle, BsJournalText,
-  BsBook, BsHouseDoor,
+  BsBook, BsHouseDoor, BsSearch,
 } from 'solid-icons/bs';
 import type { TabOption } from '../../components/navigation/Tabs';
+import { buildSearchItems } from '../searchIndex';
 
 const sectionTabs: TabOption[] = [
   { value: 'native', label: 'Native API', icon: BsTerminal },
@@ -54,8 +56,41 @@ const isMobileQuery = () =>
 const DocsLayout = (props: RouteSectionProps) => {
   const [paneState, setPaneState] = createSignal<PaneState>(isMobileQuery() ? 'closed' : 'open');
   const [isMobile, setIsMobile] = createSignal(isMobileQuery());
+  const [searchOpen, setSearchOpen] = createSignal(false);
   const navigate = useNavigate();
   const location = useLocation();
+  let pendingHash: string | null = null;
+
+  const scrollToTarget = (id: string) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    el.classList.add('search-highlight');
+    setTimeout(() => el.classList.remove('search-highlight'), 2000);
+  };
+
+  const handleSearchNavigate = (fullPath: string) => {
+    setSearchOpen(false);
+    const hashIdx = fullPath.indexOf('#');
+    const path = hashIdx >= 0 ? fullPath.slice(0, hashIdx) : fullPath;
+    const hash = hashIdx >= 0 ? fullPath.slice(hashIdx + 1) : null;
+    const samePage = location.pathname === path;
+
+    if (hash) pendingHash = hash;
+
+    if (!samePage) navigate(path);
+
+    if (hash) {
+      setTimeout(() => {
+        scrollToTarget(hash);
+        pendingHash = null;
+      }, samePage ? 50 : 200);
+    }
+
+    if (isMobile()) setPaneState('closed');
+  };
+
+  const searchItems = buildSearchItems(handleSearchNavigate);
 
   onMount(() => {
     const mql = window.matchMedia('(max-width: 768px)');
@@ -79,6 +114,7 @@ const DocsLayout = (props: RouteSectionProps) => {
 
   createEffect(() => {
     location.pathname;
+    if (pendingHash) return;
     contentRef?.scrollTo(0, 0);
   });
 
@@ -175,12 +211,31 @@ const DocsLayout = (props: RouteSectionProps) => {
                 />
               </>
             }
+            right={
+              <Button
+                variant="subtle"
+                size="compact"
+                icon={BsSearch}
+                onClick={() => setSearchOpen(true)}
+                aria-label="Search"
+              />
+            }
           />
           <div class="container container--wide grid">
             {props.children}
           </div>
         </div>
       </div>
+
+      <CommandPalette
+        open={searchOpen()}
+        onClose={() => setSearchOpen(false)}
+        items={searchItems}
+        keybinding
+        onKeybinding={() => setSearchOpen(prev => !prev)}
+        placeholder="Search documentation..."
+        emptyMessage="No results found"
+      />
     </>
   );
 };
