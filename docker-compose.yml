@@ -1,0 +1,10 @@
+services:
+  makcu-docs:
+    image: ghcr.io/k4hvh/makcu-docs:latest
+    container_name: makcu-docs
+    ports:
+      - "3003:3000"
+    restart: unless-stopped
+    environment:
+      #- PUBLIC_DIR=./dist                                  # Default: ./dist
+      #- PORT=3000                                          # Default: 3000
