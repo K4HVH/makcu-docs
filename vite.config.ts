@@ -8,6 +8,7 @@ export default defineConfig({
     solidPlugin(),
   ],
   root: 'src',
+  publicDir: '../public',
   server: {
     port: 3000,
   },
