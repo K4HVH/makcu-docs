@@ -2,6 +2,8 @@
 
 Documentation site for the MAKCU device and the MAKCU Rust library.
 
+Live version can be found here: [MAKCU Docs](https://makcu.k4tech.net)
+
 Built with [SolidJS](https://solidjs.com) and [MidnightUI](https://github.com/user/midnightui).
 
 ## Sections
@@ -45,7 +47,3 @@ Output goes to `dist/`.
 - [Bun](https://bun.sh) -- Runtime and package manager
 - [MidnightUI](https://github.com/user/midnightui) -- Component library
 - [solid-icons](https://github.com/x64Bits/solid-icons) -- Icons
-
-## License
-
-MIT
