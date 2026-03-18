@@ -44,7 +44,7 @@ const Home: Component = () => {
               <Card interactive padding="normal">
                 <CardHeader
                   title="Rust Library"
-                  subtitle="Library documentation (coming soon)"
+                  subtitle="Safe, high-performance Rust interface for MAKCU devices"
                 />
               </Card>
             </A>

@@ -1,4 +1,5 @@
 import type { Component } from 'solid-js';
+import { A } from '@solidjs/router';
 import { Card, CardHeader } from '../../../components/surfaces/Card';
 import '../../../styles/docs.css';
 
@@ -26,12 +27,12 @@ const BrokenCommands: Component = () => {
               <tr>
                 <td><code>km.move(x,y,steps)</code></td>
                 <td><span class="api-badge api-badge--warning">BROKEN</span></td>
-                <td>Only works in some directions. Diagonal moves produce no movement.</td>
+                <td>Only works in some directions. Diagonal moves produce no movement. Use <A href="/native/commands/movement#km-move"><code>km.move(x,y)</code></A> instead, or the Rust library's <A href="/library/features/extras#move-smooth"><code>move_smooth()</code></A>.</td>
               </tr>
               <tr>
                 <td><code>km.move(x,y,steps,cx,cy)</code></td>
                 <td><span class="api-badge api-badge--warning">BROKEN</span></td>
-                <td>Bezier movement. Same issue as above.</td>
+                <td>Bezier movement. Same issue as <A href="/native/commands/movement#km-move"><code>km.move(x,y,steps)</code></A>.</td>
               </tr>
               <tr>
                 <td><code>km.catch_ml()</code> etc.</td>
@@ -48,6 +49,7 @@ const BrokenCommands: Component = () => {
           <CardHeader title="Silent Commands" subtitle="Not recognised by the firmware" />
           <p>
             These commands produce no response (timeout with no <code>{'>>> '}</code> prompt).
+            See <A href="/native/protocol#response-format">response format</A> for the SILENT response type.
           </p>
           <table class="api-params">
             <thead>
@@ -59,7 +61,7 @@ const BrokenCommands: Component = () => {
             <tbody>
               <tr>
                 <td>Click shorthand</td>
-                <td><code>km.click()</code> and variants</td>
+                <td><code>km.click()</code> and variants. Use <A href="/native/commands/buttons#click">press + release</A> instead.</td>
               </tr>
               <tr>
                 <td>Absolute positioning</td>
@@ -103,7 +105,7 @@ const BrokenCommands: Component = () => {
               </tr>
               <tr>
                 <td>Wrong button names</td>
-                <td><code>km.side1()</code>, <code>km.side2()</code> (use <code>km.ms1()</code> / <code>km.ms2()</code>)</td>
+                <td><code>km.side1()</code>, <code>km.side2()</code> (use <A href="/native/commands/buttons"><code>km.ms1()</code> / <code>km.ms2()</code></A>)</td>
               </tr>
             </tbody>
           </table>

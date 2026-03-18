@@ -1,4 +1,5 @@
 import type { Component } from 'solid-js';
+import { A } from '@solidjs/router';
 import { Card, CardHeader } from '../../../../components/surfaces/Card';
 import '../../../../styles/docs.css';
 
@@ -10,7 +11,9 @@ const Stream: Component = () => {
           <CardHeader title="Button Event Stream" subtitle="Asynchronous button state change reporting" />
           <p>
             When enabled, the device emits a raw byte on the serial stream whenever any
-            button state changes.
+            button state changes. The Rust library wraps this
+            as <A href="/library/stream">typed button events</A> with <A href="/library/stream#button-mask"><code>ButtonMask</code></A>,
+            and provides higher-level <A href="/library/features/extras#event-callbacks">event callbacks</A>.
           </p>
         </Card>
       </div>
@@ -88,7 +91,8 @@ const Stream: Component = () => {
           <p>
             The device prefixes each event with the literal string <code>km.</code> (<code>6B 6D 2E</code>),
             followed by the raw mask byte. Match this 3-byte prefix, then read the next byte
-            unconditionally as the mask.
+            unconditionally as the mask. See <A href="/native/protocol#reading-responses">reading responses</A> for
+            how events interleave with command responses.
           </p>
           <div class="callout callout--danger">
             <p>

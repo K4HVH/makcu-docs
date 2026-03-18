@@ -1,4 +1,5 @@
 import type { Component } from 'solid-js';
+import { A } from '@solidjs/router';
 import { Card, CardHeader } from '../../../components/surfaces/Card';
 import '../../../styles/docs.css';
 
@@ -36,7 +37,7 @@ const Hardware: Component = () => {
                 <td><code>USB 2</code></td>
                 <td>COM</td>
                 <td>Left (v3.2)</td>
-                <td>Serial command interface. Software connects here.</td>
+                <td>Serial command interface. Software connects here. See <A href="/native/transport">Transport</A>.</td>
               </tr>
               <tr>
                 <td><code>USB 3</code></td>
@@ -91,11 +92,11 @@ const Hardware: Component = () => {
               </tr>
               <tr>
                 <td>Left LED at startup: 1 flash</td>
-                <td>Operating at 115200 baud</td>
+                <td>Operating at <A href="/native/transport#baud-rate">115200 baud</A></td>
               </tr>
               <tr>
                 <td>Left LED at startup: 4 flashes</td>
-                <td>Operating at 4 Mbaud</td>
+                <td>Operating at <A href="/native/transport#baud-rate">4 Mbaud</A></td>
               </tr>
             </tbody>
           </table>

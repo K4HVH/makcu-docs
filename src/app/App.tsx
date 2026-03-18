@@ -17,7 +17,20 @@ import Stream from './pages/native/commands/Stream';
 import Serial from './pages/native/commands/Serial';
 import BrokenCommands from './pages/native/BrokenCommands';
 import Notes from './pages/native/Notes';
-import LibraryPlaceholder from './pages/library/LibraryPlaceholder';
+import LibraryIntroduction from './pages/library/Introduction';
+import LibraryConnection from './pages/library/Connection';
+import LibraryMovement from './pages/library/Movement';
+import LibraryButtons from './pages/library/Buttons';
+import LibraryLocks from './pages/library/Locks';
+import LibraryDeviceInfo from './pages/library/DeviceInfo';
+import LibraryStream from './pages/library/Stream';
+import LibraryFireAndForget from './pages/library/FireAndForget';
+import LibraryAsync from './pages/library/features/Async';
+import LibraryBatchBuilder from './pages/library/features/BatchBuilder';
+import LibraryExtras from './pages/library/features/Extras';
+import LibraryMock from './pages/library/features/Mock';
+import LibraryProfile from './pages/library/features/Profile';
+import LibraryTypesAndErrors from './pages/library/TypesAndErrors';
 
 const App: Component = () => {
   return (
@@ -39,7 +52,20 @@ const App: Component = () => {
           <Route path="/native/commands/serial" component={Serial} />
           <Route path="/native/broken" component={BrokenCommands} />
           <Route path="/native/notes" component={Notes} />
-          <Route path="/library" component={LibraryPlaceholder} />
+          <Route path="/library" component={LibraryIntroduction} />
+          <Route path="/library/connection" component={LibraryConnection} />
+          <Route path="/library/movement" component={LibraryMovement} />
+          <Route path="/library/buttons" component={LibraryButtons} />
+          <Route path="/library/locks" component={LibraryLocks} />
+          <Route path="/library/info" component={LibraryDeviceInfo} />
+          <Route path="/library/stream" component={LibraryStream} />
+          <Route path="/library/fire-and-forget" component={LibraryFireAndForget} />
+          <Route path="/library/features/async" component={LibraryAsync} />
+          <Route path="/library/features/batch" component={LibraryBatchBuilder} />
+          <Route path="/library/features/extras" component={LibraryExtras} />
+          <Route path="/library/features/mock" component={LibraryMock} />
+          <Route path="/library/features/profile" component={LibraryProfile} />
+          <Route path="/library/types" component={LibraryTypesAndErrors} />
         </Route>
         <Route path="*" component={() => <Navigate href="/" />} />
       </Router>

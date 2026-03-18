@@ -1,4 +1,5 @@
 import type { Component } from 'solid-js';
+import { A } from '@solidjs/router';
 import { Card, CardHeader } from '../../../../components/surfaces/Card';
 import '../../../../styles/docs.css';
 
@@ -20,6 +21,7 @@ const Serial: Component = () => {
           <p>
             The commands are documented here for completeness. If your mouse does expose
             a serial number slot, these commands may function, but this has not been verified.
+            See also the Rust library's <A href="/library/info#serial-get"><code>serial()</code></A> and <A href="/library/info#serial-set"><code>set_serial()</code></A> wrappers.
           </p>
         </Card>
       </div>

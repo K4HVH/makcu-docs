@@ -1,4 +1,5 @@
 import type { Component } from 'solid-js';
+import { A } from '@solidjs/router';
 import { Card, CardHeader } from '../../../../components/surfaces/Card';
 import '../../../../styles/docs.css';
 
@@ -11,6 +12,9 @@ const Locks: Component = () => {
           <p>
             Locks intercept the specified input before it reaches the host PC. Each lock
             is independent. None persist across power cycles.
+            Extended lock variants (<code>km.lock_mw</code>, <code>km.lock_mx+</code>, etc.)
+            are <A href="/native/broken#silent-commands">not recognised</A> by the firmware. See the Rust
+            library's <A href="/library/locks">lock API</A> for a typed wrapper.
           </p>
         </Card>
       </div>

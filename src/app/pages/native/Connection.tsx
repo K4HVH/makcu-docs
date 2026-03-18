@@ -1,4 +1,5 @@
 import type { Component } from 'solid-js';
+import { A } from '@solidjs/router';
 import { Card, CardHeader } from '../../../components/surfaces/Card';
 import '../../../styles/docs.css';
 
@@ -9,19 +10,19 @@ const Connection: Component = () => {
         <Card>
           <CardHeader title="Connection Sequence" subtitle="Establishing communication with the device" />
           <ol>
-            <li>Open the port at <strong>4 Mbaud</strong>.</li>
-            <li>Send <code>km.version()\r\n</code>.</li>
+            <li>Open the port at <strong><A href="/native/transport#baud-rate">4 Mbaud</A></strong>.</li>
+            <li>Send <A href="/native/commands/version"><code>km.version()\r\n</code></A>.</li>
             <li>If the response contains <code>km.MAKCU</code>, the connection is established.</li>
             <li>Otherwise, close the port and proceed with the baud change sequence:
               <ol style={{ "margin-top": "var(--g-spacing-sm)", "list-style-type": "lower-alpha" }}>
-                <li>Open the port at <strong>115200</strong>.</li>
+                <li>Open the port at <strong><A href="/native/transport#baud-rate">115200</A></strong>.</li>
                 <li>Send the binary baud change frame (9 bytes, no <code>\r\n</code>).</li>
                 <li>Wait <strong>100 ms</strong>.</li>
                 <li>Close the port.</li>
                 <li>Open the port at <strong>4 Mbaud</strong>.</li>
                 <li>Wait <strong>50 ms</strong>, then flush the input buffer.</li>
-                <li>Send <code>km.version()\r\n</code>.</li>
-                <li>Verify the response contains <code>km.MAKCU</code>.</li>
+                <li>Send <A href="/native/commands/version"><code>km.version()\r\n</code></A>.</li>
+                <li>Verify the response contains <code>km.MAKCU</code>. See <A href="/native/protocol#response-format">response format</A>.</li>
               </ol>
             </li>
           </ol>
@@ -29,6 +30,12 @@ const Connection: Component = () => {
             <p>
               Timeout is <strong>500 ms</strong>. If no response is received, the connection
               attempt has failed. Retry the full sequence or verify the physical connection.
+            </p>
+          </div>
+          <div class="callout callout--info">
+            <p>
+              The Rust library's <A href="/library/connection#connecting"><code>Device::connect()</code></A> handles
+              this entire sequence automatically, including baud negotiation and auto-detection.
             </p>
           </div>
         </Card>

@@ -11,7 +11,8 @@ import {
   BsList, BsInfoCircle, BsCpu, BsPlug, BsLink45deg, BsTerminal,
   BsCheckCircle, BsCursor, BsArrowsMove, BsMouse, BsLock,
   BsBroadcast, BsUpcScan, BsExclamationTriangle, BsJournalText,
-  BsBook, BsHouseDoor, BsSearch,
+  BsBook, BsHouseDoor, BsSearch, BsLightning, BsStack, BsStars,
+  BsArrowRepeat, BsWrench, BsFileCode, BsSpeedometer,
 } from 'solid-icons/bs';
 import type { TabOption } from '../../components/navigation/Tabs';
 import { buildSearchItems } from '../searchIndex';
@@ -46,9 +47,33 @@ const nativeReferenceTabs: TabOption[] = [
 
 const allNativeTabs = [...nativeOverviewTabs, ...nativeCommandTabs, ...nativeReferenceTabs];
 
-const libraryTabOptions: TabOption[] = [
-  { value: '/library', label: 'Overview', icon: BsBook },
+const libraryGettingStartedTabs: TabOption[] = [
+  { value: '/library', label: 'Introduction', icon: BsInfoCircle },
+  { value: '/library/connection', label: 'Connection', icon: BsLink45deg },
 ];
+
+const libraryApiTabs: TabOption[] = [
+  { value: '/library/movement', label: 'Movement', icon: BsArrowsMove },
+  { value: '/library/buttons', label: 'Buttons', icon: BsCursor },
+  { value: '/library/locks', label: 'Locks', icon: BsLock },
+  { value: '/library/info', label: 'Device Info', icon: BsCheckCircle },
+  { value: '/library/stream', label: 'Button Stream', icon: BsBroadcast },
+  { value: '/library/fire-and-forget', label: 'Fire and Forget', icon: BsLightning },
+];
+
+const libraryFeatureTabs: TabOption[] = [
+  { value: '/library/features/async', label: 'Async', icon: BsArrowRepeat },
+  { value: '/library/features/batch', label: 'Batch', icon: BsStack },
+  { value: '/library/features/extras', label: 'Extras', icon: BsStars },
+  { value: '/library/features/mock', label: 'Mock', icon: BsWrench },
+  { value: '/library/features/profile', label: 'Profile', icon: BsSpeedometer },
+];
+
+const libraryReferenceTabs: TabOption[] = [
+  { value: '/library/types', label: 'Types and Errors', icon: BsFileCode },
+];
+
+const allLibraryTabs = [...libraryGettingStartedTabs, ...libraryApiTabs, ...libraryFeatureTabs, ...libraryReferenceTabs];
 
 const isMobileQuery = () =>
   typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches;
@@ -106,7 +131,7 @@ const DocsLayout = (props: RouteSectionProps) => {
   const activeSection = () => location.pathname.startsWith('/library') ? 'library' : 'native';
 
   const pageTitle = createMemo(() => {
-    const all = [...allNativeTabs, ...libraryTabOptions];
+    const all = [...allNativeTabs, ...allLibraryTabs];
     return all.find(t => t.value === location.pathname)?.label ?? '';
   });
 
@@ -116,6 +141,12 @@ const DocsLayout = (props: RouteSectionProps) => {
     location.pathname;
     if (pendingHash) return;
     contentRef?.scrollTo(0, 0);
+  });
+
+  createEffect(() => {
+    const hash = location.hash?.replace('#', '');
+    if (!hash || pendingHash) return;
+    setTimeout(() => scrollToTarget(hash), 50);
   });
 
   const handlePageNav = (value: string) => {
@@ -174,13 +205,37 @@ const DocsLayout = (props: RouteSectionProps) => {
             />
           </Show>
           <Show when={activeSection() === 'library'}>
-            <Divider spacing="compact" label="Pages" labelAlign="start" />
+            <Divider spacing="compact" label="Getting Started" labelAlign="start" />
             <Tabs
               orientation="vertical"
               variant="subtle"
               value={location.pathname}
               onChange={handlePageNav}
-              options={libraryTabOptions}
+              options={libraryGettingStartedTabs}
+            />
+            <Divider spacing="compact" label="API" labelAlign="start" />
+            <Tabs
+              orientation="vertical"
+              variant="subtle"
+              value={location.pathname}
+              onChange={handlePageNav}
+              options={libraryApiTabs}
+            />
+            <Divider spacing="compact" label="Features" labelAlign="start" />
+            <Tabs
+              orientation="vertical"
+              variant="subtle"
+              value={location.pathname}
+              onChange={handlePageNav}
+              options={libraryFeatureTabs}
+            />
+            <Divider spacing="compact" label="Reference" labelAlign="start" />
+            <Tabs
+              orientation="vertical"
+              variant="subtle"
+              value={location.pathname}
+              onChange={handlePageNav}
+              options={libraryReferenceTabs}
             />
           </Show>
         </Pane>

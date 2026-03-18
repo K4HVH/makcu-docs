@@ -1,4 +1,5 @@
 import type { Component } from 'solid-js';
+import { A } from '@solidjs/router';
 import { Card, CardHeader } from '../../../components/surfaces/Card';
 import '../../../styles/docs.css';
 
@@ -57,7 +58,7 @@ const Protocol: Component = () => {
           </table>
           <div class="callout callout--info">
             <p>
-              <code>km.version()</code> is a special case. It returns <code>km.MAKCU\r\n{'>>> '}</code> with
+              <A href="/native/commands/version"><code>km.version()</code></A> is a special case. It returns <code>km.MAKCU\r\n{'>>> '}</code> with
               no preceding echo line.
             </p>
           </div>
@@ -75,7 +76,7 @@ const Protocol: Component = () => {
           <p>
             When the button event stream is enabled, raw event bytes are interleaved with
             command responses on the same serial stream. See
-            the <a href="/native/commands/stream">Button Stream</a> page for details on
+            the <A href="/native/commands/stream">Button Stream</A> page for details on
             distinguishing event data from command responses.
           </p>
         </Card>
@@ -84,10 +85,10 @@ const Protocol: Component = () => {
       <div id="protocol-examples" data-search-target>
         <Card>
           <CardHeader title="Examples" />
-          <div class="api-response-label">Command with no return value (EXECUTED)</div>
+          <div class="api-response-label">Command with no return value (EXECUTED) -- <A href="/native/commands/buttons#set-state">button set state</A></div>
           <pre><code>{`-->  km.left(1)\\r\\n\n<--  km.left(1)\\r\\n>>> `}</code></pre>
 
-          <div class="api-response-label">Command with a return value (RESPONDED)</div>
+          <div class="api-response-label">Command with a return value (RESPONDED) -- <A href="/native/commands/buttons#query-state">button query</A></div>
           <pre><code>{`-->  km.left()\\r\\n\n<--  km.left()\\r\\n0\\r\\n>>> `}</code></pre>
 
           <div class="api-response-label">Unrecognised command (SILENT)</div>

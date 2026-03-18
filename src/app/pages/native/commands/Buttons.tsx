@@ -1,4 +1,5 @@
 import type { Component } from 'solid-js';
+import { A } from '@solidjs/router';
 import { Card, CardHeader } from '../../../../components/surfaces/Card';
 import '../../../../styles/docs.css';
 
@@ -11,10 +12,12 @@ const Buttons: Component = () => {
           <p>
             Five buttons are available: <code>left</code>, <code>right</code>, <code>middle</code>,
             {' '}<code>ms1</code> (side button 1), and <code>ms2</code> (side button 2).
+            The Rust library wraps these as the <A href="/library/types#enums"><code>Button</code></A> enum
+            with a <A href="/library/buttons">typed button API</A>.
           </p>
           <div class="callout callout--danger">
             <p>
-              The names <code>side1</code> and <code>side2</code> are <strong>not recognised</strong> by
+              The names <code>side1</code> and <code>side2</code> are <A href="/native/broken#silent-commands"><strong>not recognised</strong></A> by
               the firmware. Always use <code>ms1</code> and <code>ms2</code>.
             </p>
           </div>
@@ -37,7 +40,6 @@ const Buttons: Component = () => {
               not produce any input on the host.
             </p>
           </div>
-          <div class="api-response-label">Commands</div>
           <table class="api-params">
             <thead>
               <tr>
@@ -96,13 +98,14 @@ const Buttons: Component = () => {
         <Card>
           <CardHeader title="Click" subtitle="Press and release sequence" />
           <p>
-            There is no working click shorthand (<code>km.click()</code> is non-functional).
+            There is no working click shorthand (<code>km.click()</code> is <A href="/native/broken#silent-commands">non-functional</A>).
             Send two separate commands:
           </p>
           <pre><code>{`km.left(1)\\r\\n\nkm.left(0)\\r\\n`}</code></pre>
           <p>
             Insert a delay between the press and release if the target application requires
-            a minimum hold duration.
+            a minimum hold duration. The Rust library's <A href="/library/features/extras#click"><code>click()</code></A> method
+            handles this automatically.
           </p>
         </Card>
       </div>
