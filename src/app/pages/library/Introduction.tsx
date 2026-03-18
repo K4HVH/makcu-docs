@@ -9,7 +9,7 @@ const Introduction: Component = () => {
       <Card>
         <CardHeader title="MAKCU Rust Library" subtitle="Safe, high-performance Rust interface for MAKCU devices" />
         <p>
-          The <code>makcu</code> crate provides a complete Rust API for controlling MAKCU mouse
+          The <A href="https://crates.io/crates/makcu"><code>makcu</code></A> crate provides a complete Rust API for controlling MAKCU mouse
           input devices over serial. It handles connection negotiation, baud rate switching,
           command serialization, response parsing, automatic reconnection, and concurrent access.
         </p>
