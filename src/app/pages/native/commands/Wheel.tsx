@@ -21,6 +21,7 @@ const Wheel: Component = () => {
               <tr>
                 <th>Parameter</th>
                 <th>Type</th>
+                <th>Range</th>
                 <th>Description</th>
               </tr>
             </thead>
@@ -28,7 +29,8 @@ const Wheel: Component = () => {
               <tr>
                 <td><code>n</code></td>
                 <td>int</td>
-                <td>Scroll delta. No firmware-level clamping.</td>
+                <td>-127 to +127</td>
+                <td>Scroll delta.</td>
               </tr>
             </tbody>
           </table>
