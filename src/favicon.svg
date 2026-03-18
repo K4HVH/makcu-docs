@@ -1,41 +1,34 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
   <defs>
-    <!-- Background gradient -->
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#0d0d12"/>
       <stop offset="100%" stop-color="#14141f"/>
     </linearGradient>
-    <!-- Moon gradient (accent → primary) -->
-    <linearGradient id="moon" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#66b3ff"/>
-      <stop offset="50%" stop-color="#0080ff"/>
-      <stop offset="100%" stop-color="#0066cc"/>
+    <linearGradient id="doc" x1="10%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7ac2ff"/>
+      <stop offset="45%" stop-color="#1f9bff"/>
+      <stop offset="100%" stop-color="#005fcc"/>
     </linearGradient>
-    <!-- Star sparkle gradient -->
+    <linearGradient id="fold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d9f1ff"/>
+      <stop offset="100%" stop-color="#8ed1ff"/>
+    </linearGradient>
     <linearGradient id="star" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#ffffff"/>
       <stop offset="100%" stop-color="#99ccff"/>
     </linearGradient>
-    <!-- Soft moonlight glow -->
-    <radialGradient id="glow" cx="42%" cy="45%" r="50%">
-      <stop offset="0%" stop-color="#0080ff" stop-opacity="0.15"/>
+    <radialGradient id="glow" cx="45%" cy="42%" r="58%">
+      <stop offset="0%" stop-color="#0080ff" stop-opacity="0.18"/>
       <stop offset="100%" stop-color="#0080ff" stop-opacity="0"/>
     </radialGradient>
-    <!-- Crescent mask: white moon minus offset black circle -->
-    <mask id="crescent">
-      <circle cx="16" cy="16" r="10" fill="white"/>
-      <circle cx="21" cy="14.5" r="9" fill="black"/>
-    </mask>
-    <!-- Moon bloom filter -->
-    <filter id="moonGlow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="1.2" result="blur"/>
-      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0 0 0 0 0 0.5 0 0 0 0 1 0 0 0 0.6 0" result="glow"/>
+    <filter id="docGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="1.1" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0 0 0 0 0 0.5 0 0 0 0 1 0 0 0 0.45 0" result="glow"/>
       <feMerge>
         <feMergeNode in="glow"/>
         <feMergeNode in="SourceGraphic"/>
       </feMerge>
     </filter>
-    <!-- Star sparkle filter -->
     <filter id="starGlow" x="-100%" y="-100%" width="300%" height="300%">
       <feGaussianBlur in="SourceGraphic" stdDeviation="0.6" result="blur"/>
       <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.5 0 0 0 0 0.7 0 0 0 0 1 0 0 0 0.8 0" result="glow"/>
@@ -46,24 +39,20 @@
     </filter>
   </defs>
 
-  <!-- Dark background -->
   <rect width="32" height="32" rx="6" fill="url(#bg)"/>
-
-  <!-- Ambient moonlight wash -->
   <rect width="32" height="32" rx="6" fill="url(#glow)"/>
 
-  <!-- Crescent moon with glow (circle minus offset circle via mask) -->
-  <g filter="url(#moonGlow)">
-    <circle cx="16" cy="16" r="10" fill="url(#moon)" mask="url(#crescent)"/>
+  <g filter="url(#docGlow)">
+    <path d="M9.25 6.5h9.2l4.3 4.3v12.7c0 1.1-.9 2-2 2h-11.5c-1.1 0-2-.9-2-2v-15c0-1.1.9-2 2-2Z" fill="url(#doc)"/>
+    <path d="M18.45 6.5v2.8c0 .83.67 1.5 1.5 1.5h2.8Z" fill="url(#fold)"/>
+    <path d="M11.2 21V12.9l4.1 4.3 4.1-4.3V21" fill="none" stroke="#08111d" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.15"/>
   </g>
 
-  <!-- Sparkle star (4-point, symmetric) top-right -->
   <g filter="url(#starGlow)" transform="translate(25.5, 7)">
-    <path d="M0 -2.2 C0.3 -0.3 0.3 -0.3 2.2 0 C0.3 0.3 0.3 0.3 0 2.2 C-0.3 0.3 -0.3 0.3 -2.2 0 C-0.3 -0.3 -0.3 -0.3 0 -2.2Z" fill="url(#star)"/>
+    <path d="M0 -2.2C0.3 -0.3 0.3 -0.3 2.2 0C0.3 0.3 0.3 0.3 0 2.2C-0.3 0.3 -0.3 0.3 -2.2 0C-0.3 -0.3 -0.3 -0.3 0 -2.2Z" fill="url(#star)"/>
   </g>
 
-  <!-- Tiny sparkle accent -->
-  <g filter="url(#starGlow)" transform="translate(23, 12) scale(0.45)">
-    <path d="M0 -2.2 C0.3 -0.3 0.3 -0.3 2.2 0 C0.3 0.3 0.3 0.3 0 2.2 C-0.3 0.3 -0.3 0.3 -2.2 0 C-0.3 -0.3 -0.3 -0.3 0 -2.2Z" fill="white" opacity="0.7"/>
+  <g filter="url(#starGlow)" transform="translate(7.5, 24.5) scale(0.45)">
+    <path d="M0 -2.2C0.3 -0.3 0.3 -0.3 2.2 0C0.3 0.3 0.3 0.3 0 2.2C-0.3 0.3 -0.3 0.3 -2.2 0C-0.3 -0.3 -0.3 -0.3 0 -2.2Z" fill="white" opacity="0.72"/>
   </g>
 </svg>
