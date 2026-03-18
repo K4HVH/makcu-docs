@@ -1,4 +1,5 @@
 import type { Component } from 'solid-js';
+import { A } from '@solidjs/router';
 import { Card, CardHeader } from '../../../../components/surfaces/Card';
 import '../../../../styles/docs.css';
 
@@ -14,8 +15,8 @@ const Wheel: Component = () => {
           <p>
             Scrolls by <code>n</code> units. Positive values scroll up, negative values
             scroll down. Actual direction may vary with OS scroll settings.
+            See also the Rust library's <A href="/library/movement#wheel"><code>wheel()</code></A> wrapper.
           </p>
-          <div class="api-response-label">Parameters</div>
           <table class="api-params">
             <thead>
               <tr>

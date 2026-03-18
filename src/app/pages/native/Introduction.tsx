@@ -30,7 +30,7 @@ const Introduction: Component = () => {
             </tr>
             <tr>
               <td>Protocol</td>
-              <td>ASCII over serial (4 Mbaud)</td>
+              <td>ASCII over serial (4 Mbaud). See <A href="/native/protocol">Command Protocol</A> and <A href="/native/transport">Transport</A>.</td>
             </tr>
             <tr>
               <td>Line Terminator</td>

@@ -1,4 +1,5 @@
 import type { Component } from 'solid-js';
+import { A } from '@solidjs/router';
 import { Card, CardHeader } from '../../../components/surfaces/Card';
 import '../../../styles/docs.css';
 
@@ -38,15 +39,15 @@ const Transport: Component = () => {
               </tr>
               <tr>
                 <td>Default Baud</td>
-                <td><code>115200</code></td>
+                <td><code>115200</code>. See <A href="/native/connection#baud-change-frame">baud change frame</A>.</td>
               </tr>
               <tr>
                 <td>Operating Baud</td>
-                <td><code>4000000</code> (4 Mbaud)</td>
+                <td><code>4000000</code> (4 Mbaud). See <A href="/native/connection#connection-sequence">connection sequence</A>.</td>
               </tr>
               <tr>
                 <td>Line Terminator</td>
-                <td><code>\r\n</code></td>
+                <td><code>\r\n</code>. See <A href="/native/protocol#request-format">request format</A>.</td>
               </tr>
               <tr>
                 <td>Linux Path</td>
@@ -72,7 +73,7 @@ const Transport: Component = () => {
             <p>
               If the device was previously switched to 4 Mbaud within the same power session,
               it will remain at that speed. Always attempt 4 Mbaud first before sending the
-              baud change frame. See the <a href="/native/connection">Connection</a> page for
+              baud change frame. See the <A href="/native/connection">Connection</A> page for
               the full negotiation sequence.
             </p>
           </div>

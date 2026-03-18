@@ -1,4 +1,5 @@
 import type { Component } from 'solid-js';
+import { A } from '@solidjs/router';
 import { Card, CardHeader } from '../../../../components/surfaces/Card';
 import '../../../../styles/docs.css';
 
@@ -13,8 +14,8 @@ const Movement: Component = () => {
           <span class="api-badge api-badge--executed">EXECUTED</span>
           <p>
             Moves the cursor by <code>(x, y)</code> relative to its current position.
+            See also the Rust library's <A href="/library/movement#move-xy"><code>move_xy()</code></A> wrapper.
           </p>
-          <div class="api-response-label">Parameters</div>
           <table class="api-params">
             <thead>
               <tr>
@@ -45,8 +46,9 @@ const Movement: Component = () => {
             <p>
               Smooth and bezier variants (<code>km.move(x,y,steps)</code>
               and <code>km.move(x,y,steps,cx,cy)</code>) are accepted without error but
-              broken. Diagonal moves silently produce no movement.
-              Use <code>km.move(x,y)</code> only.
+              <A href="/native/broken#broken-commands">broken</A>. Diagonal moves silently produce no movement.
+              Use <code>km.move(x,y)</code> only. The Rust library's <A href="/library/features/extras#move-smooth"><code>move_smooth()</code></A> provides
+              a working software implementation.
             </p>
           </div>
         </Card>
@@ -60,8 +62,8 @@ const Movement: Component = () => {
           <span class="api-badge api-badge--executed">EXECUTED</span>
           <p>
             Performs a left-button-down, move, left-button-up sequence across two HID frames.
+            See also the Rust library's <A href="/library/movement#silent-move"><code>silent_move()</code></A> wrapper.
           </p>
-          <div class="api-response-label">Parameters</div>
           <table class="api-params">
             <thead>
               <tr>
