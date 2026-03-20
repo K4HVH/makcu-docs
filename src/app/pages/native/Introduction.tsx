@@ -99,6 +99,11 @@ const Introduction: Component = () => {
               <CardHeader title="Button Stream" subtitle="Asynchronous button state change events" />
             </Card>
           </A>
+          <A href="/native/commands/catch" style={{ "text-decoration": "none" }}>
+            <Card interactive variant="subtle" padding="compact">
+              <CardHeader title="Button Capture" subtitle="Count physical presses while a button is locked" />
+            </Card>
+          </A>
           <A href="/native/commands/serial" style={{ "text-decoration": "none" }}>
             <Card interactive variant="subtle" padding="compact">
               <CardHeader title="Serial Spoofing" subtitle="Read and modify the mouse serial number" />
