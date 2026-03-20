@@ -3,7 +3,7 @@ import type { CommandPaletteItem } from '../components/navigation/CommandPalette
 import {
   BsInfoCircle, BsCpu, BsPlug, BsLink45deg, BsTerminal,
   BsCheckCircle, BsCursor, BsArrowsMove, BsMouse, BsLock,
-  BsBroadcast, BsUpcScan, BsExclamationTriangle, BsJournalText,
+  BsBroadcast, BsUpcScan, BsFunnel, BsExclamationTriangle, BsJournalText,
   BsBook, BsLightning, BsStack, BsStars, BsArrowRepeat,
   BsWrench, BsFileCode, BsSpeedometer,
 } from 'solid-icons/bs';
@@ -111,6 +111,14 @@ const entries: SearchEntry[] = [
     group: 'Commands',
     icon: BsBroadcast,
     keywords: ['stream', 'events', 'bitmask', 'async', 'realtime', 'km.buttons'],
+  },
+  {
+    label: 'Button Capture',
+    description: 'Count physical button presses while locked',
+    path: '/native/commands/catch',
+    group: 'Commands',
+    icon: BsFunnel,
+    keywords: ['catch', 'capture', 'counter', 'click count', 'lock', 'km.catch_ml'],
   },
   {
     label: 'Serial Number Spoofing',
@@ -950,6 +958,41 @@ const entries: SearchEntry[] = [
     keywords: ['buttons', 'stream', 'enable', 'disable', 'events', 'query'],
   },
   {
+    label: 'km.catch_ml()',
+    description: 'Capture left button presses while locked',
+    path: '/native/commands/catch#catch-commands',
+    group: 'Commands',
+    keywords: ['catch', 'left', 'capture', 'counter', 'click count', 'lock'],
+  },
+  {
+    label: 'km.catch_mm()',
+    description: 'Capture middle button presses while locked',
+    path: '/native/commands/catch#catch-commands',
+    group: 'Commands',
+    keywords: ['catch', 'middle', 'capture', 'counter', 'click count', 'lock'],
+  },
+  {
+    label: 'km.catch_mr()',
+    description: 'Capture right button presses while locked',
+    path: '/native/commands/catch#catch-commands',
+    group: 'Commands',
+    keywords: ['catch', 'right', 'capture', 'counter', 'click count', 'lock'],
+  },
+  {
+    label: 'km.catch_ms1()',
+    description: 'Capture side button 1 presses while locked',
+    path: '/native/commands/catch#catch-commands',
+    group: 'Commands',
+    keywords: ['catch', 'side', 'ms1', 'capture', 'counter', 'click count', 'lock'],
+  },
+  {
+    label: 'km.catch_ms2()',
+    description: 'Capture side button 2 presses while locked',
+    path: '/native/commands/catch#catch-commands',
+    group: 'Commands',
+    keywords: ['catch', 'side', 'ms2', 'capture', 'counter', 'click count', 'lock'],
+  },
+  {
     label: 'km.serial()',
     description: 'Read, set, or reset mouse serial number',
     path: '/native/commands/serial#serial-commands',
@@ -1096,6 +1139,23 @@ const entries: SearchEntry[] = [
     keywords: ['collision', '0x0A', '0x0D', 'newline', 'carriage return', 'line-based', 'parser', 'dropped'],
   },
 
+  // ── Catch Sections ─────────────────────────────────────────────────────
+
+  {
+    label: 'Catch Usage',
+    description: 'Lock a button, then read physical press count',
+    path: '/native/commands/catch#catch-usage',
+    group: 'Catch',
+    keywords: ['catch', 'usage', 'lock', 'count', 'physical', 'example'],
+  },
+  {
+    label: 'Catch Command Reference',
+    description: 'All 5 catch targets: ml, mm, mr, ms1, ms2',
+    path: '/native/commands/catch#catch-commands',
+    group: 'Catch',
+    keywords: ['catch', 'reference', 'all', 'targets', 'ml', 'mm', 'mr', 'ms1', 'ms2'],
+  },
+
   // ── Broken Commands: Individual ─────────────────────────────────────────
 
   {
@@ -1114,15 +1174,6 @@ const entries: SearchEntry[] = [
     tags: ['Broken'],
     keywords: ['bezier', 'curve', 'broken', 'move', 'control point'],
   },
-  {
-    label: 'km.catch_ml()',
-    description: 'Click counter - broken, always returns 0',
-    path: '/native/broken#broken-commands',
-    group: 'Known Issues',
-    tags: ['Broken'],
-    keywords: ['catch', 'counter', 'click count', 'broken', 'increment'],
-  },
-
   // ── Silent Commands: Individual ─────────────────────────────────────────
 
   {

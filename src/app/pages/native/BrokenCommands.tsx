@@ -34,11 +34,6 @@ const BrokenCommands: Component = () => {
                 <td><span class="api-badge api-badge--warning">BROKEN</span></td>
                 <td>Bezier movement. Same issue as <A href="/native/commands/movement#km-move"><code>km.move(x,y,steps)</code></A>.</td>
               </tr>
-              <tr>
-                <td><code>km.catch_ml()</code> etc.</td>
-                <td><span class="api-badge api-badge--warning">BROKEN</span></td>
-                <td>Parses correctly and returns <code>0</code>, but the click counter never increments.</td>
-              </tr>
             </tbody>
           </table>
         </Card>

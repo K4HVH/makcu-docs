@@ -15,6 +15,7 @@ import Wheel from './pages/native/commands/Wheel';
 import Locks from './pages/native/commands/Locks';
 import Stream from './pages/native/commands/Stream';
 import Serial from './pages/native/commands/Serial';
+import Catch from './pages/native/commands/Catch';
 import BrokenCommands from './pages/native/BrokenCommands';
 import Notes from './pages/native/Notes';
 import LibraryIntroduction from './pages/library/Introduction';
@@ -50,6 +51,7 @@ const App: Component = () => {
           <Route path="/native/commands/locks" component={Locks} />
           <Route path="/native/commands/stream" component={Stream} />
           <Route path="/native/commands/serial" component={Serial} />
+          <Route path="/native/commands/catch" component={Catch} />
           <Route path="/native/broken" component={BrokenCommands} />
           <Route path="/native/notes" component={Notes} />
           <Route path="/library" component={LibraryIntroduction} />

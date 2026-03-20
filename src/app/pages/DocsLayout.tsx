@@ -10,7 +10,7 @@ import { CommandPalette } from '../../components/navigation/CommandPalette';
 import {
   BsList, BsInfoCircle, BsCpu, BsPlug, BsLink45deg, BsTerminal,
   BsCheckCircle, BsCursor, BsArrowsMove, BsMouse, BsLock,
-  BsBroadcast, BsUpcScan, BsExclamationTriangle, BsJournalText,
+  BsBroadcast, BsUpcScan, BsFunnel, BsExclamationTriangle, BsJournalText,
   BsBook, BsHouseDoor, BsSearch, BsLightning, BsStack, BsStars,
   BsArrowRepeat, BsWrench, BsFileCode, BsSpeedometer,
 } from 'solid-icons/bs';
@@ -37,6 +37,7 @@ const nativeCommandTabs: TabOption[] = [
   { value: '/native/commands/wheel', label: 'Wheel', icon: BsMouse },
   { value: '/native/commands/locks', label: 'Locks', icon: BsLock },
   { value: '/native/commands/stream', label: 'Stream', icon: BsBroadcast },
+  { value: '/native/commands/catch', label: 'Catch', icon: BsFunnel },
   { value: '/native/commands/serial', label: 'Serial', icon: BsUpcScan },
 ];
 
