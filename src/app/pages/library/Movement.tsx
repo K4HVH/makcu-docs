@@ -13,6 +13,8 @@ const Movement: Component = () => {
             Three methods control cursor position and scroll input. All accept signed integers
             and validate ranges before sending to the device. For smooth multi-step movement,
             see the <A href="/library/features/extras#move-smooth"><code>extras</code></A> feature.
+            All movement methods support <A href="/library/fire-and-forget">fire-and-forget</A> mode
+            and <A href="/library/features/batch#batch-methods">batch sequences</A>.
           </p>
         </Card>
       </div>

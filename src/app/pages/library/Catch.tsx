@@ -34,7 +34,9 @@ const Catch: Component = () => {
           <p>
             Enables the catch stream for the specified button. The button must already
             be locked via <A href="/library/locks#set-lock"><code>set_lock()</code></A>. Calling
-            this multiple times is idempotent.
+            this multiple times is idempotent. Also available
+            through <A href="/library/fire-and-forget"><code>ff()</code></A> and
+            in <A href="/library/features/batch#batch-methods">batch sequences</A>.
           </p>
           <table class="api-params">
             <thead>

@@ -22,6 +22,10 @@ const Stream: Component = () => {
       <div id="stream-enable" data-search-target>
         <Card>
           <CardHeader title="Enable / Disable" subtitle="Control the button event stream" />
+          <p>
+            Enable/disable methods support <A href="/library/fire-and-forget">fire-and-forget</A> mode
+            and <A href="/library/features/batch#batch-methods">batch sequences</A>.
+          </p>
           <table class="api-params">
             <thead>
               <tr>

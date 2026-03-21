@@ -51,12 +51,12 @@ const TypesAndErrors: Component = () => {
               <tr>
                 <td><code>FireAndForget&lt;'d&gt;</code></td>
                 <td>struct</td>
-                <td><A href="/library/fire-and-forget">Fire-and-forget</A> wrapper. Borrows <code>Device</code>.</td>
+                <td><A href="/library/fire-and-forget">Fire-and-forget</A> RAII guard. Derefs to <code>Device</code>.</td>
               </tr>
               <tr>
                 <td><code>AsyncFireAndForget&lt;'d&gt;</code></td>
                 <td>struct</td>
-                <td>Async <A href="/library/fire-and-forget">fire-and-forget</A> wrapper. Requires <A href="/library/features/async"><code>async</code></A>.</td>
+                <td>Async <A href="/library/fire-and-forget">fire-and-forget</A> RAII guard. Derefs to <code>AsyncDevice</code>. Requires <A href="/library/features/async"><code>async</code></A>.</td>
               </tr>
             </tbody>
           </table>

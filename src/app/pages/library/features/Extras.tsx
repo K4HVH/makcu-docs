@@ -13,7 +13,9 @@ const Extras: Component = () => {
             The <code>extras</code> feature adds higher-level operations built on top of the
             base API. These are implemented in software with controlled timing -- they are
             not firmware commands. These operations can also be used
-            in <A href="/library/features/batch#batch-extras">batch sequences</A>.
+            in <A href="/library/features/batch#batch-extras">batch sequences</A> and
+            through <A href="/library/fire-and-forget#ff-wrapper"><code>ff()</code></A> for
+            fire-and-forget mode.
           </p>
           <pre><code>cargo add makcu --features extras</code></pre>
         </Card>

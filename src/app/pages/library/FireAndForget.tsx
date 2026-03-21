@@ -18,12 +18,18 @@ const FireAndForget: Component = () => {
             This is useful for high-frequency operations like continuous mouse movement where
             latency matters more than confirmation.
           </p>
-          <div class="callout callout--warning">
+          <p>
+            <code>FireAndForget</code> is an RAII guard that derefs
+            to <A href="/library/types#core-types"><code>Device</code></A>. Every method on <code>Device</code> is
+            available through the guard -- including <A href="/library/features/extras">extras</A> methods
+            like <A href="/library/features/extras#click"><code>click()</code></A> and <A href="/library/features/extras#move-smooth"><code>move_smooth()</code></A>.
+          </p>
+          <div class="callout callout--info">
             <p>
-              Fire-and-forget commands cannot return values. Methods
-              like <A href="/library/buttons#button-state"><code>button_state()</code></A>, <A href="/library/locks#lock-state"><code>lock_state()</code></A>,
-              and <A href="/library/info#version"><code>version()</code></A> are not available on
-              the <A href="/library/types#core-types"><code>FireAndForget</code></A> wrapper.
+              Query methods (<A href="/library/buttons#button-state"><code>button_state()</code></A>, <A href="/library/locks#lock-state"><code>lock_state()</code></A>, <A href="/library/info#version"><code>version()</code></A>, etc.)
+              always wait for a response regardless of fire-and-forget mode, since they must
+              return a value. Both <code>ff()</code> and <code>DeviceConfig</code> fire-and-forget
+              behave identically in this regard.
             </p>
           </div>
         </Card>
@@ -31,12 +37,12 @@ const FireAndForget: Component = () => {
 
       <div id="ff-wrapper" data-search-target>
         <Card>
-          <CardHeader title="ff()" subtitle="Get the fire-and-forget wrapper" />
+          <CardHeader title="ff()" subtitle="Get the fire-and-forget guard" />
           <pre class="api-signature">{`fn ff(&self) -> FireAndForget<'_>`}</pre>
           <p>
-            Returns a <code>FireAndForget</code> wrapper that provides the same command
-            methods but without waiting for responses. The wrapper borrows
-            the <code>Device</code>, so it cannot outlive it.
+            Returns a <code>FireAndForget</code> guard that derefs to <code>Device</code>. While
+            the guard is alive, all write commands sent on the current thread skip waiting for
+            responses. The guard borrows the <code>Device</code>, so it cannot outlive it.
           </p>
           <div class="api-response-label">Example</div>
           <pre><code>{`// Single fire-and-forget command
@@ -46,39 +52,48 @@ device.ff().move_xy(10, 0)?;
 let ff = device.ff();
 ff.move_xy(100, 0)?;
 ff.move_xy(0, 100)?;
-ff.wheel(3)?;`}</code></pre>
+ff.wheel(3)?;
+
+// Extras work too
+ff.click(Button::Left, Duration::from_millis(50))?;
+ff.move_smooth(200, 0, 20, Duration::from_millis(5))?;`}</code></pre>
         </Card>
       </div>
 
       <div id="ff-methods" data-search-target>
         <Card>
-          <CardHeader title="Available Methods" subtitle="Commands available in fire-and-forget mode" />
+          <CardHeader title="How It Works" subtitle="Thread-local RAII guard" />
+          <p>
+            The guard sets a thread-local flag when created and clears it on drop. All
+            device methods check this flag -- if set, write commands skip waiting for the
+            device response. This means:
+          </p>
           <table class="api-params">
             <thead>
               <tr>
-                <th>Method</th>
-                <th>Description</th>
+                <th>Behaviour</th>
+                <th>Detail</th>
               </tr>
             </thead>
             <tbody>
-              <tr><td><code>move_xy(x, y)</code></td><td><A href="/library/movement#move-xy">Relative cursor movement</A>.</td></tr>
-              <tr><td><code>silent_move(x, y)</code></td><td><A href="/library/movement#silent-move">Atomic drag operation</A>.</td></tr>
-              <tr><td><code>wheel(delta)</code></td><td><A href="/library/movement#wheel">Scroll wheel input</A>.</td></tr>
-              <tr><td><code>button_down(button)</code></td><td><A href="/library/buttons#button-down">Press a button</A>.</td></tr>
-              <tr><td><code>button_up(button)</code></td><td><A href="/library/buttons#button-up">Soft release a button</A>.</td></tr>
-              <tr><td><code>button_up_force(button)</code></td><td><A href="/library/buttons#button-up-force">Force release a button</A>.</td></tr>
-              <tr><td><code>set_lock(target, locked)</code></td><td><A href="/library/locks#set-lock">Set an input lock</A>.</td></tr>
-              <tr><td><code>enable_button_stream()</code></td><td><A href="/library/stream#stream-enable">Enable button event stream</A>.</td></tr>
-              <tr><td><code>disable_button_stream()</code></td><td><A href="/library/stream#stream-enable">Disable button event stream</A>.</td></tr>
-              <tr><td><code>enable_catch(button)</code></td><td><A href="/library/catch#enable-catch">Enable catch stream</A> for a button.</td></tr>
-              <tr><td><code>send_raw(cmd)</code></td><td>Send raw command bytes.</td></tr>
+              <tr>
+                <td>All <code>Device</code> methods available</td>
+                <td>Including <A href="/library/features/extras">extras</A> and <A href="/library/catch">catch</A> -- via <code>Deref&lt;Target=Device&gt;</code>.</td>
+              </tr>
+              <tr>
+                <td>Thread-safe</td>
+                <td>The flag is thread-local. Other threads sharing the same <code>Device</code> are unaffected.</td>
+              </tr>
+              <tr>
+                <td>Queries always confirm</td>
+                <td>Methods that return values (<code>version()</code>, <code>button_state()</code>, etc.) always wait for a response.</td>
+              </tr>
+              <tr>
+                <td>Nestable</td>
+                <td>Extras methods that internally call <code>button_down()</code>, <code>move_xy()</code>, etc. all inherit fire-and-forget from the guard.</td>
+              </tr>
             </tbody>
           </table>
-          <p>
-            All methods return <code>Result&lt;()&gt;</code>. Errors only occur if the
-            command fails validation (e.g. out-of-range parameters) or the transport channel
-            is closed.
-          </p>
         </Card>
       </div>
 
@@ -87,8 +102,8 @@ ff.wheel(3)?;`}</code></pre>
           <CardHeader title="Global Fire-and-Forget" subtitle="Default all commands to fire-and-forget" />
           <p>
             Set <code>fire_and_forget: true</code> in <A href="/library/connection#device-config"><code>DeviceConfig</code></A> to make all
-            commands fire-and-forget by default. Query methods
-            (<code>button_state</code>, <code>version</code>, etc.) still wait for responses.
+            commands fire-and-forget by default. This is equivalent to wrapping every call
+            in <code>ff()</code>. Query methods still wait for responses.
           </p>
           <pre><code>{`use makcu::{Device, DeviceConfig};
 
@@ -109,20 +124,13 @@ let version = device.version()?;`}</code></pre>
 
       <div id="ff-raw" data-search-target>
         <Card>
-          <CardHeader title="Raw Commands" subtitle="Send arbitrary command bytes" />
-          <pre class="api-signature">{`fn send_raw(&self, cmd: &[u8]) -> Result<Vec<u8>>`}</pre>
+          <CardHeader title="Raw Commands in FF Mode" subtitle="send_raw with fire-and-forget" />
           <p>
-            Sends raw bytes to the device and returns the raw response. The command
-            must include the <code>\r\n</code> terminator. Available on
-            both <code>Device</code> (returns response) and <code>FireAndForget</code> (no
-            response).
+            <A href="/library/connection#send-raw"><code>send_raw()</code></A> respects fire-and-forget
+            mode. When active, the command is sent without waiting and an
+            empty <code>Vec</code> is returned.
           </p>
-          <div class="api-response-label">Example</div>
-          <pre><code>{`// Confirmed (waits for response)
-let response = device.send_raw(b"km.version()\\r\\n")?;
-
-// Fire-and-forget
-device.ff().send_raw(b"km.left(1)\\r\\n")?;`}</code></pre>
+          <pre><code>{`device.ff().send_raw(b"km.left(1)\\r\\n")?;  // returns immediately`}</code></pre>
         </Card>
       </div>
     </>
