@@ -108,7 +108,10 @@ println!("Left button: {}", if pressed { "pressed" } else { "released" });`}</co
         <Card>
           <CardHeader title="Click Pattern" subtitle="Press and release sequence" />
           <p>
-            There is no single-command click in the base API. Send a press followed by a release:
+            There is no single-command click in the base API. All button write methods
+            support <A href="/library/fire-and-forget">fire-and-forget</A> mode
+            and <A href="/library/features/batch#batch-methods">batch sequences</A>.
+            Send a press followed by a release:
           </p>
           <pre><code>{`device.button_down(Button::Left)?;
 device.button_up(Button::Left)?;`}</code></pre>

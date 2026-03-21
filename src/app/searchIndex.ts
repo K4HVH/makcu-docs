@@ -354,6 +354,13 @@ const entries: SearchEntry[] = [
     group: 'Connection (Rust)',
     keywords: ['thread', 'send', 'sync', 'arc', 'concurrent', 'writer', 'reader'],
   },
+  {
+    label: 'send_raw()',
+    description: 'Send arbitrary raw command bytes to the device',
+    path: '/library/connection#send-raw',
+    group: 'Connection (Rust)',
+    keywords: ['raw', 'send', 'bytes', 'send_raw', 'custom', 'escape', 'firmware'],
+  },
 
   // ── Library: Movement Sections ──────────────────────────────────────
 
@@ -523,25 +530,25 @@ const entries: SearchEntry[] = [
   // ── Library: Fire-and-Forget Sections ───────────────────────────────
 
   {
-    label: 'ff() Wrapper',
-    description: 'Fire-and-forget command wrapper',
+    label: 'ff() Guard',
+    description: 'Fire-and-forget RAII guard, derefs to Device',
     path: '/library/fire-and-forget#ff-wrapper',
     group: 'Fire-and-Forget (Rust)',
-    keywords: ['ff', 'wrapper', 'fire', 'forget', 'no response'],
+    keywords: ['ff', 'guard', 'fire', 'forget', 'no response', 'deref', 'RAII'],
   },
   {
-    label: 'FF Available Commands',
-    description: 'Methods available on FireAndForget',
+    label: 'How FF Works',
+    description: 'Thread-local RAII guard design',
     path: '/library/fire-and-forget#ff-methods',
     group: 'Fire-and-Forget (Rust)',
-    keywords: ['ff', 'methods', 'move_xy', 'button_down', 'wheel', 'set_lock'],
+    keywords: ['ff', 'thread-local', 'RAII', 'deref', 'extras', 'all methods'],
   },
   {
-    label: 'send_raw()',
-    description: 'Send arbitrary raw command bytes',
+    label: 'Raw Commands in FF',
+    description: 'send_raw with fire-and-forget mode',
     path: '/library/fire-and-forget#ff-raw',
     group: 'Fire-and-Forget (Rust)',
-    keywords: ['raw', 'send', 'bytes', 'send_raw', 'custom'],
+    keywords: ['raw', 'send', 'ff', 'send_raw', 'fire', 'forget'],
   },
 
   // ── Library: Async Sections ─────────────────────────────────────────

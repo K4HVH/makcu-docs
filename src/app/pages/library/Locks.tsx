@@ -45,7 +45,9 @@ const Locks: Component = () => {
           <pre class="api-signature">{`fn set_lock(&self, target: LockTarget, locked: bool) -> Result<()>`}</pre>
           <p>
             Locks (<code>true</code>) or unlocks (<code>false</code>) the specified input.
-            When locked, the input is blocked from reaching the host.
+            When locked, the input is blocked from reaching the host. Also available
+            through <A href="/library/fire-and-forget"><code>ff()</code></A> and
+            in <A href="/library/features/batch#batch-methods">batch sequences</A>.
           </p>
           <div class="api-response-label">Example</div>
           <pre><code>{`use makcu::LockTarget;

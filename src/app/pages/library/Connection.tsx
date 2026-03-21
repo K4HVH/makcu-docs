@@ -251,6 +251,28 @@ std::thread::spawn(move || {
           </p>
         </Card>
       </div>
+
+      <div id="send-raw" data-search-target>
+        <Card>
+          <CardHeader title="send_raw" subtitle="Send arbitrary command bytes" />
+          <pre class="api-signature">{`fn send_raw(&self, cmd: &[u8]) -> Result<Vec<u8>>`}</pre>
+          <p>
+            Sends raw bytes to the device and returns the raw response. The command
+            must include the <code>\r\n</code> terminator. Use this as an escape hatch for
+            firmware commands the library doesn't wrap yet.
+          </p>
+          <p>
+            In <A href="/library/fire-and-forget">fire-and-forget</A> mode the command is sent
+            without waiting and an empty <code>Vec</code> is returned.
+          </p>
+          <div class="api-response-label">Example</div>
+          <pre><code>{`// Send a command and read the response
+let response = device.send_raw(b"km.version()\\r\\n")?;
+
+// Fire-and-forget — returns immediately
+device.ff().send_raw(b"km.left(1)\\r\\n")?;`}</code></pre>
+        </Card>
+      </div>
     </>
   );
 };

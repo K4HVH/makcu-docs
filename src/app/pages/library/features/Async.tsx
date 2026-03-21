@@ -90,17 +90,20 @@ let rx = device.catch_events();  // sync -- returns channel`}</code></pre>
 
       <div id="async-ff" data-search-target>
         <Card>
-          <CardHeader title="AsyncFireAndForget" subtitle="Async fire-and-forget wrapper" />
+          <CardHeader title="AsyncFireAndForget" subtitle="Async fire-and-forget guard" />
           <pre class="api-signature">{`fn ff(&self) -> AsyncFireAndForget<'_>`}</pre>
           <p>
-            Works identically to the sync <A href="/library/fire-and-forget"><code>FireAndForget</code></A> wrapper. Commands are
-            sent without waiting for responses. Methods on the wrapper are <strong>not</strong> async
-            -- they return immediately after queuing the command.
+            Works identically to the sync <A href="/library/fire-and-forget"><code>FireAndForget</code></A> guard.
+            Derefs to <code>AsyncDevice</code>, so all methods are available. Write commands
+            skip waiting for responses while the guard is alive. Methods are still async
+            and must be <code>.await</code>ed -- the <code>.await</code> returns immediately
+            after the command is queued.
           </p>
           <div class="api-response-label">Example</div>
           <pre><code>{`let ff = device.ff();
-ff.move_xy(10, 0)?;    // not async -- returns immediately
-ff.button_down(Button::Left)?;`}</code></pre>
+ff.move_xy(10, 0).await?;
+ff.button_down(Button::Left).await?;
+ff.click(Button::Left, Duration::from_millis(50)).await?;`}</code></pre>
         </Card>
       </div>
 
@@ -181,7 +184,7 @@ device.drag(Button::Left, 300, 0, 30, Duration::from_millis(5)).await?;`}</code>
               </tr>
               <tr>
                 <td><code>ff()</code></td>
-                <td>Returns a <A href="/library/fire-and-forget#ff-wrapper">wrapper reference</A>.</td>
+                <td>Returns an <A href="/library/fire-and-forget#ff-wrapper">RAII guard</A>.</td>
               </tr>
               <tr>
                 <td><code>batch()</code></td>
