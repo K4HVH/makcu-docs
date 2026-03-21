@@ -55,6 +55,7 @@ src/
           Wheel.tsx                   # km.wheel()
           Locks.tsx                   # km.lock_mx/my/ml/mr/mm/ms1/ms2
           Stream.tsx                  # km.buttons() event stream
+          Catch.tsx                   # km.catch_m*() button capture
           Serial.tsx                  # km.serial() (non-functional)
       library/
         LibraryPlaceholder.tsx        # Placeholder page
