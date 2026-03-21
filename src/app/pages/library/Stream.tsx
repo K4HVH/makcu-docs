@@ -77,6 +77,8 @@ std::thread::spawn(move || {
               Multiple subscribers can be created by calling <code>button_events()</code>
               multiple times. Each receiver gets its own copy of every event.
               For a callback-based interface, see the <A href="/library/features/extras#event-callbacks"><code>extras</code> event callbacks</A>.
+              For per-button physical press/release events,
+              see <A href="/library/catch">Button Capture</A>.
             </p>
           </div>
         </Card>

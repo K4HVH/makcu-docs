@@ -25,6 +25,7 @@ import LibraryButtons from './pages/library/Buttons';
 import LibraryLocks from './pages/library/Locks';
 import LibraryDeviceInfo from './pages/library/DeviceInfo';
 import LibraryStream from './pages/library/Stream';
+import LibraryCatch from './pages/library/Catch';
 import LibraryFireAndForget from './pages/library/FireAndForget';
 import LibraryAsync from './pages/library/features/Async';
 import LibraryBatchBuilder from './pages/library/features/BatchBuilder';
@@ -61,6 +62,7 @@ const App: Component = () => {
           <Route path="/library/locks" component={LibraryLocks} />
           <Route path="/library/info" component={LibraryDeviceInfo} />
           <Route path="/library/stream" component={LibraryStream} />
+          <Route path="/library/catch" component={LibraryCatch} />
           <Route path="/library/fire-and-forget" component={LibraryFireAndForget} />
           <Route path="/library/features/async" component={LibraryAsync} />
           <Route path="/library/features/batch" component={LibraryBatchBuilder} />

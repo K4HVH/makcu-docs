@@ -105,6 +105,21 @@ const TypesAndErrors: Component = () => {
             </tbody>
           </table>
 
+          <div class="api-response-label"><A href="/library/catch#catch-event-type">CatchEvent</A></div>
+          <table class="api-params">
+            <thead>
+              <tr>
+                <th>Field</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><code>button</code></td><td><A href="/library/types#enums"><code>Button</code></A></td><td>Which button produced this event.</td></tr>
+              <tr><td><code>pressed</code></td><td><code>bool</code></td><td><code>true</code> for press, <code>false</code> for release.</td></tr>
+            </tbody>
+          </table>
+
           <div class="api-response-label"><A href="/library/locks#lock-states-all">LockStates</A></div>
           <table class="api-params">
             <thead>

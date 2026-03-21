@@ -65,6 +65,9 @@ device.batch()
               <tr><td><code>button_up(button)</code></td><td><A href="/library/buttons#button-up">Soft release a button</A>.</td></tr>
               <tr><td><code>button_up_force(button)</code></td><td><A href="/library/buttons#button-up-force">Force release a button</A>.</td></tr>
               <tr><td><code>set_lock(target, locked)</code></td><td><A href="/library/locks#set-lock">Set an input lock</A>.</td></tr>
+              <tr><td><code>enable_catch(button)</code></td><td><A href="/library/catch#enable-catch">Enable catch stream</A> for a button.</td></tr>
+              <tr><td><code>enable_button_stream()</code></td><td><A href="/library/stream#stream-enable">Enable button event stream</A>.</td></tr>
+              <tr><td><code>disable_button_stream()</code></td><td><A href="/library/stream#stream-enable">Disable button event stream</A>.</td></tr>
             </tbody>
           </table>
           <div class="callout callout--info">
@@ -111,6 +114,14 @@ device.batch()
               <tr>
                 <td><code>drag(button, x, y, steps, interval)</code></td>
                 <td><A href="/library/features/extras#drag">Smooth move</A> with button held.</td>
+              </tr>
+              <tr>
+                <td><code>start_catch(button)</code></td>
+                <td><A href="/library/features/extras#catch-convenience">Lock + enable catch</A> in one step.</td>
+              </tr>
+              <tr>
+                <td><code>stop_catch(button)</code></td>
+                <td><A href="/library/features/extras#catch-convenience">Unlock button</A>, stopping catch.</td>
               </tr>
             </tbody>
           </table>

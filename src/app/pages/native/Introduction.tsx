@@ -101,7 +101,7 @@ const Introduction: Component = () => {
           </A>
           <A href="/native/commands/catch" style={{ "text-decoration": "none" }}>
             <Card interactive variant="subtle" padding="compact">
-              <CardHeader title="Button Capture" subtitle="Count physical presses while a button is locked" />
+              <CardHeader title="Button Capture" subtitle="Per-button press/release event stream while locked" />
             </Card>
           </A>
           <A href="/native/commands/serial" style={{ "text-decoration": "none" }}>

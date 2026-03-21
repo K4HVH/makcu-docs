@@ -82,6 +82,9 @@ let serial = device.serial().await?;`}</code></pre>
           <div class="api-response-label"><A href="/library/stream">Button Stream</A></div>
           <pre><code>{`device.enable_button_stream().await?;
 let rx = device.button_events();  // sync -- returns channel`}</code></pre>
+          <div class="api-response-label"><A href="/library/catch">Button Capture</A></div>
+          <pre><code>{`device.enable_catch(Button::Left).await?;
+let rx = device.catch_events();  // sync -- returns channel`}</code></pre>
         </Card>
       </div>
 
@@ -129,7 +132,8 @@ ff.button_down(Button::Left)?;`}</code></pre>
 device.move_smooth(500, 0, 50, Duration::from_millis(5)).await?;
 device.drag(Button::Left, 300, 0, 30, Duration::from_millis(5)).await?;`}</code></pre>
           <p>
-            <A href="/library/features/extras#event-callbacks">Event callbacks</A> (<code>on_button_press</code>, <code>on_button_event</code>) are
+            <A href="/library/features/extras#event-callbacks">Event callbacks</A> (<code>on_button_press</code>, <code>on_button_event</code>)
+            and <A href="/library/features/extras#catch-callbacks">catch callbacks</A> (<code>on_catch</code>, <code>on_catch_event</code>) are
             available on <code>AsyncDevice</code> as synchronous methods. They spawn
             standard threads internally.
           </p>
@@ -170,6 +174,10 @@ device.drag(Button::Left, 300, 0, 30, Duration::from_millis(5)).await?;`}</code>
               <tr>
                 <td><code>button_events()</code></td>
                 <td>Returns a <A href="/library/stream#button-events">channel receiver</A>.</td>
+              </tr>
+              <tr>
+                <td><code>catch_events()</code></td>
+                <td>Returns a <A href="/library/catch#catch-events">channel receiver</A>.</td>
               </tr>
               <tr>
                 <td><code>ff()</code></td>

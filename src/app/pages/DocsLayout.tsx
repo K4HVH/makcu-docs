@@ -59,6 +59,7 @@ const libraryApiTabs: TabOption[] = [
   { value: '/library/locks', label: 'Locks', icon: BsLock },
   { value: '/library/info', label: 'Device Info', icon: BsCheckCircle },
   { value: '/library/stream', label: 'Button Stream', icon: BsBroadcast },
+  { value: '/library/catch', label: 'Button Capture', icon: BsFunnel },
   { value: '/library/fire-and-forget', label: 'Fire and Forget', icon: BsLightning },
 ];
 

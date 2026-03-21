@@ -160,6 +160,90 @@ device.move_pattern(
         </Card>
       </div>
 
+      <div id="catch-convenience" data-search-target>
+        <Card>
+          <CardHeader title="Catch Convenience" subtitle="Lock, enable, and stop catch in one call" />
+          <p>
+            These methods combine lock management with catch, wrapping the
+            base <A href="/library/catch">catch API</A> for common use cases.
+          </p>
+
+          <div class="api-response-label">start_catch</div>
+          <pre class="api-signature">{`fn start_catch(&self, button: Button) -> Result<()>`}</pre>
+          <p>
+            Locks the button and enables catch in one call.
+            Equivalent to <A href="/library/locks#set-lock"><code>set_lock(target, true)</code></A> followed
+            by <A href="/library/catch#enable-catch"><code>enable_catch(button)</code></A>.
+          </p>
+          <pre><code>{`use makcu::Button;
+
+device.start_catch(Button::Left)?;
+let rx = device.catch_events();
+
+// ... receive events ...
+
+device.stop_catch(Button::Left)?;`}</code></pre>
+
+          <div class="api-response-label">stop_catch</div>
+          <pre class="api-signature">{`fn stop_catch(&self, button: Button) -> Result<()>`}</pre>
+          <p>
+            Unlocks the button, which stops the catch stream. This is the only way to
+            disable catch -- there is no explicit disable command in the firmware.
+          </p>
+          <div class="callout callout--warning">
+            <p>
+              <code>stop_catch</code> unlocks the button entirely. If the button was locked
+              for other reasons (e.g. blocking input), those locks are also released.
+            </p>
+          </div>
+        </Card>
+      </div>
+
+      <div id="catch-callbacks" data-search-target>
+        <Card>
+          <CardHeader title="Catch Callbacks" subtitle="Register handlers for catch events" />
+          <p>
+            Catch callbacks provide a higher-level interface to
+            the <A href="/library/catch">catch stream</A>. Instead of manually reading a channel,
+            register a closure that fires on physical press/release events.
+          </p>
+
+          <div class="api-response-label">on_catch</div>
+          <pre class="api-signature">{`fn on_catch<F>(&self, button: Button, f: F) -> EventHandle
+where F: Fn(bool) + Send + 'static`}</pre>
+          <p>
+            Registers a callback for a specific button's catch events. The closure
+            receives <code>true</code> on press and <code>false</code> on release.
+          </p>
+          <pre><code>{`device.start_catch(Button::Left)?;
+let _handle = device.on_catch(Button::Left, |pressed| {
+    if pressed {
+        println!("Left physically pressed");
+    } else {
+        println!("Left physically released");
+    }
+});`}</code></pre>
+
+          <div class="api-response-label">on_catch_event</div>
+          <pre class="api-signature">{`fn on_catch_event<F>(&self, f: F) -> EventHandle
+where F: Fn(CatchEvent) + Send + 'static`}</pre>
+          <p>
+            Registers a callback that fires on any catch event from any button.
+            Receives the full <A href="/library/catch#catch-event-type"><code>CatchEvent</code></A>.
+          </p>
+          <pre><code>{`let _handle = device.on_catch_event(|event| {
+    println!("{:?} {}", event.button,
+        if event.pressed { "pressed" } else { "released" });
+});`}</code></pre>
+
+          <div class="api-response-label">EventHandle</div>
+          <p>
+            Both methods return an <A href="/library/types#feature-types"><code>EventHandle</code></A>. The callback remains active
+            as long as the handle is alive. Dropping the handle unregisters the callback.
+          </p>
+        </Card>
+      </div>
+
       <div id="event-callbacks" data-search-target>
         <Card>
           <CardHeader title="Event Callbacks" subtitle="Register handlers for button events" />
