@@ -78,7 +78,7 @@ device.set_lock(LockTarget::Left, false)?;`}</code></pre>
       <div id="catch-events" data-search-target>
         <Card>
           <CardHeader title="catch_events" subtitle="Subscribe to catch press/release events" />
-          <pre class="api-signature">{`fn catch_events(&self) -> mpsc::Receiver<CatchEvent>`}</pre>
+          <pre class="api-signature">{`fn catch_events(&self) -> crossbeam_channel::Receiver<CatchEvent>`}</pre>
           <p>
             Returns a channel receiver that emits
             a <A href="/library/types#data-structs"><code>CatchEvent</code></A> on every physical

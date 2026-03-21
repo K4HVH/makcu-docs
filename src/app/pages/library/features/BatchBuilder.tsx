@@ -68,12 +68,21 @@ device.batch()
               <tr><td><code>enable_catch(button)</code></td><td><A href="/library/catch#enable-catch">Enable catch stream</A> for a button.</td></tr>
               <tr><td><code>enable_button_stream()</code></td><td><A href="/library/stream#stream-enable">Enable button event stream</A>.</td></tr>
               <tr><td><code>disable_button_stream()</code></td><td><A href="/library/stream#stream-enable">Disable button event stream</A>.</td></tr>
+              <tr><td><code>send_raw(cmd)</code></td><td><A href="/library/connection#send-raw">Send arbitrary command bytes</A>.</td></tr>
             </tbody>
           </table>
           <div class="callout callout--info">
             <p>
               Consecutive native commands are automatically coalesced into a single transport
               write. This minimizes serial overhead when sending rapid sequences.
+            </p>
+          </div>
+          <div class="callout callout--warning">
+            <p>
+              Query methods (<code>button_state</code>, <code>lock_state</code>, <code>version</code>, etc.)
+              are not available in batches. Batches use <A href="/library/fire-and-forget">fire-and-forget</A> writes
+              internally -- coalescing multiple commands into a single write means responses
+              cannot be aligned to individual commands.
             </p>
           </div>
         </Card>
