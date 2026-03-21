@@ -58,7 +58,22 @@ src/
           Catch.tsx                   # km.catch_m*() button capture
           Serial.tsx                  # km.serial() (non-functional)
       library/
-        LibraryPlaceholder.tsx        # Placeholder page
+        Introduction.tsx              # Rust library overview
+        Connection.tsx                # Device/AsyncDevice connection
+        Movement.tsx                  # move_xy, silent_move, wheel
+        Buttons.tsx                   # button_down/up, button_state
+        Locks.tsx                     # set_lock, lock_state, lock_states_all
+        Stream.tsx                    # Button event stream
+        Catch.tsx                     # Per-button capture (CatchEvent)
+        DeviceInfo.tsx                # version, serial, device_info
+        FireAndForget.tsx             # ff() wrapper
+        TypesAndErrors.tsx            # Types, enums, MakcuError
+        features/
+          Async.tsx                   # AsyncDevice, async feature
+          BatchBuilder.tsx            # BatchBuilder fluent API
+          Extras.tsx                  # click, smooth, drag, callbacks
+          Mock.tsx                    # MockTransport for testing
+          Profile.tsx                 # Per-command timing profiler
   components/                         # MidnightUI components (DO NOT MODIFY)
   styles/
     global.css                        # MidnightUI theme tokens (DO NOT MODIFY)

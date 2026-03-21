@@ -208,6 +208,14 @@ const entries: SearchEntry[] = [
     keywords: ['stream', 'events', 'button_events', 'ButtonMask', 'subscribe'],
   },
   {
+    label: 'Button Capture (Rust)',
+    description: 'Per-button press/release event stream while locked',
+    path: '/library/catch',
+    group: 'Rust Library',
+    icon: BsFunnel,
+    keywords: ['catch', 'capture', 'stream', 'press', 'release', 'lock', 'enable_catch', 'CatchEvent'],
+  },
+  {
     label: 'Fire and Forget',
     description: 'Send commands without waiting for responses',
     path: '/library/fire-and-forget',
@@ -455,7 +463,7 @@ const entries: SearchEntry[] = [
   {
     label: 'enable_button_stream() / disable_button_stream()',
     description: 'Control the button event stream on the device',
-    path: '/library/stream#enable-disable',
+    path: '/library/stream#stream-enable',
     group: 'Stream (Rust)',
     keywords: ['enable', 'disable', 'stream', 'start', 'stop', 'button_stream_state'],
   },
@@ -472,6 +480,44 @@ const entries: SearchEntry[] = [
     path: '/library/stream#button-mask',
     group: 'Stream (Rust)',
     keywords: ['ButtonMask', 'bitmask', 'left', 'right', 'middle', 'raw'],
+  },
+
+  // ── Library: Catch Sections ───────────────────────────────────────
+
+  {
+    label: 'Catch Overview',
+    description: 'Per-button press/release event stream requiring lock',
+    path: '/library/catch#catch-overview',
+    group: 'Catch (Rust)',
+    keywords: ['catch', 'capture', 'overview', 'lock', 'per-button', 'stream'],
+  },
+  {
+    label: 'enable_catch()',
+    description: 'Enable catch for a specific button',
+    path: '/library/catch#enable-catch',
+    group: 'Catch (Rust)',
+    keywords: ['enable_catch', 'catch', 'button', 'start', 'enable'],
+  },
+  {
+    label: 'catch_events()',
+    description: 'Subscribe to catch event channel',
+    path: '/library/catch#catch-events',
+    group: 'Catch (Rust)',
+    keywords: ['catch_events', 'subscribe', 'channel', 'receiver', 'CatchEvent'],
+  },
+  {
+    label: 'CatchEvent',
+    description: 'Per-button press/release event struct',
+    path: '/library/catch#catch-event-type',
+    group: 'Catch (Rust)',
+    keywords: ['CatchEvent', 'button', 'pressed', 'event', 'struct'],
+  },
+  {
+    label: 'Catch vs Stream',
+    description: 'Comparison of ButtonStream and Catch APIs',
+    path: '/library/catch#catch-vs-stream',
+    group: 'Catch (Rust)',
+    keywords: ['catch', 'stream', 'comparison', 'difference', 'ButtonMask', 'CatchEvent'],
   },
 
   // ── Library: Fire-and-Forget Sections ───────────────────────────────
@@ -624,6 +670,20 @@ const entries: SearchEntry[] = [
     path: '/library/features/extras#event-callbacks',
     group: 'Extras (Rust)',
     keywords: ['callback', 'event', 'handler', 'on_button_press', 'on_button_event', 'EventHandle'],
+  },
+  {
+    label: 'Catch Convenience',
+    description: 'start_catch and stop_catch helpers',
+    path: '/library/features/extras#catch-convenience',
+    group: 'Extras (Rust)',
+    keywords: ['start_catch', 'stop_catch', 'catch', 'convenience', 'lock', 'extras'],
+  },
+  {
+    label: 'Catch Callbacks',
+    description: 'on_catch and on_catch_event handlers',
+    path: '/library/features/extras#catch-callbacks',
+    group: 'Extras (Rust)',
+    keywords: ['on_catch', 'on_catch_event', 'catch', 'callback', 'handler', 'EventHandle'],
   },
 
   // ── Library: Mock Sections ──────────────────────────────────────────

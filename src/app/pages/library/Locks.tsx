@@ -14,6 +14,8 @@ const Locks: Component = () => {
             available: two movement axes and five buttons. Locks use
             the <A href="/library/types#enums"><code>LockTarget</code></A> enum. Maps to the
             firmware's <A href="/native/commands/locks"><code>km.lock_*</code></A> commands.
+            Locking a button is also required to
+            enable <A href="/library/catch">button capture</A>.
           </p>
           <div class="api-response-label">LockTarget Enum</div>
           <pre class="api-signature">{`pub enum LockTarget`}</pre>

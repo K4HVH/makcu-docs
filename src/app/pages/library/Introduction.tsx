@@ -76,7 +76,7 @@ const Introduction: Component = () => {
               </tr>
               <tr>
                 <td><A href="/library/features/extras"><code>extras</code></A></td>
-                <td>Software-implemented operations: <A href="/library/features/extras#click">click</A>, <A href="/library/features/extras#move-smooth">smooth move</A>, <A href="/library/features/extras#drag">drag</A>, <A href="/library/features/extras#move-pattern">patterns</A>, <A href="/library/features/extras#event-callbacks">event callbacks</A>.</td>
+                <td>Software-implemented operations: <A href="/library/features/extras#click">click</A>, <A href="/library/features/extras#move-smooth">smooth move</A>, <A href="/library/features/extras#drag">drag</A>, <A href="/library/features/extras#move-pattern">patterns</A>, <A href="/library/features/extras#catch-convenience">catch convenience</A>, <A href="/library/features/extras#event-callbacks">event callbacks</A>.</td>
               </tr>
               <tr>
                 <td><A href="/library/features/profile"><code>profile</code></A></td>
@@ -149,6 +149,11 @@ device.wheel(3)?;`}</code></pre>
               <CardHeader title="Button Stream" subtitle="Real-time button state change events" />
             </Card>
           </A>
+          <A href="/library/catch" style={{ "text-decoration": "none" }}>
+            <Card interactive variant="subtle" padding="compact">
+              <CardHeader title="Button Capture" subtitle="Per-button press/release event stream" />
+            </Card>
+          </A>
           <A href="/library/fire-and-forget" style={{ "text-decoration": "none" }}>
             <Card interactive variant="subtle" padding="compact">
               <CardHeader title="Fire and Forget" subtitle="Send commands without waiting for responses" />
@@ -172,7 +177,7 @@ device.wheel(3)?;`}</code></pre>
           </A>
           <A href="/library/features/extras" style={{ "text-decoration": "none" }}>
             <Card interactive variant="subtle" padding="compact">
-              <CardHeader title="Extras" subtitle="Click, smooth move, drag, patterns, and event callbacks" />
+              <CardHeader title="Extras" subtitle="Click, smooth move, drag, patterns, catch convenience, and callbacks" />
             </Card>
           </A>
           <A href="/library/features/mock" style={{ "text-decoration": "none" }}>
