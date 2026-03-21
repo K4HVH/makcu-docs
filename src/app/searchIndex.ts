@@ -607,10 +607,10 @@ const entries: SearchEntry[] = [
   },
   {
     label: 'Batch Native Commands',
-    description: 'move_xy, wheel, button_down, set_lock in batches',
+    description: 'move_xy, wheel, button_down, set_lock, send_raw in batches',
     path: '/library/features/batch#batch-methods',
     group: 'Batch (Rust)',
-    keywords: ['batch', 'native', 'commands', 'move_xy', 'wheel', 'button'],
+    keywords: ['batch', 'native', 'commands', 'move_xy', 'wheel', 'button', 'send_raw', 'raw'],
   },
   {
     label: 'Batch Extras Commands',

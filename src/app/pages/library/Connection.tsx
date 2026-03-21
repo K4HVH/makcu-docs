@@ -263,7 +263,8 @@ std::thread::spawn(move || {
           </p>
           <p>
             In <A href="/library/fire-and-forget">fire-and-forget</A> mode the command is sent
-            without waiting and an empty <code>Vec</code> is returned.
+            without waiting and an empty <code>Vec</code> is returned. Also available
+            in <A href="/library/features/batch#batch-methods">batch sequences</A>.
           </p>
           <div class="api-response-label">Example</div>
           <pre><code>{`// Send a command and read the response

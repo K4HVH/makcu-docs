@@ -135,11 +135,21 @@ ff.click(Button::Left, Duration::from_millis(50)).await?;`}</code></pre>
 device.move_smooth(500, 0, 50, Duration::from_millis(5)).await?;
 device.drag(Button::Left, 300, 0, 30, Duration::from_millis(5)).await?;`}</code></pre>
           <p>
-            <A href="/library/features/extras#event-callbacks">Event callbacks</A> (<code>on_button_press</code>, <code>on_button_event</code>)
-            and <A href="/library/features/extras#catch-callbacks">catch callbacks</A> (<code>on_catch</code>, <code>on_catch_event</code>) are
-            available on <code>AsyncDevice</code> as synchronous methods. They spawn
-            standard threads internally.
+            All callback registration methods
+            (<A href="/library/features/extras#event-callbacks"><code>on_button_press</code></A>,
+            <A href="/library/features/extras#event-callbacks"><code>on_button_event</code></A>,
+            <A href="/library/features/extras#catch-callbacks"><code>on_catch</code></A>,
+            <A href="/library/features/extras#catch-callbacks"><code>on_catch_event</code></A>)
+            are async on <code>AsyncDevice</code> and must be <code>.await</code>ed.
+            All callbacks spawn standard threads internally for event delivery.
           </p>
+          <pre><code>{`let _h = device.on_button_press(Button::Left, |pressed| {
+    println!("{}", if pressed { "down" } else { "up" });
+}).await?;
+
+let _h = device.on_catch(Button::Left, |pressed| {
+    println!("{}", if pressed { "pressed" } else { "released" });
+}).await?;`}</code></pre>
         </Card>
       </div>
 
