@@ -137,6 +137,11 @@ let device = Device::with_config(config)?;`}</code></pre>
                 <td>Get the serial port name.</td>
               </tr>
               <tr>
+                <td><code>config()</code></td>
+                <td><code>&amp;DeviceConfig</code></td>
+                <td>Get the configuration this device was created with.</td>
+              </tr>
+              <tr>
                 <td><code>disconnect()</code></td>
                 <td><code>()</code></td>
                 <td>Gracefully disconnect and shut down all internal threads.</td>
@@ -203,7 +208,7 @@ std::thread::spawn(move || {
           </p>
           <p>
             During reconnection, commands that require a response will
-            return <A href="/library/types#error-variants"><code>MakcuError::NotConnected</code></A>. <A href="/library/fire-and-forget">Fire-and-forget</A> commands are silently
+            return <A href="/library/types#error-variants"><code>MakcuError::Disconnected</code></A>. <A href="/library/fire-and-forget">Fire-and-forget</A> commands are silently
             dropped.
           </p>
           <div class="callout callout--warning">

@@ -226,10 +226,6 @@ const TypesAndErrors: Component = () => {
             </thead>
             <tbody>
               <tr>
-                <td><code>NotConnected</code></td>
-                <td>No active device connection.</td>
-              </tr>
-              <tr>
                 <td><code>Port(serialport::Error)</code></td>
                 <td>Serial port error from the underlying driver.</td>
               </tr>
@@ -266,7 +262,7 @@ match device.move_xy(99999, 0) {
     Err(MakcuError::OutOfRange { value, min, max }) => {
         println!("{} not in {}..={}", value, min, max);
     }
-    Err(MakcuError::NotConnected) => {
+    Err(MakcuError::Disconnected) => {
         println!("Device disconnected");
     }
     Err(e) => println!("Error: {}", e),

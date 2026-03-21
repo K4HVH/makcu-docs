@@ -818,7 +818,7 @@ const entries: SearchEntry[] = [
     description: 'Error enum variants and handling',
     path: '/library/types#error-variants',
     group: 'Types (Rust)',
-    keywords: ['error', 'MakcuError', 'NotConnected', 'Timeout', 'OutOfRange', 'NotFound'],
+    keywords: ['error', 'MakcuError', 'Timeout', 'OutOfRange', 'NotFound', 'Disconnected'],
   },
   {
     label: 'MakcuError::OutOfRange',
@@ -826,13 +826,6 @@ const entries: SearchEntry[] = [
     path: '/library/types#error-variants',
     group: 'Types (Rust)',
     keywords: ['OutOfRange', 'range', 'value', 'min', 'max', 'parameter', 'validation'],
-  },
-  {
-    label: 'MakcuError::NotConnected',
-    description: 'No active device connection',
-    path: '/library/types#error-variants',
-    group: 'Types (Rust)',
-    keywords: ['NotConnected', 'disconnected', 'no connection', 'error'],
   },
   {
     label: 'MakcuError::Timeout',
