@@ -170,12 +170,6 @@ const Catch: Component = () => {
               </tr>
             </tbody>
           </table>
-          <div class="callout callout--warning">
-            <p>
-              Only <code>km.catch_ml()</code> has been physically verified on v3.2 / v3.7.
-              The other buttons are assumed to follow the same pattern.
-            </p>
-          </div>
         </Card>
       </div>
 
