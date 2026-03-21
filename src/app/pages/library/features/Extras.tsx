@@ -211,7 +211,7 @@ device.stop_catch(Button::Left)?;`}</code></pre>
           </p>
 
           <div class="api-response-label">on_catch</div>
-          <pre class="api-signature">{`fn on_catch<F>(&self, button: Button, f: F) -> EventHandle
+          <pre class="api-signature">{`fn on_catch<F>(&self, button: Button, f: F) -> Result<EventHandle>
 where F: Fn(bool) + Send + 'static`}</pre>
           <p>
             Registers a callback for a specific button's catch events. The closure
@@ -224,10 +224,10 @@ let _handle = device.on_catch(Button::Left, |pressed| {
     } else {
         println!("Left physically released");
     }
-});`}</code></pre>
+})?;`}</code></pre>
 
           <div class="api-response-label">on_catch_event</div>
-          <pre class="api-signature">{`fn on_catch_event<F>(&self, f: F) -> EventHandle
+          <pre class="api-signature">{`fn on_catch_event<F>(&self, f: F) -> Result<EventHandle>
 where F: Fn(CatchEvent) + Send + 'static`}</pre>
           <p>
             Registers a callback that fires on any catch event from any button.
@@ -236,11 +236,12 @@ where F: Fn(CatchEvent) + Send + 'static`}</pre>
           <pre><code>{`let _handle = device.on_catch_event(|event| {
     println!("{:?} {}", event.button,
         if event.pressed { "pressed" } else { "released" });
-});`}</code></pre>
+})?;`}</code></pre>
 
           <div class="api-response-label">EventHandle</div>
           <p>
-            Both methods return an <A href="/library/types#feature-types"><code>EventHandle</code></A>. The callback remains active
+            Both methods return an <A href="/library/types#feature-types"><code>EventHandle</code></A> wrapped
+            in <code>Result</code>. The callback remains active
             as long as the handle is alive. Dropping the handle unregisters the callback.
           </p>
         </Card>
@@ -256,7 +257,7 @@ where F: Fn(CatchEvent) + Send + 'static`}</pre>
           </p>
 
           <div class="api-response-label">on_button_press</div>
-          <pre class="api-signature">{`fn on_button_press<F>(&self, button: Button, f: F) -> EventHandle
+          <pre class="api-signature">{`fn on_button_press<F>(&self, button: Button, f: F) -> Result<EventHandle>
 where F: Fn(bool) + Send + 'static`}</pre>
           <p>
             Registers a callback for a specific button. The closure
@@ -268,10 +269,10 @@ where F: Fn(bool) + Send + 'static`}</pre>
     } else {
         println!("Left released");
     }
-});`}</code></pre>
+})?;`}</code></pre>
 
           <div class="api-response-label">on_button_event</div>
-          <pre class="api-signature">{`fn on_button_event<F>(&self, f: F) -> EventHandle
+          <pre class="api-signature">{`fn on_button_event<F>(&self, f: F) -> Result<EventHandle>
 where F: Fn(ButtonMask) + Send + 'static`}</pre>
           <p>
             Registers a callback that fires on any button state change. Receives
@@ -279,11 +280,12 @@ where F: Fn(ButtonMask) + Send + 'static`}</pre>
           </p>
           <pre><code>{`let _handle = device.on_button_event(|mask| {
     println!("Buttons: {:05b}", mask.raw());
-});`}</code></pre>
+})?;`}</code></pre>
 
           <div class="api-response-label">EventHandle</div>
           <p>
-            Both methods return an <A href="/library/types#feature-types"><code>EventHandle</code></A>. The callback remains active
+            Both methods return an <A href="/library/types#feature-types"><code>EventHandle</code></A> wrapped
+            in <code>Result</code>. The callback remains active
             as long as the handle is alive. Dropping the handle unregisters the callback.
           </p>
           <div class="callout callout--warning">
